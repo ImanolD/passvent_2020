@@ -7,24 +7,15 @@
 
 <ion-content class="welcome-page">
 
-  <img src="assets/img/logo_1.png" class="logo-welcome">
+  <img src="assets/img/pv_logo.png" class="logo-welcome">
+  <div class="welcome-text">Bienvenido a PassVent</div>
+  <div class="welcome-hint">Únete a la red de más de 10,000 personas</div>
 
-  <ion-slides pager="true" autoplay="2000" loop="true">
-    <ion-slide>
-     <h3>Reserve Classes</h3>
-    </ion-slide>
-    <ion-slide>
-     <h3>Create Groups</h3>
-    </ion-slide>
-    <ion-slide>
-     <h3>Discover Experiences</h3>
-    </ion-slide>
-    <ion-slide>
-     <h3>Organize Events</h3>
-    </ion-slide>
-  </ion-slides>
 
-  <button (click)="openLogin()" type="button" name="button" class="login-btn">Log In</button>
-  <button (click)="openRegister()" type="button" name="button" class="register-btn">Sign Up</button>
-  <p (click)="openCircles()" class="allies-btn">Ally</p>
+  <button type="button" name="button" class="fb-btn">Continuar con Facebook</button>
+  <div class="terms-advice">
+    Al hacer click en continuar estás
+    aceptando nuestros <br>
+    <a>Términos y Condiciones</a>
+  </div>
 </ion-content>
