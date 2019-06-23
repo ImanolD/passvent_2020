@@ -298,3 +298,573 @@ ion-content{
 		}
 	}
 }
+
+
+
+// AQUI EMPIEZA EL CSS BUENO
+
+
+$orange: #FF5722;
+$grey: #7A7A7A;
+$blue: #536DFE;
+$red: #E02020;
+$green: #20BF55;
+
+$light: 300;
+$regular: 400;
+$medium: 500;
+$semibold: 600;
+$bold:700;
+
+.page-content{
+  margin-top: 70px;
+}
+
+p{
+  font-family: 'Poppins', sans-serif !important;
+  margin: 0px !important;
+}
+a{
+  color: $blue;
+  text-decoration: none;
+}
+.text-center{
+  text-align: center;
+}
+.orange{
+  color: $orange;
+}
+.grey{
+  color: $grey;
+}
+.white{
+  color: white;
+}
+.e-light{
+  font-weight: 300;
+}
+.light{
+  font-weight: 300;
+}
+.regular{
+  font-weight: 400;
+}
+.medium{
+  font-weight: 500;
+}
+.semibold{
+  font-weight: 600;
+}
+.bold{
+  font-weight: 700;
+}
+.text-left{
+  text-align: left;
+  float: left;
+}
+.title{
+  font-size: 26px;
+  font-weight: $semibold;
+}
+.title{
+  font-weight: $medium;
+  font-size: 16px;
+  padding-left: 10px;
+  margin-top: 20px !important;
+  margin-bottom: 10px !important;
+}
+.subtitle{
+  color: $grey;
+  font-weight: $light;
+  margin-top: -10px !important;
+  padding-left: 10px;
+  font-size: 13px;
+}
+
+.line{
+  height: 1px;
+  width: 80%;
+  background-color: #D8D8D8;
+  border-radius: 5px;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  top: 20px;
+}
+
+.f-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.f-around{
+  display: flex;
+  justify-content: space-around;
+}
+
+.f-between{
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-header{
+  text-align: center;
+  padding: 35px 15px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  height: 100px;
+  margin-bottom: 30px;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: +100;
+  background-color: white;
+  p{
+    color: #FF5722;
+    font-weight: 600;
+    font-size: 1.9em;
+    margin: 0px;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: .3em;
+  }
+  ion-img{
+    float: right;
+    position: relative;
+    top: -1.9em;
+  }
+}
+
+
+.tabs{
+  display: flex;
+  justify-content: space-around;
+  padding: 5px 0px 40px 0px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  z-index: +11111111;
+  &.transparent{
+    background-color: rgba(255, 255, 255, .0);
+  }
+  &.relative{
+    position: relative;
+  }
+  .item{
+    width: 20%;
+    position: relative;
+    .circle{
+      width: 35px;
+      height: 35px;
+      display: block;
+      margin: 0 auto;
+      padding: 5px;
+      border-radius: 50%;
+      &.active{
+        background-color: #FF5722;
+      }
+    }
+    .profile{
+      width: 34px;
+      height: 34px;
+      border: 3px solid white;
+      border-radius: 17px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      background-image: url("assets/placeholders/chem.jpeg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    ion-img{
+      height: 20px;
+      position: relative;
+      top: 3px;
+      path{
+        fill: white;
+      }
+    }
+    .pending{
+      height: 6px;
+      width: 6px;
+      background-color: $orange;
+      border-radius: 3px;
+      display: block;
+      margin: 0 auto;
+      position: relative;
+      top: 5px;
+    }
+    .count{
+      background-color: $orange;
+      color: white;
+      border-radius: 8px;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      padding: 8px;
+      left: 18px;
+      top: -50px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      p{
+        padding-left: 5px;
+        font-weight: 600;
+      }
+    }
+
+  }
+}
+
+.button{
+  color: white;
+  height: 55px;
+  border-radius: 8px;
+  width: 100%;
+  color: white;
+  font-size: 14px;
+  font-weight: $regular;
+  max-width: 300px;
+  &.orange{
+    background-color: $orange;
+  }
+  &.blue{
+    background-color: $blue;
+  }
+  &.transparent{
+    background-color: rgba(255, 255, 255, .3);
+  }
+  &.small{
+    height: 30px;
+    font-size: 10px;
+    border-radius: 5px;
+    padding-top: 5px;
+  }
+  &.app{
+    font-weight: $semibold;
+    font-size: 16px;
+    display: block;
+    margin: 0 auto;
+    height: 2em;
+  }
+  &.small{
+    font-size: 10px;
+    margin-top: .8em
+  }
+}
+
+.button-outline{
+  background-color: white;
+  border: 1px solid black;
+  font-size: 11px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  width: 30%;
+  margin-left: 10px;
+  font-weight: $bold;
+  &.green{
+    border: 1px solid $green;
+    color: $green;
+  }
+  &.red{
+    border: 1px solid $red;
+    color: $red;
+  }
+  &.blue{
+    border: 1px solid $blue;
+    color: $blue;
+  }
+  &.half{
+    width: 45%;
+  }
+
+}
+
+.more{
+  background-color: $blue;
+  width: 80px;
+  font-weight: $bold;
+  color: white;
+  border-radius: 5px;
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 12px;
+  padding: 2px 0px;
+  position: relative;
+  top: -2px;
+  &.orange{
+    background-color: $orange;
+  }
+}
+
+.page-instructions{
+  padding: 10px 15px 0px 15px;
+  .title{
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: -20px;
+    color: black;
+  }
+  p{
+    font-size: 14px;
+    color: $grey;
+    font-weight: $light;
+    margin-top: -10px;
+    padding-left: 10px;
+  }
+}
+
+.events{
+  padding: 15px;
+  p{
+    margin: 0 !important;
+  }
+  .card{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    background-color: white;
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    .actions{
+      width: 100%;
+      font-size: 14px;
+      padding: 10px 0px 0px 15px;
+      display: flex;
+      justify-content: space-between;
+      .asistants{
+        display: flex;
+        ion-img{
+          height: 15px;
+          width: 15px;
+          margin-left: 10px;
+        }
+        .photos{
+          padding:0px 2px;
+          .circle{
+            height: 15px;
+            width: 15px;
+            border: 1px solid white;
+            display: inline-block;
+            background-color: #E02020;
+            border-radius: 50%;
+            margin-left: -5px;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
+          }
+        }
+      }
+      .buttons{
+        display: flex;
+        width: 130px;
+        ion-img{
+          height: 25px;
+          margin-right: 5px;
+        }
+        .status{
+          width: 95%;
+          height: 25px;
+          color: white;
+          border-radius: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          &.accepted{
+            background-color: $green;
+          }
+          &.denied{
+            background-color: $red;
+          }
+          &.interested{
+            background-color: $blue;
+          }
+        }
+      }
+    }
+    .title{
+      padding-left: 15px;
+    }
+    .bottom{
+      display: flex;
+      .event-info{
+        height: 70px;
+        background-image: url("assets/placeholders/peda.jpeg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 60%;
+        max-width: 300px;
+        border-radius: 0px 8px 0px 0px;
+        position: relative;
+        .overlay{
+          height: 100%;
+          width: 100%;
+          background-color: rgba(70, 70, 70, .7);
+          position: absolute;
+          z-index: +1;
+          border-radius: 0px 8px 0px 8px;
+          font-size: 12px;
+          display: flex;
+          align-items: center;
+          padding-left: 10px;
+          color: white;
+        }
+      }
+      .host{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40%;
+        float: right;
+        max-width: 200px;
+        padding-right: 5px;
+        .info{
+          display: flex;
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          position: relative;
+          position: relative;
+          .images{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding-left: 30px;
+          }
+          .img{
+            display: inline !important;
+            height: 40px;
+            width: 40px;
+            border-radius: 20px;
+            background-color: grey;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border: 3px solid white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            &.im1{
+              background-image: url("assets/placeholders/ad.jpg");
+            }
+            &.im2{
+              background-image: url("assets/placeholders/chem.jpeg");
+            }
+            &.im3{
+              background-image: url("assets/placeholders/ft.jpeg");
+            }
+            &.im4{
+              background-image: url("assets/placeholders/rua.png");
+            }
+            &.im5{
+              background-image: url("assets/placeholders/mad.png");
+            }
+            &.im6{
+              background-image: url("assets/placeholders/esp.jpeg");
+            }
+            &.many{
+              margin-left: -25px;
+            }
+          }
+        }
+        .vip{
+          height: 40px;
+          margin-bottom: 10px;
+        }
+        p{
+          font-size: 10px;
+          margin-top: -10px;
+        }
+      }
+    }
+  }
+}
+
+.profile-events{
+  width: 100%;
+  overflow-x: scroll;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 300px;
+  .card{
+    display: inline !important;
+    min-width: 300px !important;
+    margin-right: 1em;
+  }
+}
+
+.events-simple{
+  padding: 15px;
+  p{
+    margin: 0 !important;
+  }
+  .card{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    background-color: white;
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    .actions{
+      width: 100%;
+      font-size: 14px;
+      padding: 10px 0px 0px 15px;
+      display: flex;
+      justify-content: space-between;
+      .asistants{
+        display: flex;
+        ion-img{
+          height: 15px;
+          width: 15px;
+          margin-left: 10px;
+        }
+        .photos{
+          padding:0px 2px;
+          .circle{
+            height: 15px;
+            width: 15px;
+            border: 1px solid white;
+            display: inline-block;
+            background-color: #E02020;
+            border-radius: 50%;
+            margin-left: -5px;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
+          }
+        }
+      }
+    }
+    .title{
+      padding-left: 15px;
+    }
+    .bottom{
+      display: flex;
+      .event-info{
+        height: 70px;
+        background-image: url("assets/placeholders/peda.jpeg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+        border-radius: 0px 0px 8px 8px;
+        position: relative;
+        .overlay{
+          height: 100%;
+          width: 100%;
+          background-color: rgba(70, 70, 70, .7);
+          position: absolute;
+          z-index: +1;
+          border-radius: 0px 0px 8px 8px;
+          font-size: 12px;
+          display: flex;
+          align-items: center;
+          padding-left: 10px;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.gold{
+  color: rgba(255, 215, 0, 1);
+}

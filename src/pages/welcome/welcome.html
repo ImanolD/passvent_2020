@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 
-<ion-content class="welcome-page">
+<!-- <ion-content class="welcome-page">
 
   <img src="assets/img/pv_logo.png" class="logo-welcome">
   <div class="welcome-text">Bienvenido a PassVent</div>
@@ -18,4 +18,526 @@
     aceptando nuestros <br>
     <a>Términos y Condiciones</a>
   </div>
+</ion-content> -->
+
+<ion-content>
+
+  <div class="page">
+
+    <div class="page splash text-center">
+
+      <img class="logo" src="assets/PV.png">
+      <p class="main-t title bold">Bienvenido a <span class="orange">PassVent</span></p>
+      <p style="margin-top:-20px;" class="grey subtitle">Únete a la red de más de 5,000 <br> personas</p>
+
+      <div class="bottom bti">
+        <button (click)="freindsAnimation($event)" class="button facebook" name="button"><i class="fab fa-facebook-f"></i>Continuar con Facebook</button>
+        <p class="light grey b1">Al hacer click en continuar estás <br> aceptando nuestros <br> <a href="#">Términos y Condiciones</a></p>
+      </div>
+
+    </div>
+
+    <div class="page freinds">
+
+      <ion-img class="one float1" src="/assets/freinds/1.png"></ion-img>
+      <ion-img class="two float1" src="/assets/freinds/2.png"></ion-img>
+      <ion-img class="three float2" src="/assets/freinds/3.png"></ion-img>
+      <ion-img class="four float2" src="/assets/freinds/4.png"></ion-img>
+      <ion-img class="five float2" src="/assets/freinds/5.png"></ion-img>
+      <ion-img class="six float3" src="/assets/freinds/6.png"></ion-img>
+
+      <div class="bottom b2">
+        <p style="font-size:24px;" class="semibold">Encuentra a tus amigos</p>
+        <p class="light grey">¡Agrega a tus amigos de Facebook o invita a tus amigos a PassVent!</p>
+        <button style="margin-top: 1.5em;" (click)="addAnimation($event)" class="button orange" type="button" name="button">Agregar Amigos</button>
+      </div>
+    </div>
+
+    <div class="fr page add-freinds">
+
+      <div class="page-instructions a1">
+        <p class="title">Estos son tus amigos en PassVent</p>
+        <p>Agrégalos para enterarte de los eventos a los que asistirán.</p>
+      </div>
+
+      <div class="table">
+
+        <div class="freind a2">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
+          </div>
+
+        </div>
+
+        <div class="freind a3">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
+          </div>
+
+        </div>
+
+        <div class="freind a4">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
+          </div>
+
+        </div>
+
+        <div class="freind a5">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
+          </div>
+
+        </div>
+
+        <div class="freind a6">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
+          </div>
+
+        </div>
+
+        <div class="freind a7">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
+          </div>
+
+        </div>
+
+        <div class="freind a8">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
+          </div>
+
+        </div>
+
+        <div class="freind a9">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
+          </div>
+
+        </div>
+
+        <div class="freind a10">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
+          </div>
+
+        </div>
+
+        <div class="freind a11">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
+          </div>
+
+        </div>
+
+        <div class="freind a12">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="bottom bt3">
+        <button (click)="inviteAnimation($event)" class="button orange" type="button" name="button">Continuar</button>
+      </div>
+
+    </div>
+
+    <div class="fr page invite-freinds">
+
+      <div class="page-instructions i1">
+        <p class="title">Invita más amigos a PassVent</p>
+        <p>Invita a tus amigos que aún no están usando PassVent, ¡entre más mejor!</p>
+      </div>
+
+      <div class="table">
+
+        <div class="freind invite f-center i2">
+          <button class="blue" type="button" name="button"><i class="far fa-paper-plane"></i>Invitar a Todos</button>
+        </div>
+
+        <div class="freind i3">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button class="blue" type="button" name="button"><i class="far fa-paper-plane"></i>Invitar a PassVent</button>
+          </div>
+
+        </div>
+
+        <div class="freind i4">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button class="blue" type="button" name="button"><i class="far fa-paper-plane"></i>Invitar a PassVent</button>
+          </div>
+
+        </div>
+
+        <div class="freind i5">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button class="blue" type="button" name="button"><i class="far fa-paper-plane"></i>Invitar a PassVent</button>
+          </div>
+
+        </div>
+
+        <div class="freind i6">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button class="blue" type="button" name="button"><i class="far fa-paper-plane"></i>Invitar a PassVent</button>
+          </div>
+
+        </div>
+
+        <div class="freind i7">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button class="blue" type="button" name="button"><i class="far fa-paper-plane"></i>Invitar a PassVent</button>
+          </div>
+
+        </div>
+
+        <div class="freind i8">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button class="blue" type="button" name="button"><i class="far fa-paper-plane"></i>Invitar a PassVent</button>
+          </div>
+
+        </div>
+
+        <div class="freind i9">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button class="blue" type="button" name="button"><i class="far fa-paper-plane"></i>Invitar a PassVent</button>
+          </div>
+
+        </div>
+
+        <div class="freind i10">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button class="blue" type="button" name="button"><i class="far fa-paper-plane"></i>Invitar a PassVent</button>
+          </div>
+
+        </div>
+
+        <div class="freind i11">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button class="blue" type="button" name="button"><i class="far fa-paper-plane"></i>Invitar a PassVent</button>
+          </div>
+
+        </div>
+
+        <div class="freind i12">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button class="blue" type="button" name="button"><i class="far fa-paper-plane"></i>Invitar a PassVent</button>
+          </div>
+
+        </div>
+
+        <div class="freind i13">
+
+          <div class="container-img">
+            <ion-img src="/assets/freinds/1.png"></ion-img>
+          </div>
+
+          <p class="grey">Alejandro Ruiz</p>
+
+          <div class="container">
+            <button class="blue" type="button" name="button"><i class="far fa-paper-plane"></i>Invitar a PassVent</button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="bottom bt4">
+        <button (click)="likesAnimation($event)" class="button orange" type="button" name="button">Continuar</button>
+      </div>
+
+    </div>
+
+    <div class="page likes">
+
+      <div class="page-instructions l1">
+        <p class="title">Cuéntanos de ti</p>
+        <p>Para poder recomendárte eventos que te pudieran interesar dinos que te gusta.</p>
+      </div>
+
+      <ion-grid>
+        <ion-row>
+
+          <ion-col size="4">
+            <div class="circle l0">
+              <ion-img src="/assets/likes-icons/martini.svg"></ion-img>
+            </div>
+            <p class="grey l0">Nightlife</p>
+          </ion-col>
+
+          <ion-col size="4">
+            <div class="circle l3">
+              <ion-img src="/assets/likes-icons/outdoor.svg"></ion-img>
+            </div>
+            <p class="grey l3">Aire Libre</p>
+          </ion-col>
+
+          <ion-col size="4">
+            <div class="circle l4">
+              <ion-img src="/assets/likes-icons/spotlights.svg"></ion-img>
+            </div>
+            <p class="grey l4">Conciertos</p>
+          </ion-col>
+
+          <ion-col size="4">
+            <div class="circle l5">
+              <ion-img src="/assets/likes-icons/trophy.svg"></ion-img>
+            </div>
+            <p class="grey l5">Deporte</p>
+          </ion-col>
+
+          <ion-col size="4">
+            <div class="circle l6">
+              <ion-img src="/assets/likes-icons/confetti.svg"></ion-img>
+            </div>
+            <p class="grey l6">Fiesta</p>
+          </ion-col>
+
+          <ion-col size="4">
+            <div class="circle l7">
+              <ion-img src="/assets/likes-icons/fork.svg"></ion-img>
+            </div>
+            <p class="grey l7">Comida</p>
+          </ion-col>
+
+          <ion-col size="4">
+            <div class="circle l8">
+              <ion-img src="/assets/likes-icons/pawprint.svg"></ion-img>
+            </div>
+            <p class="grey l8">Animales</p>
+          </ion-col>
+
+          <ion-col size="4">
+            <div class="circle l9">
+              <ion-img src="/assets/likes-icons/gift.svg"></ion-img>
+            </div>
+            <p class="grey l9">Cumpleaños</p>
+          </ion-col>
+
+          <ion-col size="4">
+            <div class="circle l10">
+              <ion-img src="/assets/likes-icons/art.svg"></ion-img>
+            </div>
+            <p class="grey l10">Arte y Cultura</p>
+          </ion-col>
+
+          <ion-col size="4">
+            <div class="circle l11">
+              <ion-img src="/assets/likes-icons/shopping-bag.svg"></ion-img>
+            </div>
+            <p class="grey l11">Compras</p>
+          </ion-col>
+
+          <ion-col size="4">
+            <div class="circle l12">
+              <ion-img src="/assets/likes-icons/idea.svg"></ion-img>
+            </div>
+            <p class="grey l12">Tecnología</p>
+          </ion-col>
+
+          <ion-col size="4">
+            <div class="circle l13">
+              <ion-img src="/assets/likes-icons/education.svg"></ion-img>
+            </div>
+            <p class="grey l13">Educación</p>
+          </ion-col>
+
+          <ion-col size="4">
+            <div class="circle l14">
+              <ion-img src="/assets/likes-icons/movie.svg"></ion-img>
+            </div>
+            <p class="grey l14">Cine</p>
+          </ion-col>
+
+          <ion-col size="4">
+            <div class="circle l15">
+              <ion-img src="/assets/likes-icons/beer.svg"></ion-img>
+            </div>
+            <p class="grey l15">Bebida</p>
+          </ion-col>
+
+          <ion-col size="4">
+            <div class="circle l16">
+              <ion-img src="/assets/likes-icons/swimming-pool.svg"></ion-img>
+            </div>
+            <p class="grey l16">Agua</p>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+
+      <div class="bottom bt1">
+        <button (click)="doneAnimation($event)" class="button orange" type="button" name="button">Continuar</button>
+      </div>
+
+    </div>
+
+
+
+
+
+    <div class="page done">
+
+      <p class="ya">¡Ya tienes tu cuenta  <span class="orange">P</span>ass <span class="orange">V</span>ent!</p>
+      <p class="exp">PassVent es una App Para cosas super chidas, esperemos te guste.</p>
+
+      <div class="bottom bt5">
+        <button routerLink="/home" class="button orange" type="button" name="button">Continuar</button>
+      </div>
+
+    </div>
+
+  </div>
+
 </ion-content>
