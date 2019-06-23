@@ -66,6 +66,7 @@ import { Stripe } from '@ionic-native/stripe';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Facebook } from '@ionic-native/facebook';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -200,6 +201,7 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     InAppBrowser,
     SocialSharing,
     Geolocation,
+    Facebook,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
