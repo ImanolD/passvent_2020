@@ -31,7 +31,8 @@
       <p style="margin-top:-20px;" class="grey subtitle">Únete a la red de más de 5,000 <br> personas</p>
 
       <div class="bottom bti">
-        <button (click)="freindsAnimation($event)" class="button facebook" name="button"><i class="fab fa-facebook-f"></i>Continuar con Facebook</button>
+        <button (click)="doFacebook($event)" class="button facebook" name="button">Continuar con Facebook</button>
+        <!-- <button (click)="freindsAnimation($event)" class="button facebook" name="button"><i class="fab fa-facebook-f"></i>Continuar con Facebook</button> -->
         <p class="light grey b1">Al hacer click en continuar estás <br> aceptando nuestros <br> <a href="#">Términos y Condiciones</a></p>
       </div>
 
@@ -48,7 +49,7 @@
 
       <div class="bottom b2">
         <p style="font-size:24px;" class="semibold">Encuentra a tus amigos</p>
-        <p class="light grey">¡Agrega a tus amigos de Facebook o invita a tus amigos a PassVent!</p>
+        <p class="light grey">¡Agrega a tus amigos a PassVent!</p>
         <button style="margin-top: 1.5em;" (click)="addAnimation($event)" class="button orange" type="button" name="button">Agregar Amigos</button>
       </div>
     </div>
@@ -56,164 +57,28 @@
     <div class="fr page add-freinds">
 
       <div class="page-instructions a1">
-        <p class="title">Estos son tus amigos en PassVent</p>
+        <p class="title">Busca a tus amigos en PassVent</p>
         <p>Agrégalos para enterarte de los eventos a los que asistirán.</p>
       </div>
+      <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+
 
       <div class="table">
 
-        <div class="freind a2">
+        <div *ngFor="let u of this.searchUsers(); let in=index">
+          <div *ngIf="!u.isFriend" class="freind a2">
 
-          <div class="container-img">
-            <ion-img src="/assets/freinds/1.png"></ion-img>
+            <div class="container-img">
+              <ion-img src="{{u.picture.url}}"></ion-img>
+            </div>
+
+            <p class="grey">{{u.name}}</p>
+
+            <div class="container">
+              <button (click)="confirmAdd(u)" type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
+            </div>
+
           </div>
-
-          <p class="grey">Alejandro Ruiz</p>
-
-          <div class="container">
-            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
-          </div>
-
-        </div>
-
-        <div class="freind a3">
-
-          <div class="container-img">
-            <ion-img src="/assets/freinds/1.png"></ion-img>
-          </div>
-
-          <p class="grey">Alejandro Ruiz</p>
-
-          <div class="container">
-            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
-          </div>
-
-        </div>
-
-        <div class="freind a4">
-
-          <div class="container-img">
-            <ion-img src="/assets/freinds/1.png"></ion-img>
-          </div>
-
-          <p class="grey">Alejandro Ruiz</p>
-
-          <div class="container">
-            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
-          </div>
-
-        </div>
-
-        <div class="freind a5">
-
-          <div class="container-img">
-            <ion-img src="/assets/freinds/1.png"></ion-img>
-          </div>
-
-          <p class="grey">Alejandro Ruiz</p>
-
-          <div class="container">
-            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
-          </div>
-
-        </div>
-
-        <div class="freind a6">
-
-          <div class="container-img">
-            <ion-img src="/assets/freinds/1.png"></ion-img>
-          </div>
-
-          <p class="grey">Alejandro Ruiz</p>
-
-          <div class="container">
-            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
-          </div>
-
-        </div>
-
-        <div class="freind a7">
-
-          <div class="container-img">
-            <ion-img src="/assets/freinds/1.png"></ion-img>
-          </div>
-
-          <p class="grey">Alejandro Ruiz</p>
-
-          <div class="container">
-            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
-          </div>
-
-        </div>
-
-        <div class="freind a8">
-
-          <div class="container-img">
-            <ion-img src="/assets/freinds/1.png"></ion-img>
-          </div>
-
-          <p class="grey">Alejandro Ruiz</p>
-
-          <div class="container">
-            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
-          </div>
-
-        </div>
-
-        <div class="freind a9">
-
-          <div class="container-img">
-            <ion-img src="/assets/freinds/1.png"></ion-img>
-          </div>
-
-          <p class="grey">Alejandro Ruiz</p>
-
-          <div class="container">
-            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
-          </div>
-
-        </div>
-
-        <div class="freind a10">
-
-          <div class="container-img">
-            <ion-img src="/assets/freinds/1.png"></ion-img>
-          </div>
-
-          <p class="grey">Alejandro Ruiz</p>
-
-          <div class="container">
-            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
-          </div>
-
-        </div>
-
-        <div class="freind a11">
-
-          <div class="container-img">
-            <ion-img src="/assets/freinds/1.png"></ion-img>
-          </div>
-
-          <p class="grey">Alejandro Ruiz</p>
-
-          <div class="container">
-            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
-          </div>
-
-        </div>
-
-        <div class="freind a12">
-
-          <div class="container-img">
-            <ion-img src="/assets/freinds/1.png"></ion-img>
-          </div>
-
-          <p class="grey">Alejandro Ruiz</p>
-
-          <div class="container">
-            <button type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
-          </div>
-
         </div>
 
       </div>

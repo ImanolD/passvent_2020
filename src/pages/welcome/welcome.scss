@@ -23,9 +23,16 @@ page-welcome {
     }
     .facebook{
       background-color: #3b5998;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+      position: relative;
       i{
-        float: left;
-        margin-left: 20px;
+        position: absolute;
+        bottom: 0!important;
+        // float: left;
+        // margin-left: 20px;
       }
     }
     .bottom{

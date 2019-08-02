@@ -32,6 +32,10 @@ declare var Back: any;
 export class WelcomePage {
 public general_loader: any;
 
+public response$: any;
+public users: any = [];
+public search: any = '';
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -54,7 +58,6 @@ public general_loader: any;
     this.afAuth.authState.subscribe(user => {
       if(user){
         this.general_loader.dismiss();
-        this.afAuth.auth.signOut();
             // this.general_loader.dismiss();
             // let indice = firebase.auth().currentUser.uid;
             // let reference =  firebase.database().ref('Users').orderByChild('index').equalTo(indice);
@@ -78,7 +81,91 @@ public general_loader: any;
      });
   }
 
-  doFacebook(){
+  //Agregar amigos
+  confirmAdd(user){
+    this.alertCtrl.create({
+      title: '¿Deseas agrgar a '+user.name+' a tus amigos?',
+      message: 'Recibirá una solicitud para agregarte a sus amigos',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () =>{
+
+          }
+        },
+        {
+          text: 'Enviar Solicitud',
+          handler: () =>{
+            this.sendRequest(user);
+          }
+        },
+      ]
+    }).present();
+  }
+  sendRequest(user){
+    let index = this.generateUUID();
+
+    //Enviar el request al amigo
+    this.af.list('Users/'+user.index).update('requests', {
+      'type': 'friend_request',
+      'index': index,
+      'friend': firebase.auth().currentUser.uid
+    });
+
+    //Notificacion para el usuario y push notification
+    this.af.list('Users/'+user.index+'/notifications').update(index, {
+      'title': '¡Nueva solicitud de amistad!',
+      'subtitle': 'Tienes una nueva solicitud de amistad en passvent',
+      'index': index
+    });
+    this.af.list('Notifications').update(index, {
+      'title': '¡Nueva solicitud de amistad!',
+      'subtitle': 'Tienes una nueva solicitud de amistad en passvent',
+      'index': user.index
+    })
+        .then(()=>{
+          this.alertCtrl.create({
+            title: '¡Solicitud enviada!',
+            message: 'Tu solicitud ha sido enviada',
+            buttons: ['Ok']
+          }).present();
+        })
+  }
+
+
+  //Getting users info and searchbar
+
+  getUsers(){
+    this.af.object('Users').snapshotChanges().subscribe(action => {
+      this.response$ = action.payload.val();
+      this.users = [];
+      this.convertUsers();
+    });
+  }
+  convertUsers(){
+    let u = this.response$;
+    for(let key in u){
+        this.users.push({
+          'email': u[key].email,
+          'first_name': u[key].first_name,
+          'id': u[key].id,
+          'name': u[key].name,
+          'index': key,
+          'picture': (u[key].picture ? u[key].picture.data : u[key].picture_large),
+          'isFriend': ( key == firebase.auth().currentUser.uid )
+        });
+    }
+    console.log(this.users);
+  }
+
+  searchUsers(){
+    return this.users.filter( u =>  (this.search == '' || u.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1))
+  }
+
+
+  //Login related code
+
+  doFacebook(event: any){
     this.general_loader = this.loadingCtrl.create({
       spinner: 'dots',
       content: 'Iniciando...'
@@ -93,6 +180,27 @@ public general_loader: any;
 
             this.afAuth.auth.signInWithCredential(facebookCredential)
               .then( res => {
+
+                this.fb.api('me/friends', []).then(profile => {
+                    //this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']};
+                    this.general_loader.dismiss();
+                    this.af.list('Users').update(firebase.auth().currentUser.uid, profile);
+                    this.freindsAnimation(event);
+                }).catch((error) => {
+                  //this.general_loader.dismiss();
+                  this.af.list('errors').push(error)
+                });
+
+                    // this.fb.api('me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture_large)', []).then(profile => {
+                    //     //this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']};
+                    //     this.general_loader.dismiss();
+                    //     this.af.list('Nuevo').push(profile);
+                    //     this.freindsAnimation(event);
+                    // }).catch((error) => {
+                    //   this.general_loader.dismiss();
+                    //   this.af.list('errors').push(error)
+                    // });
+
                 // this.indice = firebase.auth().currentUser.uid;
                 // this.af.object('/Usuarios/'+this.indice).snapshotChanges().subscribe(action => {
                 //   if(!action.payload.val()){
@@ -108,14 +216,19 @@ public general_loader: any;
                 //  });
                 // console.log('Exito');
               });
-         }).catch((error) => {  console.log(error); });
+         }).catch((error) => {
+           this.general_loader.dismiss();
+           this.af.list('errors').push(error)
+         });
     }
     else{
       return this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then((res)=>{
        console.log(res);
-      this.general_loader.dismiss();
+       this.general_loader.dismiss();
        let user = res.additionalUserInfo.profile;
+       this.af.list('Users').update(firebase.auth().currentUser.uid, user);
 
+        this.freindsAnimation(event);
        // this.submitUser(res.additionalUserInfo.profile);
        //let fecha = new Date();
        //this.getUserDetail(res.additionalUserInfo.profile.id);
@@ -126,7 +239,7 @@ public general_loader: any;
   }
 
   getUserDetail(userid) {
-  this.fb.api("/"+userid+"/?fields=id,email,name,picture,gender",["public_profile"])
+  this.fb.api("/"+userid+"/?fields=id,email,name,picture,gender,user_friends",["public_profile"])
     .then(profile => {
       console.log(profile);
       // this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']}
@@ -142,16 +255,12 @@ public general_loader: any;
     });
 }
 
-
-
   loginWithFacebook():Promise<any> {
-      return this.fb.login(['email', 'public_profile', 'user_friends']);
+      return this.fb.login(['email', 'public_profile']);
    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad WelcomePage');
-  }
 
+  //Open other pages
   openLogin(){
     this.navCtrl.push(LoginPage, {'User': 'nomads'});
   }
@@ -164,6 +273,7 @@ public general_loader: any;
     this.navCtrl.push(CirclesPage, {'Color': 'purple'});
   }
 
+  //Animations
   ionViewDidEnter() {
     var ts = new TimelineMax();
     ts.from(".logo", 2, { opacity: 0});
@@ -174,6 +284,7 @@ public general_loader: any;
   }
 
   freindsAnimation(event: any) {
+    this.getUsers();
     var tf = new TimelineMax();
     tf.to(".main-t", .8, { opacity: 0, x: 20 });
     tf.to(".subtitle", .8, { opacity: 0, x: 20 }, '-=0.3');
@@ -270,8 +381,6 @@ public general_loader: any;
     tl.from(".bt1", .8, { opacity: 0, y: 50 }, '-=4');
   }
 
-
-
   doneAnimation(event: any) {
     var td = new TimelineMax();
     td.to(".l1", 1, { opacity: 0, x: 20 });
@@ -296,6 +405,23 @@ public general_loader: any;
     td.from(".ya", .8, { opacity: 0,});
     td.from(".exp", .8, { opacity: 0,},'-=.5');
     td.from(".bt5", .8, { opacity: 0, y: 50 }, '-=.16');
+  }
+
+
+  //General Code
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad WelcomePage');
+  }
+
+  private generateUUID(): any {
+    var d = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx'.replace(/[xy]/g, function (c) {
+    var r = (d + Math.random() * 16) % 16 | 0;
+        d = Math.floor(d / 16);
+        return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+     });
+    return uuid;
   }
 
 }
