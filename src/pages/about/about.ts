@@ -30,12 +30,23 @@ export class AboutPage {
 ];
 public noms_balance: any = '';
 
+public f_selected: any = 1;
+
   constructor(public navCtrl: NavController,
   public af: AngularFireDatabase,
   public loadingCtrl: LoadingController,
   public alertCtrl: AlertController,
   public sanitizer: DomSanitizer) {
 
+  }
+
+
+  getClass(indice){
+    return this.f_selected == indice ? 'btn-filters selected' : 'btn-filters';
+  }
+
+  changeClass(indice){
+    this.f_selected = indice;
   }
 
   testWallet(){

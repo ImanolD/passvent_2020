@@ -33,8 +33,118 @@ export class WelcomePage {
 public general_loader: any;
 
 public response$: any;
+public responsep$: any;
+
+public preferences: any = [
+    {
+      'circle': 'circle l0',
+      'img': '/assets/likes-icons/martini.svg',
+      'p': 'grey l0',
+      'name': 'Nightlife',
+      'selected': false
+    },
+    {
+      'circle': 'circle l3',
+      'img': '/assets/likes-icons/outdoor.svg',
+      'p': 'grey l3',
+      'name': 'Aire Libre',
+      'selected': false
+    },
+    {
+      'circle': 'circle l4',
+      'img': '/assets/likes-icons/spotlights.svg',
+      'p': 'grey l4',
+      'name': 'Conciertos',
+      'selected': false
+    },
+    {
+      'circle': 'circle l5',
+      'img': '/assets/likes-icons/trophy.svg',
+      'p': 'grey l5',
+      'name': 'Deporte',
+      'selected': false
+    },
+    {
+      'circle': 'circle l6',
+      'img': '/assets/likes-icons/confetti.svg',
+      'p': 'grey l6',
+      'name': 'Fiesta',
+      'selected': false
+    },
+    {
+      'circle': 'circle l7',
+      'img': '/assets/likes-icons/fork.svg',
+      'p': 'grey l7',
+      'name': 'Comida',
+      'selected': false
+    },
+    {
+      'circle': 'circle l8',
+      'img': '/assets/likes-icons/pawprint.svg',
+      'p': 'grey l8',
+      'name': 'Animales',
+      'selected': false
+    },
+    {
+      'circle': 'circle l9',
+      'img': '/assets/likes-icons/gift.svg',
+      'p': 'grey l9',
+      'name': 'Cumpleaños',
+      'selected': false
+    },
+    {
+      'circle': 'circle l10',
+      'img': '/assets/likes-icons/art.svg',
+      'p': 'grey l10',
+      'name': 'Arte y Cultura',
+      'selected': false
+    },
+    {
+      'circle': 'circle l11',
+      'img': '/assets/likes-icons/shopping-bag.svg',
+      'p': 'grey l11',
+      'name': 'Compras',
+      'selected': false
+    },
+    {
+      'circle': 'circle l12',
+      'img': '/assets/likes-icons/idea.svg',
+      'p': 'grey l12',
+      'name': 'Tecnología',
+      'selected': false
+    },
+    {
+      'circle': 'circle l13',
+      'img': '/assets/likes-icons/education.svg',
+      'p': 'grey l13',
+      'name': 'Educación',
+      'selected': false
+    },
+    {
+      'circle': 'circle l14',
+      'img': '/assets/likes-icons/movie.svg',
+      'p': 'grey l14',
+      'name': 'Cine',
+      'selected': false
+    },
+    {
+      'circle': 'circle l15',
+      'img': '/assets/likes-icons/beer.svg',
+      'p': 'grey l15',
+      'name': 'Bebida',
+      'selected': false
+    },
+    {
+      'circle': 'circle l16',
+      'img': '/assets/likes-icons/swimming-pool.svg',
+      'p': 'grey l16',
+      'name': 'Agua',
+      'selected': false
+    }
+];
 public users: any = [];
 public search: any = '';
+public likes: any = [];
 
   constructor(
     public navCtrl: NavController,
@@ -81,8 +191,16 @@ public search: any = '';
      });
   }
 
+  getClass(sele){
+    return sele ? 'option-like selected' : 'option-like';
+  }
+
+  goTabs(){
+    this.navCtrl.push(TabsPage);
+  }
+
   //Agregar amigos
-  confirmAdd(user){
+  confirmAdd(user, indice){
     this.alertCtrl.create({
       title: '¿Deseas agrgar a '+user.name+' a tus amigos?',
       message: 'Recibirá una solicitud para agregarte a sus amigos',
@@ -96,6 +214,7 @@ public search: any = '';
         {
           text: 'Enviar Solicitud',
           handler: () =>{
+            this.af.list('Users').update(user.index, {'added': true});
             this.sendRequest(user);
           }
         },
@@ -152,7 +271,8 @@ public search: any = '';
           'name': u[key].name,
           'index': key,
           'picture': (u[key].picture ? u[key].picture.data : u[key].picture_large),
-          'isFriend': ( key == firebase.auth().currentUser.uid )
+          'isFriend': ( key == firebase.auth().currentUser.uid ),
+          'added': (u[key].added ? u[key].added : false)
         });
     }
     console.log(this.users);
@@ -254,7 +374,6 @@ public search: any = '';
       console.log(e);
     });
 }
-
   loginWithFacebook():Promise<any> {
       return this.fb.login(['email', 'public_profile']);
    }
@@ -382,6 +501,10 @@ public search: any = '';
   }
 
   doneAnimation(event: any) {
+    let aux = this.preferences.filter(p => p.selected);
+    this.af.list('Users').update(firebase.auth().currentUser.uid, {
+      'preferences': aux
+    });
     var td = new TimelineMax();
     td.to(".l1", 1, { opacity: 0, x: 20 });
     td.to(".l0", 1.5, { opacity: 0, y: 20, scale: 0 });
@@ -409,9 +532,20 @@ public search: any = '';
 
 
   //General Code
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad WelcomePage');
+    // this.af.object('Preferences').snapshotChanges().subscribe(action => {
+    //   this.responsep$ = action.payload.val();
+    //   this.preferences = [];
+    //   this.convertPreferences();
+    // });
+  }
+
+  convertPreferences(){
+    let p = this.responsep$;
+    for(let key in p){
+      this.preferences.push({'name': p[key].name});
+    };
+    console.log(this.preferences);
   }
 
   private generateUUID(): any {

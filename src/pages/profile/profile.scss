@@ -1,7 +1,5 @@
 page-profile {
-  .scroll-content{
-    overflow: hidden!important;
-  }
+  
   .code-info{
     display: flex;
     justify-content: center;
@@ -238,5 +236,86 @@ page-profile {
     color: white;
     margin-right: 8vw;
   }
+
+
+  //CSS DE Alex
+
+  .profile {
+  .name {
+    font-size: 22px;
+    font-weight: 500;
+    text-align: center;
+    width: 100%;
+  }
+
+  .fa-cog {
+    color: #7A7A7A;
+    font-size: 25px;
+    position: absolute;
+    top: 30px;
+    right: 20px;
+  }
+
+  .fa-qrcode {
+    color: #7A7A7A;
+    font-size: 25px;
+    position: absolute;
+    top: 30px;
+    left: 25px;
+  }
+
+  .person {
+    display: flex;
+    padding-top: 0.8em;
+    width: 100%;
+
+    .picture {
+      margin: 0px 20px;
+      width: 40%;
+
+      .circle {
+        height: 120px;
+        width: 120px;
+        border-radius: 60px;
+        border: 3px solid white;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        background-image: url("../../assets/placeholders/esp.jpeg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: block;
+        margin: 0 auto;
+        margin-left: 10px;
+      }
+    }
+
+    .info {
+      flex-direction: column;
+      color: #FF5722;
+
+      .number {
+        font-size: 25px;
+        font-weight: 600;
+        text-align: center !important;
+        position: relative;
+        bottom: -10px;
+      }
+    }
+  }
+}
+
+.about {
+  text-align: left;
+  padding: 1em;
+
+  a {
+    font-size: 16px !important;
+    text-align: center !important;
+  }
+
+  .desc {
+    font-size: 14px;
+    margin-top: 15px;
+  }
+}
 
 }

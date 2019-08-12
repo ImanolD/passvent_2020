@@ -5,6 +5,7 @@ import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { ActivityPage } from '../activity/activity';
 import { EditactPage } from '../editact/editact';
+import { NeweventPage } from '../newevent/newevent';
 
 /**
  * Generated class for the MyactivitiesPage page.
@@ -58,25 +59,20 @@ public general_loader: any;
     for(let key in a){
       this.activities.push({
         'title': a[key].title,
-        'title_complete': a[key].title,
         'location': a[key].location,
-        'description':  a[key].description,
-        'useful_notes': (a[key].useful_notes ? a[key].useful_notes : ''),
-        'cancelation_policy':  a[key].cancelation_policy,
-        'class_price':  a[key].class_price,
-        'fee':  a[key].fee,
-        'categories':  a[key].categories,
-        'schedule':  a[key].schedule,
-        'media':  a[key].media,
-        'img':  a[key].img,
-        'creator':  a[key].creator,
-        'index':  a[key].index,
-        'isEvent': false,
-        'review': (a[key].review ? a[key].review : 5),
-        'reviews': (a[key].reviews ? a[key].reviews : [])
+        'cuesta': a[key].cuesta,
+        'start_day': a[key].start_day,
+        'start_time': a[key].start_time,
+        'end_day': a[key].end_day,
+        'end_time': a[key].end_time,
+        'externa': a[key].externa,
+        'gallery': a[key].gallery,
+        'gallery_all': a[key].gallery_all,
+        'limit': a[key].limit,
+        'private': a[key].private,
       });
     }
-    this.activities = this.activities.filter( a => a.creator == firebase.auth().currentUser.uid);
+    //this.activities = this.activities.filter( a => a.creator == firebase.auth().currentUser.uid);
     this.general_loader.dismiss();
     console.log(this.activities);
   }
@@ -85,9 +81,13 @@ public general_loader: any;
     this.navCtrl.push(ActivityPage, {'Activity': actividad});
   }
 
+  newEvent(){
+    this.navCtrl.push(NeweventPage);
+  }
+
 
   getActivities(){
-    this.af.object('Activities').snapshotChanges().subscribe(action => {
+    this.af.object('Events').snapshotChanges().subscribe(action => {
       this.response$ = action.payload.val();
       this.activities = [];
       this.convertActivities();

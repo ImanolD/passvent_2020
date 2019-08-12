@@ -40,6 +40,7 @@ import { EditeventPage } from '../pages/editevent/editevent';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { ReservationsPage } from '../pages/reservations/reservations';
 import { AllPage } from '../pages/all/all';
+import { NeweventPage } from '../pages/newevent/newevent';
 
 import { Keyboard } from '@ionic-native/keyboard';
 
@@ -49,7 +50,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 export class MyApp {
 
 
-  rootPage:any = WelcomePage;
+  rootPage:any = TabsPage;
 
   constructor(config: Config, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, modalCtrl: ModalController, keyboard: Keyboard) {
     platform.ready().then(() => {

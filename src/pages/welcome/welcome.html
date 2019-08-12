@@ -75,7 +75,7 @@
             <p class="grey">{{u.name}}</p>
 
             <div class="container">
-              <button (click)="confirmAdd(u)" type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
+              <button *ngIf="!u.added" (click)="confirmAdd(u, in)" type="button" name="button"><i class="fas fa-plus"></i>Agregar a amigos</button>
             </div>
 
           </div>
@@ -271,8 +271,28 @@
         <p>Para poder recomendárte eventos que te pudieran interesar dinos que te gusta.</p>
       </div>
 
-      <ion-grid>
+      <div class="likes-container">
+        <div *ngFor="let p of this.preferences">
+          <div (click)="p.selected ? p.selected = false : p.selected = true" class="{{getClass(p.selected)}}">
+            <div class="circle-option">
+              <img src="{{p.img}}" alt="">
+            </div>
+            <div class="option-title">{{p.name}}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <ion-grid>
         <ion-row>
+
+          <div *ngFor="let p of this.preferences">
+            <ion-col size="4">
+              <div class="{{p.circle}}">
+                <ion-img src="{{p.img}}"></ion-img>
+              </div>
+              <p class="{{p.p}}">{{p.name}}</p>
+            </ion-col>
+          </div>
 
           <ion-col size="4">
             <div class="circle l0">
@@ -380,7 +400,7 @@
           </ion-col>
 
         </ion-row>
-      </ion-grid>
+      </ion-grid> -->
 
       <div class="bottom bt1">
         <button (click)="doneAnimation($event)" class="button orange" type="button" name="button">Continuar</button>
@@ -398,7 +418,7 @@
       <p class="exp">PassVent es una App Para cosas super chidas, esperemos te guste.</p>
 
       <div class="bottom bt5">
-        <button routerLink="/home" class="button orange" type="button" name="button">Continuar</button>
+        <button (click)="goTabs()" class="button orange" type="button" name="button">Continuar</button>
       </div>
 
     </div>

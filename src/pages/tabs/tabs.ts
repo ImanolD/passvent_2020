@@ -27,7 +27,5 @@ export class TabsPage {
   public selected: any;
 
   constructor() {
-    this.type = localStorage.getItem('Tipo');
-    ( this.type == 'allies' ? this.selected = '2' : this.selected = '2');
   }
 }

@@ -27,23 +27,40 @@ export class NeweventPage {
  public current_index: any = 1;
  public event_data: any = {
    'title': '',
-   'day': '',
-   'time': '',
+   'start_day': '',
+   'start_time': '',
+   'end_day': '',
+   'end_time': '',
    'location': '',
-   'difficulty': '',
-   'img': 'https://images.pexels.com/photos/1246953/pexels-photo-1246953.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-   'about_event': '',
-   'provided': '',
-   'about_organizer': '',
-   'spaces_available': '',
-   'cost': '0',
-   'type': 'public',
+   'private': '',
+   'limit': '',
+   'gallery': false,
+   'gallery_all': false,
+   'cuesta': false,
+   'externa': false,
    'media': [],
-   'nomads': []
+   'creator': '',
+   'attendants': [],
+   'tickets': []
  }
  public isClan: any = false;
  public GoogleAutocomplete: any = new google.maps.places.AutocompleteService();
  public autocompleteItems: any = [];
+
+ public foto: any = '';
+
+ public limite: any = false;
+ public externa: any = false;
+ public cuesta: any = false;
+
+ public boletos: any = [
+   {
+     'name': '',
+     'cost': '',
+     'description': ''
+   },
+ ];
+
 
   constructor( public navCtrl: NavController,
     public navParams: NavParams,
@@ -60,6 +77,14 @@ export class NeweventPage {
 
   sanitizeThis(image){
     return this.sanitizer.bypassSecurityTrustStyle('url('+image+')');
+  }
+
+  addBoleto(){
+    this.boletos.push({
+      'name': '',
+      'cost': '',
+      'description': ''
+    });
   }
 
   selectSearchResult(item){
@@ -133,13 +158,12 @@ export class NeweventPage {
     let indice = this.generateUUID();
     this.event_data.creator = firebase.auth().currentUser.uid;
     this.event_data.index = indice;
-    this.event_data.nomads.push({
+
+    this.event_data.attendants.push({
       'index': this.event_data.creator,
-      'isOwner': true,
-      'date': this.event_data.day,
-      'day': moment(this.event_data.day).format('dddd'),
-      'time': this.event_data.time
+      'isOwner': true
     });
+
     this.af.list('Users/'+firebase.auth().currentUser.uid+'/schedule').push({
       'activity_id': indice,
       'date': this.event_data.day,
@@ -162,22 +186,65 @@ export class NeweventPage {
         })
   }
 
+  cEvent(){
+    this.general_loader = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Creando evento...'
+    });
+    this.general_loader.present();
+
+    let indice = this.generateUUID();
+    this.event_data.creator = firebase.auth().currentUser.uid;
+    this.event_data.index = indice;
+    this.event_data.attendants.push({
+      'index': this.event_data.creator,
+      'isOwner': true
+    });
+
+    this.af.list('Users/'+firebase.auth().currentUser.uid+'/schedule').push({
+      'activity_id': indice,
+      'date': this.event_data.start_day,
+      'day': moment(this.event_data.day).format('dddd'),
+      'time': this.event_data.start_time
+
+    });
+
+    this.af.list('Users/'+firebase.auth().currentUser.uid+'/Events').update(indice, {
+      'index': indice,
+      'isOwner': true
+    });
+
+    this.boletos = this.boletos.filter(b => b.name != '' && b.cost != '' && b.description != '');
+    if(this.boletos.length > 0) this.event_data.tickets = this.boletos;
+
+    this.af.list('Events').update(indice, this.event_data)
+        .then(() => {
+          this.general_loader.dismiss();
+          this.alertCtrl.create({
+            title: 'Evento Creado',
+            message: 'Tu evento fue creado exitosamente',
+            buttons: ['Ok']
+          }).present();
+          this.navCtrl.pop();
+        });
+  }
+
   presentOptions() {
      let actionSheet = this.actionSheetCtrl.create({
-       title: 'What would you like?',
+       title: '¿Que te gustaría hacer?',
        buttons: [
          {
-           text: 'Take a picture',
+           text: 'Tomar una foto',
            handler: () => {
              this.tomarFoto();
            }
          },{
-           text: 'Select a picture',
+           text: 'Escoger una foto',
            handler: () => {
              this.escogerFoto();
            }
          },{
-           text: 'Cancel',
+           text: 'Cancelar',
            role: 'cancel',
            handler: () => {
              console.log('Cancel clicked');
@@ -213,7 +280,7 @@ export class NeweventPage {
     let vm = this;
        this.general_loader = this.loadingCtrl.create({
          spinner: 'bubbles',
-         content: 'Uploading Picture...'
+         content: 'Subiendo Foto...'
         });
        const options: CameraOptions={
         quality: 50,
@@ -232,6 +299,7 @@ export class NeweventPage {
              vm.general_loader.dismiss();
              if(vm.current_index == 1)  vm.event_data.img = url;
              else vm.event_data.media.push({'url': url});
+             vm.foto = url;
            })
          });
        });
@@ -240,7 +308,7 @@ export class NeweventPage {
     let vm = this;
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
-      content: 'Uploading Picture...'
+      content: 'Subiendo Foto...'
      });
 
       const options: CameraOptions={
@@ -262,6 +330,7 @@ export class NeweventPage {
             if(vm.current_index == 1)  vm.event_data.img = url;
             else vm.event_data.media.push({'url': url});
             //this.fotos[this.fotos.length] = url;
+            vm.foto = url;
           })
         });
       });}

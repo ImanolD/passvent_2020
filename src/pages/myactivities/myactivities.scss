@@ -1,21 +1,189 @@
 page-myactivities {
-  ion-buttons{
-    padding-right: 5%;
+
+  .toolbar-background-ios{
+    border-style: none!important;
   }
-  .activity-container{
-    background-color: rgba(255, 255, 255, .11);
-    border-radius: 10px;
-    margin-bottom: 3%;
-    .activity-title{
-      font-family: 'Custom';
-      font-size: 80%;
-      font-weight: 700!important;
-      color: white;
+
+  .button{
+    display: block;
+    margin: 0 auto;
+    font-weight: 700;
+  }
+
+
+.events{
+  padding: 15px;
+  p{
+    margin: 0 !important;
+  }
+  .card{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    background-color: white;
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    .actions{
+      width: 100%;
+      font-size: 14px;
+      padding: 10px 0px 0px 15px;
+      display: flex;
+      justify-content: space-between;
+      .asistants{
+        display: flex;
+        ion-img{
+          height: 15px;
+          width: 15px;
+          margin-left: 10px;
+        }
+        .photos{
+          padding:0px 2px;
+          .circle{
+            height: 15px;
+            width: 15px;
+            border: 1px solid white;
+            display: inline-block;
+            background-color: #E02020;
+            border-radius: 50%;
+            margin-left: -5px;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
+          }
+        }
+      }
+      .buttons{
+        display: flex;
+        width: 130px;
+        ion-img{
+          height: 25px;
+          margin-right: 5px;
+        }
+        .status{
+          width: 95%;
+          height: 25px;
+          color: white;
+          border-radius: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          &.accepted{
+            background-color: $green;
+          }
+          &.denied{
+            background-color: $red;
+          }
+          &.interested{
+            background-color: $blue;
+          }
+        }
+      }
     }
-    .activity-time{
-      font-family: 'Custom';
-      font-size: 70%;
-      color: white;
+    .title{
+      padding-left: 15px;
+    }
+    .bottom{
+      display: flex;
+      .event-info{
+        height: 70px;
+        background-image: url("assets/placeholders/peda.jpeg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 60%;
+        max-width: 300px;
+        border-radius: 0px 8px 0px 0px;
+        position: relative;
+        .overlay{
+          height: 100%;
+          width: 100%;
+          background-color: rgba(70, 70, 70, .7);
+          position: absolute;
+          z-index: +1;
+          border-radius: 0px 8px 0px 8px;
+          font-size: 12px;
+          display: flex;
+          align-items: center;
+          padding-left: 10px;
+          color: white;
+        }
+      }
+      .host{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40%;
+        float: right;
+        max-width: 200px;
+        padding-right: 5px;
+        .info{
+          display: flex;
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          position: relative;
+          position: relative;
+          .images{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding-left: 30px;
+          }
+          .img{
+            display: inline !important;
+            height: 40px;
+            width: 40px;
+            border-radius: 20px;
+            background-color: grey;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border: 3px solid white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            &.im1{
+              background-image: url("assets/placeholders/ad.jpg");
+            }
+            &.im2{
+              background-image: url("assets/placeholders/chem.jpeg");
+            }
+            &.im3{
+              background-image: url("assets/placeholders/ft.jpeg");
+            }
+            &.im4{
+              background-image: url("assets/placeholders/rua.png");
+            }
+            &.im5{
+              background-image: url("assets/placeholders/mad.png");
+            }
+            &.im6{
+              background-image: url("assets/placeholders/esp.jpeg");
+            }
+            &.many{
+              margin-left: -25px;
+            }
+          }
+        }
+        .vip{
+          height: 40px;
+          margin-bottom: 10px;
+        }
+        p{
+          font-size: 10px;
+          margin-top: -10px;
+        }
+      }
+    }
+    &.simple{
+      .bottom{
+        .event-info{
+          width: 100%;
+          max-width: none;
+          border-radius: 0px 0px 8px 8px;
+          .overlay{
+            border-radius: 0px 0px 8px 8px;
+          }
+        }
+      }
     }
   }
+}
+
 }

@@ -87,6 +87,44 @@ page-welcome {
     }
   }
 
+  .likes-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 3%;
+    height: 70vh;
+    margin-bottom: 5%;
+    overflow: scroll;
+    .option-like{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 1em;
+      padding: 5%;
+      .circle-option{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 2px solid #FF5722;
+        padding: .5em;
+      }
+      .option-title{
+        font-size: 90%;
+        opacity: .6;
+      }
+    }
+  }
+
+  .selected{
+    background-color: rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
+  }
+
   .likes{
     height: 100%;
     width: 100vw;

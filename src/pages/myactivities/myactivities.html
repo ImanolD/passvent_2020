@@ -5,21 +5,48 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar color="black1">
-    <p class="title">Your Activities</p>
+  <ion-navbar color="transparent">
+    <p class="title">Mis eventos</p>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
 
-<div *ngFor="let a of this.activities" (click)="confirmEdit(a)" class="activity-container" padding>
-  <div class="activity-title">{{a.title}}</div>
-  <!-- <div class="activity-time">{{a.schedule[0].start_time}}</div> -->
-</div>
+   <button (click)="newEvent()" class="button orange" name="button">Crear Evento</button>
 
-<ion-fab (click)="openNew()" right bottom>
-    <button ion-fab color="green"><ion-icon name="add" color="white"></ion-icon></button>
-</ion-fab>
+   <div class="events">
+     <div *ngFor="let e of this.activities">
+       <div class="card simple">
+        <div class="actions">
+
+          <div class="asistants">
+            <div class="photos">
+              <div class="circle"></div>
+              <div class="circle"></div>
+              <div class="circle"></div>
+            </div>
+            <p class="light grey">0 Amigos asistirán a</p>
+          </div>
+        </div>
+
+        <p class="title medium">{{e.title}}</p>
+
+        <div class="bottom">
+          <div class="event-info">
+            <div class="overlay">
+              <div class="overlay-content">
+                <p>Fecha: {{e.start_day}}/p>
+                <p>Lugar: {{e.location}}</p>
+                <p>Hora: {{e.start_time}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+     </div>
+
+   </div>
 
 </ion-content>

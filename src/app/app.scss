@@ -41,7 +41,7 @@ ion-header{
 ion-navbar{
   border: none!important;
   .title{
-    color: white;
+    color: #FF5722;
     text-align: center;
     //font-family: 'Montserrat', sans-serif;
     font-family: 'Custom';
@@ -62,8 +62,8 @@ ion-navbar{
       border-radius: 50%;
       // width: 25px;
       padding: 5px;
-      background-color: #007C6E;
-      box-shadow: 0px 0px 5px #007C6E;
+      background-color: #FF5722;
+      //box-shadow: 0px 0px 5px #007C6E;
     }
     .cancel-hint{
       font-family: 'Montserrat', sans-serif;
@@ -161,12 +161,12 @@ ion-navbar{
 }
 
 ion-list{
-  background-color: #0C0C0C!important;
+  //background-color: #0C0C0C!important;
   ion-item{
-    background-color: #0C0C0C!important;
+    //background-color: #0C0C0C!important;
     h2{
       font-family: 'Montserrat', sans-serif;
-      color: white;
+      color: black;
     }
   }
 }
@@ -214,7 +214,7 @@ ion-content{
 }
 
 .tabbar {
-  background-color: #0C0C0C!important;
+  background-color: white!important;
   border-top: none!important;
   padding: 2.5%!important;
 	a.tab-button[aria-selected=true]:nth-of-type(1) {
@@ -222,7 +222,7 @@ ion-content{
 		font-family: 'Montserrat', sans-serif;
 		font-weight: normal;
 		.tab-button-icon {
-			color: #55D1AC;
+			color: #FF5722;
 		}
 	}
 	a.tab-button[aria-selected=true]:nth-of-type(2) {
@@ -230,7 +230,7 @@ ion-content{
 		font-family: 'Montserrat', sans-serif;
 		font-weight: normal;
 		.tab-button-icon {
-			color: #55D1AC;
+			color: #FF5722;
 		}
 	}
 	a.tab-button[aria-selected=true]:nth-of-type(3) {
@@ -238,7 +238,7 @@ ion-content{
 		font-family: 'Montserrat', sans-serif;
 		font-weight: normal;
 		.tab-button-icon {
-			color: #55D1AC;
+			color: #FF5722;
 		}
 	}
   a.tab-button[aria-selected=true]:nth-of-type(4) {
@@ -246,7 +246,7 @@ ion-content{
 		font-family: 'Montserrat', sans-serif;
 		font-weight: normal;
 		.tab-button-icon {
-		  color: #55D1AC;
+		  color: #FF5722;
 		}
 	}
 	a.tab-button[aria-selected=true]:nth-of-type(5) {
@@ -254,7 +254,7 @@ ion-content{
 		font-family: 'Montserrat', sans-serif;
 		font-weight: normal;
 		.tab-button-icon {
-			color: #55D1AC;
+			color: #FF5722;
 		}
 	}
   a.tab-button[aria-selected=false]:nth-of-type(1) {
@@ -262,7 +262,7 @@ ion-content{
 		font-family: 'Montserrat', sans-serif;
 		font-weight: normal;
 		.tab-button-icon {
-			color: rgba(255, 255, 255, .5);
+			color: rgba(0, 0, 0, .2);
 		}
 	}
 	a.tab-button[aria-selected=false]:nth-of-type(2) {
@@ -270,7 +270,7 @@ ion-content{
 		font-family: 'Montserrat', sans-serif;
 		font-weight: normal;
 		.tab-button-icon {
-			color: rgba(255, 255, 255, .5);
+			color: rgba(0, 0, 0, .2);
 		}
 	}
 	a.tab-button[aria-selected=false]:nth-of-type(3) {
@@ -278,7 +278,7 @@ ion-content{
 		font-family: 'Montserrat', sans-serif;
 		font-weight: normal;
 		.tab-button-icon {
-			color: rgba(255, 255, 255, .5);
+			color: rgba(0, 0, 0, .2);
 		}
 	}
   a.tab-button[aria-selected=false]:nth-of-type(4) {
@@ -286,7 +286,7 @@ ion-content{
 		font-family: 'Montserrat', sans-serif;
 		font-weight: normal;
 		.tab-button-icon {
-			color: rgba(255, 255, 255, .5);
+			color: rgba(0, 0, 0, .2);
 		}
 	}
 	a.tab-button[aria-selected=false]:nth-of-type(5) {
@@ -294,7 +294,7 @@ ion-content{
 		font-family: 'Montserrat', sans-serif;
 		font-weight: normal;
 		.tab-button-icon {
-			color: rgba(255, 255, 255, .5);
+			color: rgba(0, 0, 0, .2);
 		}
 	}
 }

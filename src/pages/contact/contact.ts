@@ -35,6 +35,8 @@ public done_g: any = false;
 public user_preferences: any = [];
 public filtered_a: any = [];
 
+public f_selected: any = 1;
+
   @ViewChild('map') mapElement: ElementRef;
    map: any;
 
@@ -47,6 +49,15 @@ public filtered_a: any = [];
     public sanitizer: DomSanitizer,
     public modalCtrl: ModalController) {
 
+  }
+
+
+  getClass(indice){
+    return this.f_selected == indice ? 'btn-filters selected' : 'btn-filters';
+  }
+
+  changeClass(indice){
+    this.f_selected = indice;
   }
 
   sanitizeThis(image){
@@ -432,7 +443,8 @@ public filtered_a: any = [];
       google.maps.event.addListener(marker, 'click', () => {
         //infoWindow.open(this.map, marker);
       });
-      this.getActivities();
+      if(this.general_loader) this.general_loader.dismiss();
+      //this.getActivities();
     }
 
 }

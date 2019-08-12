@@ -49,39 +49,7 @@ export class HomePage {
   public alertCtrl: AlertController,
   public sanitizer: DomSanitizer,
   public stripe: Stripe,
-  public geolocation: Geolocation ) {
-
-   this.stripe.setPublishableKey('pk_test_tRNrxhMhtRyPzotatGi5Mapm');
-    let date = new Date();
-    console.log(date);
-    date.setHours(9);
-    date.setMinutes(8);
-    console.log(moment('Monday', 'dddd').fromNow());
-    console.log(moment('2019-01-11').add(3, 'days').format('L'));
-   // let card = {
-   //  number: '5579070085401951',
-   //  expMonth: 12,
-   //  expYear: 2022,
-   //  cvc: '997'
-   // };
-
-   let card = {
-    number: '4242424242424242',
-    expMonth: 12,
-    expYear: 2020,
-    cvc: '220'
-   };
-
-   // this.stripe.createCardToken(card)
-   //    .then(token => {
-   //      this.af.list('Payments/'+firebase.auth().currentUser.uid).push({'token': token, 'amount': 500});
-   //      this.alertCtrl.create({title: 'exito', buttons: ['Ok']}).present();
-   //    })
-   //    .catch(error => {
-   //      this.alertCtrl.create({title: 'error', buttons: ['Ok']}).present();
-   //    });
-
-  }
+  public geolocation: Geolocation ) {}
 
 
   openFiltered(tipo){
@@ -497,32 +465,32 @@ export class HomePage {
   }
 
   ionViewWillEnter(){
-    if(this.activities != []){
-      this.getFavorites();
-    }
-
-
-    this.geolocation.getCurrentPosition().then((position) => {
-
-      this.posicion = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-    }, (err) => {
-      console.log(err);
-    });
+    // if(this.activities != []){
+    //   this.getFavorites();
+    // }
+    //
+    //
+    // this.geolocation.getCurrentPosition().then((position) => {
+    //
+    //   this.posicion = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    //
+    // }, (err) => {
+    //   console.log(err);
+    // });
   }
 
   ionViewDidLoad() {
-    this.general_loader = this.loadingCtrl.create({
-      spinner: 'bubbles',
-      content: 'Loading...'
-    });
-    this.general_loader.present();
-    this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
-      this.users$ = action.payload.val();
-      this.noms_balance = this.users$.noms;
-      this.favorites = this.users$.favorites;
-    });
-    this.getActivities();
+    // this.general_loader = this.loadingCtrl.create({
+    //   spinner: 'bubbles',
+    //   content: 'Loading...'
+    // });
+    // this.general_loader.present();
+    // this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
+    //   this.users$ = action.payload.val();
+    //   this.noms_balance = this.users$.noms;
+    //   this.favorites = this.users$.favorites;
+    // });
+    // this.getActivities();
   }
 
   openBrowse(segmento){
