@@ -34,6 +34,7 @@ public general_loader: any;
 
 public response$: any;
 public responsep$: any;
+public responsem$: any;
 
 public preferences: any = [
     {
@@ -146,6 +147,12 @@ public users: any = [];
 public search: any = '';
 public likes: any = [];
 
+public doing: any = 'facebook';
+
+public mail: any = '';
+public pw: any = '';
+public pw_confirm: any = '';
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -191,6 +198,10 @@ public likes: any = [];
      });
   }
 
+  openLogin(){
+    this.navCtrl.push(LoginPage);
+  }
+
   getClass(sele){
     return sele ? 'option-like selected' : 'option-like';
   }
@@ -214,7 +225,7 @@ public likes: any = [];
         {
           text: 'Enviar Solicitud',
           handler: () =>{
-            this.af.list('Users').update(user.index, {'added': true});
+            this.af.list('Users/'+firebase.auth().currentUser.uid+'/friends').update(user.index, {'index': user.index, 'status': 'requested'});
             this.sendRequest(user);
           }
         },
@@ -228,7 +239,8 @@ public likes: any = [];
     this.af.list('Users/'+user.index).update('requests', {
       'type': 'friend_request',
       'index': index,
-      'friend': firebase.auth().currentUser.uid
+      'friend': firebase.auth().currentUser.uid,
+      'event': false
     });
 
     //Notificacion para el usuario y push notification
@@ -255,6 +267,9 @@ public likes: any = [];
   //Getting users info and searchbar
 
   getUsers(){
+    this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
+      this.responsem$ = action.payload.val();
+    });
     this.af.object('Users').snapshotChanges().subscribe(action => {
       this.response$ = action.payload.val();
       this.users = [];
@@ -272,15 +287,122 @@ public likes: any = [];
           'index': key,
           'picture': (u[key].picture ? u[key].picture.data : u[key].picture_large),
           'isFriend': ( key == firebase.auth().currentUser.uid ),
-          'added': (u[key].added ? u[key].added : false)
+          'added': this.isMine(key)
         });
     }
     console.log(this.users);
   }
 
+  isMine(indice){
+    let a = this.responsem$.friends;
+    if(a){
+      for(let key in a){
+        if(a[key].index == indice) return true;
+      }
+    }
+    return false;
+  }
+
   searchUsers(){
     return this.users.filter( u =>  (this.search == '' || u.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1))
   }
+
+
+
+  //Login con email usando FIREBASE
+  loginMail(){
+  let vm = this;
+    if(this.mail != '' && this.pw != ''){
+      if(this.mail.indexOf('@')!=-1){
+        this.general_loader = this.loadingCtrl.create({
+          spinner: 'bubbles',
+          content: 'Iniciando Sesión...'
+        });
+        this.general_loader.present();
+
+        let credentials = {
+          email: this.mail,
+          password: this.pw
+        };
+
+
+        this.signInWithEmail(credentials).then(() => this.freindsAnimation(event), error => this.handleError(error.message));}
+
+        else{
+          let alert = this.alertCtrl.create({
+            title: 'Email no válido',
+            message: 'Por favor ingresa un email válido',
+            buttons: ['Ok']
+          });
+          alert.present();
+           }
+          }
+         else{
+         let alert = this.alertCtrl.create({
+             title: 'Campos Incompletos',
+             message: 'Porfavor llena todos los campos para continuar',
+             buttons: ['Ok']
+           });
+           alert.present();
+         }
+  }
+
+  signInWithEmail(credentials) {
+    return this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
+  }
+
+
+
+
+
+  //Método para registrar un usuario con correo
+  registerMail(){
+    if(this.mail != '' && this.pw != '' && this.pw_confirm != ''){
+        if(this.mail.indexOf('@')!=-1){
+            this.general_loader = this.loadingCtrl.create({
+              spinner: 'bubbles',
+              content: 'Registrando...'
+            });
+            this.general_loader.present();
+            // this.mail = this.mail.toLowerCase();
+            // this.mail = this.mail.replace(/\s+/g,'');
+            let credentials = {
+              email: this.mail,
+              password: this.pw
+             };
+             this.signUp(credentials)
+                  .then(() => this.saveData(), error => this.handleError(error.message));
+        }
+        else{
+          let alert = this.alertCtrl.create({
+            title: 'Email no válido',
+            message: 'Por favor ingresa un email válido',
+            buttons: ['Ok']
+          });
+          alert.present();
+           }
+          }
+         else{
+         let alert = this.alertCtrl.create({
+             title: 'Campos Incompletos',
+             message: 'Porfavor llena todos los campos para continuar',
+             buttons: ['Ok']
+           });
+           alert.present();
+         }
+       }
+
+    signUp(credentials) {
+      return this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password);
+    }
+
+   saveData(){
+     this.af.list('Users').update(firebase.auth().currentUser.uid, {
+       'email': this.mail,
+       'index': firebase.auth().currentUser.uid
+     });
+     this.freindsAnimation(event);
+   }
 
 
   //Login related code
@@ -379,10 +501,15 @@ public likes: any = [];
    }
 
 
-  //Open other pages
-  openLogin(){
-    this.navCtrl.push(LoginPage, {'User': 'nomads'});
-  }
+   handleError(msj){
+     this.general_loader.dismiss();
+     let alert = this.alertCtrl.create({
+       title: msj,
+       buttons:  ['Ok']
+     });
+     alert.present();
+   }
+
 
   openRegister(){
     this.navCtrl.push(RegisterPage, {'User': 'nomads'});

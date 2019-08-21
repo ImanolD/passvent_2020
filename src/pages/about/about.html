@@ -6,6 +6,36 @@
     <div (click)="changeClass(1)" class="{{this.getClass(1)}}">Mis Eventos</div>
     <div (click)="changeClass(2)" class="{{this.getClass(2)}}">Eventos que Asistiré</div>
   </div>
+
+
+  <div *ngIf="f_selected == 1" >
+    <div *ngFor="let r of this.requests">
+      <div class="notification">
+
+          <div class="picture">
+            <ion-img *ngIf="r.friend" src="{{r.friend_img}}"></ion-img>
+          </div>
+
+          <div class="info">
+            <p class="name">{{getText(r.friend_name, r.type)}}</p>
+            <p>{{getSub(r.friend_name, r.type)}}</p>
+          </div>
+
+          <div *ngIf="r.request" class="action">
+            <ion-img src="../assets/card-actions/checked.svg"></ion-img>
+            <ion-img src="../assets/card-actions/error.svg"></ion-img>
+          </div>
+
+        </div>
+    </div>
+  </div>
+
+  <div *ngIf="f_selected == 2" >
   
+  </div>
+
+
+
+
 
 </ion-content>

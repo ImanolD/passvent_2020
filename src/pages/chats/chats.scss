@@ -18,6 +18,25 @@ page-chats {
     }
   }
 
+  .input-container{
+    //border: 1px solid red;
+    width: 100%;
+    //background-color: #1A1A1A!important;
+    padding: 2%;
+    border-radius: 0 0 12px 12px!important;
+    .input-search{
+      background-color: white;
+      font-family: 'Custom';
+      font-size: 100%;
+      padding: 3%;
+      width: 100%;
+      color: black;
+      border: 1px solid rgba(0 ,0, 0, 0.2);
+      border-radius: 5px!important;
+    }
+    z-index: 100!important;
+  }
+
 
   .chat-element{
     display: flex;

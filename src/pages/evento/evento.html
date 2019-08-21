@@ -1,0 +1,264 @@
+<!--
+  Generated template for the EventoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-content>
+
+  <div class="event">
+
+    <div class="popup-overlay">
+      <div class="popup">
+        <div class="info">
+          <p>Carlos Esparza</p>
+          <div class="picture">
+            <ion-img class="back" src="../assets/code.png"></ion-img>
+          </div>
+        </div>
+        <div class="actions">
+          <div class="but accept">
+            <p>Continuar</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="image" [style.background-image]="sanitizeThis(this.evento_data.img)">
+      <div class="gradient"></div>
+
+
+      <ion-img navPop class="back" src="assets/nav/back.svg"></ion-img>
+      <ion-img class="qr" src="assets/nav/qr-code.svg"></ion-img>
+
+      <div class="info medmium white">
+        <div class="asistants">
+          <div class="photos">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+          </div>
+          <p class="light white">0 Amigos asistirán a</p>
+        </div>
+        <p>{{this.evento_data.title}}</p>
+      </div>
+
+    </div>
+
+    <div class="host">
+
+      <div class="pic">
+        <ion-img src="{{this.getData('img')}}"></ion-img>
+      </div>
+
+      <div class="info">
+        <p class="name medium">{{this.getData('name')}}</p>
+        <p class="grey light"><i class="far fa-calendar"></i>{{this.evento_data.dia}}</p>
+        <p class="grey light"><i class="far fa-clock"></i> 10:30 pm</p>
+        <p class="grey light"><i class="fas fa-map-marker-alt"></i>{{this.evento_data.location}}</p>
+        <!-- <div class="counter">56 / 100 <br> Asistentes</div>
+        <div class="counter">56 / 100 <br> Boletos</div> -->
+      </div>
+
+    </div>
+
+    <p class="light grey description">{{this.evento_data.description}}</p>
+
+    <br>
+
+    <button *ngIf="this.isOwner()" class="button orange center" type="button" name="button"><i class="fas fa-edit"></i>Editar Evento</button> <br>
+
+    <div *ngIf="!this.isOwner()" class="asistance">
+      <p class="title">¿Asistirás?</p>
+      <div class="filters">
+        <button style="height:40px;" class="button-outline green"> Sí </button>
+        <button style="height:40px; position:relative; top:-6px;" class="button-outline blue"> Estoy Interesado </button>
+        <button style="height:40px;" class="button-outline red"> No </button>
+      </div>
+    </div>
+
+    <br>
+
+
+    <div *ngIf="this.evento_data.externa">
+      <p *ngIf="this.isOwner()" class="title">Comprar Boleto<button type="button" name="button" class="more grey"><i class="fas fa-edit"></i> Editar</button></p>
+      <p class="subtitle">Una vez que hayas comprado tu boleto obtendrás el código QR para poder entrar</p>
+      <br>
+      <button class="button blue center" type="button" name="button">Comprar Boletos</button>
+    </div>
+
+
+
+    <div *ngIf="this.evento_data.tickets" class="owl-carousel ticket-carousel">
+
+      <div class="ticket">
+        <div class="container">
+          <div class="desc">
+            <p class="title">Entrada</p>
+            <p class="subtitle">Entrada Estandar para el evento</p>
+          </div>
+
+          <div class="info">
+            <div class="price f-center">
+              <p>$100.00</p>
+            </div>
+            <div class="buy f-center">
+              <button class="button blue" type="button" name="button">¡Comprar Ahora!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ticket">
+        <div class="container">
+          <div class="desc">
+            <p class="title">Entrada Vip</p>
+            <p class="subtitle">Pa Flexear</p>
+          </div>
+
+          <div class="info">
+            <div class="price f-center">
+              <p>$1,000.00</p>
+            </div>
+            <div class="buy f-center">
+              <button class="button blue" type="button" name="button">¡Comprar Ahora!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ticket">
+        <div class="container">
+          <div class="desc">
+            <p class="title">Entrada Lord Vip</p>
+            <p class="subtitle">5 Pukis Vip</p>
+          </div>
+
+          <div class="info">
+            <div class="price f-center">
+              <p>$10,000.00</p>
+            </div>
+            <div class="buy f-center">
+              <button class="button blue" type="button" name="button">¡Comprar Ahora!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <br>
+
+    <p class="title">Mira quien más asistirá <button type="button" name="button" class="more orange">Ver Todos</button><button *ngIf="this.isOwner()" type="button" name="button" class="more grey"><i class="fas fa-edit"></i> Editar</button></p>
+    <div class="people f-center">
+
+
+
+      <div class="item f-center">
+        <div class="picture placeholder"></div>
+      </div>
+
+      <div class="item f-center">
+        <div class="picture add f-center"><i class="fas fa-plus"></i></div>
+        <p class="light grey">Solicitar Invitado</p>
+      </div>
+
+      <div class="item f-center">
+        <div class="picture"></div>
+        <p class="light grey">Alex Ruiz</p>
+      </div>
+
+      <div class="item f-center">
+        <div class="picture"></div>
+        <p class="light grey">Alex Ruiz</p>
+      </div>
+      <div class="item f-center">
+        <div class="picture"></div>
+        <p class="light grey">Alex Ruiz</p>
+      </div>
+      <div class="item f-center">
+        <div class="picture"></div>
+        <p class="light grey">Alex Ruiz</p>
+      </div>
+
+    </div>
+
+    <p class="title">Galería <button type="button" name="button" class="more orange">Ver Todos</button><button *ngIf="this.isOwner()" type="button" name="button" class="more grey"><i class="fas fa-edit"></i> Editar</button></p>
+    <div class="gallery f-center">
+      <div class="fotos">
+        <div class="foto"></div>
+        <div class="foto foto1"></div>
+        <div class="foto"></div>
+        <div class="foto foto1"></div>
+        <div class="foto"></div>
+        <div class="foto foto1"></div>
+        <div class="foto"></div>
+        <div class="foto foto1"></div>
+
+      </div>
+    </div>
+
+    <div *ngIf="1==2" class="chat-card">
+      <div class="ta">Announcement Board</div>
+      <div class="chat">
+        <div class="message host">
+
+          <div class="info f-center">
+            <div class="img"></div>
+            <p class="gold">Carlos Esparza</p>
+          </div>
+
+          <p>Caiganle a las 3 perros, laldlkfasdlfkhasldjfna wefwefqw eqwer qwer qwer qwer qwer qwer qwe rqwe rq wer</p>
+        </div>
+        <div class="message med send">
+          <div class="info">
+            <div class="img"></div>
+            <p>Carlos Esparza</p>
+
+          </div>
+          <p>Que Onda, como andas?</p>
+        </div>
+
+        <div class="message recieve">
+          <p>Que Onda</p>
+        </div>
+
+        <div class="empty"></div>
+
+        <div class="message small send">
+          <p>Que Onda</p>
+        </div>
+
+        <div class="message recieve">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+
+        <div style="height:28em;" class="empty"></div>
+
+        <div class="message send">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+
+
+      </div>
+      <div class="input f-center">
+        <div class="send-img">
+          <div class="circle f-center">
+            <ion-img src="../assets/image.svg"></ion-img>
+          </div>
+        </div>
+        <input type="text" name="" value="" placeholder="Mensaje...">
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+</ion-content>

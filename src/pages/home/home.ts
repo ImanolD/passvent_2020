@@ -16,6 +16,8 @@ declare var google;
 import { Geolocation } from '@ionic-native/geolocation';
 import { MyeventsPage } from '../myevents/myevents';
 import { AllPage } from '../all/all';
+import { EventoPage } from '../evento/evento';
+import { ChatsPage } from '../chats/chats';
 
 @Component({
   selector: 'page-home',
@@ -41,6 +43,7 @@ export class HomePage {
   public done_a: any = false;
 
   public location_loader: any;
+  public eventos: any = [];
 
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
@@ -64,6 +67,10 @@ export class HomePage {
     else if(tipo == 'Events') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.events});
     else if(tipo == 'Experiences') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.getExperiences()});
     else if(tipo == 'Special Offers') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.getSpecial()});
+  }
+
+  openChats(){
+    this.navCtrl.push(ChatsPage);
   }
 
   getFavorites(){
@@ -117,6 +124,10 @@ export class HomePage {
 
   verifyRaro(cosa){
     console.log(cosa);
+  }
+
+  openEvento(evento){
+    this.navCtrl.push(EventoPage, {'Evento': evento});
   }
 
 
@@ -396,16 +407,57 @@ export class HomePage {
 
 
   getActivities(){
-    this.af.object('Activities').snapshotChanges().subscribe(action => {
-      this.response$ = action.payload.val();
-      this.activities = [];
-      this.convertActivities();
-    });
     this.af.object('Events').snapshotChanges().subscribe(action => {
-      this.e_response$ = action.payload.val();
-      this.events = [];
-      this.convertEvents();
+      this.response$ = action.payload.val();
+      this.eventos = [];
+      this.convertEventos();
     });
+  }
+
+  convertEventos(){
+    let a = this.response$;
+    for(let key in a){
+      this.eventos.push({
+        'title': a[key].title,
+        'location': a[key].location,
+        'cuesta': a[key].cuesta,
+        'start_day': a[key].start_day,
+        'start_time': a[key].start_time,
+        'end_day': a[key].end_day,
+        'end_time': a[key].end_time,
+        'externa': a[key].externa,
+        'gallery': a[key].gallery,
+        'gallery_all': a[key].gallery_all,
+        'limit': a[key].limit,
+        'private': a[key].private,
+        'img': (a[key].img ? a[key].img : ''),
+        'dia': moment(a[key].start_day).format('LL'),
+        'creator': this.getCreator(a[key].creator, 'name'),
+        'creator_img': this.getCreator(a[key].creator, 'img'),
+        'creator_index': a[key].creator,
+        'description': a[key].description,
+        'status': this.getStatus(a[key].attendants, a[key].private)
+      });
+    }
+    //this.activities = this.activities.filter( a => a.creator == firebase.auth().currentUser.uid);
+    this.general_loader.dismiss();
+    console.log(this.eventos);
+  }
+
+  getStatus(lista, privado){
+    for(let key in lista){
+      return lista[key].index == firebase.auth().currentUser.uid ? lista[key].status : !privado ? 'Invited' : 'Not';
+    }
+  }
+
+  getCreator(indice, que){
+    let u = this.users$;
+    for(let key in u){
+      if(key == indice){
+        if(que == 'name') return u[key].name;
+        else if(que == 'img') return u[key].picture.data.url;
+      }
+    }
   }
 
   existsF(arre, cual){
@@ -480,17 +532,15 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    // this.general_loader = this.loadingCtrl.create({
-    //   spinner: 'bubbles',
-    //   content: 'Loading...'
-    // });
-    // this.general_loader.present();
-    // this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
-    //   this.users$ = action.payload.val();
-    //   this.noms_balance = this.users$.noms;
-    //   this.favorites = this.users$.favorites;
-    // });
-    // this.getActivities();
+    this.general_loader = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Cargando...'
+    });
+    this.general_loader.present();
+    this.af.object('Users').snapshotChanges().subscribe(action => {
+      this.users$ = action.payload.val();
+    });
+    this.getActivities();
   }
 
   openBrowse(segmento){

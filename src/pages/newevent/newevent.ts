@@ -32,7 +32,7 @@ export class NeweventPage {
    'end_day': '',
    'end_time': '',
    'location': '',
-   'private': '',
+   'private': false,
    'limit': '',
    'gallery': false,
    'gallery_all': false,
@@ -41,7 +41,8 @@ export class NeweventPage {
    'media': [],
    'creator': '',
    'attendants': [],
-   'tickets': []
+   'tickets': [],
+   'img': 'https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
  }
  public isClan: any = false;
  public GoogleAutocomplete: any = new google.maps.places.AutocompleteService();
@@ -161,7 +162,8 @@ export class NeweventPage {
 
     this.event_data.attendants.push({
       'index': this.event_data.creator,
-      'isOwner': true
+      'isOwner': true,
+      'status': 'Accepted'
     });
 
     this.af.list('Users/'+firebase.auth().currentUser.uid+'/schedule').push({

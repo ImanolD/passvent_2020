@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="white">
-    <ion-buttons (click)="openFilters()" end>
+    <ion-buttons (click)="openChats()" end>
       <button ion-button>
         <ion-icon name="ios-chatbubbles" color="white"></ion-icon>
       </button>
@@ -10,6 +10,72 @@
 </ion-header>
 
 <ion-content padding class="home-page">
+
+ <div class="events">
+   <div *ngFor="let e of this.eventos">
+     <div *ngIf="!e.private" class="card" (click)="openEvento(e)">
+       <div class="actions">
+
+         <div class="asistants">
+           <div class="photos">
+             <div class="circle"></div>
+             <div class="circle"></div>
+             <div class="circle"></div>
+           </div>
+           <p class="light grey">0 Amigos asistirán a</p>
+         </div>
+
+         <div class="buttons">
+
+           <div *ngIf="e.status == 'Invited'">
+             <ion-img src="../assets/card-actions/error.svg"></ion-img>
+             <ion-img src="../assets/card-actions/information.svg"></ion-img>
+             <ion-img src="../assets/card-actions/checked.svg"></ion-img>
+           </div>
+
+
+           <div *ngIf="e.status == 'Accepted'" class="status accepted semibold">
+            <p>Aceptado</p>
+          </div>
+
+           <div *ngIf="e.status == 'Interested'" class="status interested semibold">
+            <p>Interesado</p>
+          </div>
+
+           <div *ngIf="e.status == 'Rejected'" class="status denied semibold">
+             <p>Rechazado</p>
+          </div>
+
+
+         </div>
+
+       </div>
+
+       <p class="title medium">{{e.title}}</p>
+
+       <div class="bottom">
+         <div class="event-info e1">
+           <div class="overlay" [style.background-image]="sanitizeThis(e.img)">
+             <div class="overlay-content">
+               <p>Fecha: {{e.dia}}</p>
+               <p>Lugar: {{e.location}}</p>
+               <p>Hora: {{e.start_time}}</p>
+             </div>
+           </div>
+         </div>
+         <div class="host">
+
+           <div class="info">
+             <div class="img im1" [style.background-image]="sanitizeThis(e.creator_img)"></div>
+             <p class="medium">{{e.creator}}</p>
+           </div>
+
+         </div>
+       </div>
+
+     </div>
+   </div>
+  </div>
 
 
 </ion-content>

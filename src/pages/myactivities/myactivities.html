@@ -33,10 +33,10 @@
         <p class="title medium">{{e.title}}</p>
 
         <div class="bottom">
-          <div class="event-info">
+          <div class="event-info" [style.background-image]="sanitizeThis(e.img)">
             <div class="overlay">
               <div class="overlay-content">
-                <p>Fecha: {{e.start_day}}/p>
+                <p>Fecha: {{e.dia}}</p>
                 <p>Lugar: {{e.location}}</p>
                 <p>Hora: {{e.start_time}}</p>
               </div>

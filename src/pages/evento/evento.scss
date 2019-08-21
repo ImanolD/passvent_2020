@@ -1,0 +1,414 @@
+page-evento {
+  .event {
+    p{
+      margin: 0px;
+    }
+    .title{
+      margin-left: 16px !important;
+    }
+    .subtitle{
+      color: #7A7A7A;
+      margin-left: 16px !important;
+      font-size: 12px;
+
+    }
+    .image {
+      width: 100%;
+      height: 30vh;
+      min-height: 300px;
+      max-height: 500px;
+      background-image: url("../../assets/placeholders/peda.jpeg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      padding: 10px;
+      .gradient{
+        background: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,0.5) 100%);
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 100%;
+        z-index: +1;
+      }
+      .back{
+        position: absolute;
+        top: 55px;
+        left: 15px;
+        z-index: +2;
+        height: 15px;
+        width: 15px;
+      }
+      .qr{
+        position: absolute;
+        top: 50px;
+        right: 20px;
+        z-index: +2;
+        height: 25px;
+        width: 25px;
+      }
+      .info{
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+        z-index: +2;
+        p{
+          font-size: 24px;
+        }
+        .asistants{
+          display: flex;
+          ion-img{
+            height: 15px;
+            width: 15px;
+            margin-left: 10px;
+          }
+          .photos{
+            padding:0px 2px;
+            .circle{
+              height: 12px;
+              width: 12px;
+              border: 1px solid white;
+              display: inline-block;
+              background-color: #E02020;
+              border-radius: 50%;
+              margin-left: -5px;
+              box-shadow: 0 1px 1px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
+            }
+          }
+          p{
+            font-size: 12px;
+            margin-left: 3px;
+          }
+        }
+
+      }
+    }
+    .host{
+      margin-top: 20px;
+      display: flex;
+      position: relative;
+      .pic{
+        width: 20%;
+        border-radius: 10px;
+        margin: 0px 15px;
+        ion-img{
+          height: 80px;
+          width: 80px;
+          border-radius: 10px;
+          display: block;
+          margin: 0 auto;
+        }
+      }
+      .info{
+        position: relative;
+        .name{
+          font-size: 16px;
+
+        }
+        p{
+          font-size: 12px;
+        }
+        .counter{
+          background-color: #20BF55;
+          color: white;
+          border-radius: 5px;
+          position: absolute;
+          right: -70px;
+          top: 0px;
+          padding: 5px;
+          text-align: center;
+          min-width: 100px;
+        }
+      }
+    }
+    .description{
+      font-size: 12px;
+      padding: 0px 10px;
+      padding-top: 15px;
+    }
+    .asistants{
+      width: 100%;
+      overflow-x: scroll;
+      .item{
+        text-align: center;
+        font-size: 12px;
+        margin: 0px 25px;
+        width: 250px;
+        flex-direction: column;
+        ion-img{
+          height: 50px;
+          width: 50px;
+          border-radius: 8px;
+        }
+      }
+    }
+    .ticket{
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      width: 90%;
+      margin: 0 auto;
+      border-radius: 10px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding: 10px;
+      p{
+        margin: 0px !important;
+      }
+      .container{
+        display: flex;
+        flex-direction: column;
+      }
+      .info{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        .price{
+          width: 50%;
+          text-align: center;
+        }
+        .buy{
+          display: flex;
+          justify-content: center;
+          width: 50%;
+          button{
+            display: block;
+            margin: 0 auto;
+            width: 80%
+          }
+        }
+      }
+    }
+  }
+
+  .chat-card{
+    background-color: white;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    width: 90%;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+    max-height: 700px;
+    overflow-y: scroll;
+    margin-bottom: 100px;
+    position: relative;
+    overflow-x: hidden;
+    .ta{
+      color: #FF5722;
+      text-align: center;
+      font-weight: 600;
+      background-color: white;
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 20px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      width: 100%;
+      border-radius: 10px 10px 0px 0px;
+      z-index: +100;
+    }
+    .input{
+      background-color: white;
+      position: absolute;
+      bottom: -3px;
+      left: 0px;
+      width: 100%;
+      padding: 1em 0em 1.5em 0em;
+      border-top: 1px solid #7A7A7A;
+      border-radius: 0px 0px 10px 10px;
+      .send-img{
+        width: 20%;
+        .circle{
+          height: 2.8em;
+          width: 2.8em;
+          border-radius: 1.4em;
+          background-color: lighten(#536DFE, 10%);
+          padding: .2em;
+          display: block;
+          margin: 0 auto;
+        }
+        ion-img{
+          height: 1.8em;
+          margin-top: .3em;
+        }
+      }
+      input{
+        border: 1px solid #7A7A7A;
+        border-radius: 30px;
+        height: 2.5em;
+        display: block;
+        margin: 0 auto;
+        width: 85%;
+        text-indent: 1em;
+        margin-right: 15px;
+      }
+      input::placeholder{
+        font-weight: 300;
+        font-size: 1em;
+        text-indent: 1em;
+      }
+      input:focus{
+        outline: none;
+      }
+    }
+  }
+  .toggle-filters {
+    padding-top: 0px;
+  }
+  .chat{
+    padding: .5em 1em 4.5em 1em;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-height: 700px;
+    .message{
+      padding: .8em;
+      border-radius: 25px;
+      font-size: .8;
+      margin-top: 1em;
+      position: relative;
+      top: 2em;
+      display: block;
+      max-width: 80%;
+    }
+    .host{
+      margin: 0 auto;
+      width: 100%;
+      background-color: #f97952;
+      font-size: 1em;
+      font-weight: 600;
+      color: white;
+      text-align: center;
+      border-radius: 15px;
+      margin-top: 35px;
+      .info{
+        flex-direction: column;
+        .img{
+          height: 50px;
+          width: 50px;
+          border-radius: 25px;
+          background-color: white;
+        }
+
+      }
+    }
+    .send{
+      background-color: #DCDCDC;
+      width: auto;
+      .info{
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .img{
+          height: 30px;
+          width: 30px;
+          background-color: white;
+          border-radius: 10px;
+          justify-content: flex-start;
+          margin-right: 10px;
+        }
+      }
+    }
+    .small{
+      width: 33%;
+    }
+    .med{
+      width: 70%;
+    }
+    .recieve{
+      background-color: rgba(0,188,248,1);
+      float: right;
+    }
+    .empty{
+      height: 4em;
+      width: 1em;
+    }
+  }
+
+  .gallery{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 7px;
+    margin-bottom: 50px;
+    .fotos{
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 auto;
+      border: 1px solid white;
+      .foto{
+        background-color: #7A7A7A;
+        height: 90px;
+        width: 90px;
+      }
+      .foto1{
+        background-color: #20BF55;
+      }
+    }
+  }
+  .popup-overlay{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: +1000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: hidden;
+    display: none;
+  }
+  .popup{
+    width: 300px;
+    background-color: white;
+    border-radius: 10px;
+    display: block;
+    margin: auto;
+    text-align: center;
+    position: relative;
+    padding-bottom: 100px;
+    p{
+      text-align: center;
+      font-size: 28px;
+    }
+    .info{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding-top: 40px;
+    }
+    .picture{
+      margin-top: 20px;
+      ion-img{
+        height: 200px;
+      }
+    }
+    .actions{
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      width: 100%;
+      height: 70px;
+      z-index: +10000;
+      .but{
+        width: 100%;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 70px;
+      }
+      .accept{
+        background-color: #20BF55;
+        border-radius: 0px 0px 10px 10px;
+      }
+    }
+    .owl-carousel{
+      padding-bottom: 30px;
+    }
+  }
+}

@@ -16,6 +16,7 @@ import { WalletPage } from '../wallet/wallet';
 export class AboutPage {
   public general_loader: any;
   public response$: any;
+  public usuarios$: any;
   public my_clans: any = [];
   public users$: any;
   public clans_example: any = [
@@ -31,6 +32,7 @@ export class AboutPage {
 public noms_balance: any = '';
 
 public f_selected: any = 1;
+public requests: any = [];
 
   constructor(public navCtrl: NavController,
   public af: AngularFireDatabase,
@@ -100,17 +102,83 @@ public f_selected: any = 1;
     });
   }
 
+  convertRequests(){
+    let r = this.users$.requests;
+    if(r){
+      for(let key in r){
+        this.requests.push({
+          'index': r[key].index,
+          'friend': r[key].friend,
+          'friend_name': this.getName(r[key].friend),
+          'friend_img': this.getImg(r[key].friend),
+          'event': r[key].event,
+          'type': r[key].type,
+          'request': this.isRequest(r[key].type)
+        });
+      }
+    }
+    console.log(this.requests);
+    if(this.general_loader) this.general_loader.dismiss();
+  }
+
+  getName(indice){
+    let u = this.usuarios$;
+    for(let key in u){
+      if(key == indice) return u[key].name;
+    }
+  }
+
+  getImg(indice){
+    let u = this.usuarios$;
+    for(let key in u){
+      if(key == indice) return u[key].picture.data.url;
+    }
+  }
+
+  isRequest(tipo){
+    return tipo == 'friend_request' || tipo == 'invite_request' || tipo == 'invitation' ? true : false;
+  }
+
+  getText(nombre, tipo){
+    if(tipo == 'friend_request'){
+      return '¡'+nombre+' solicitó seguirte!'
+    }
+    else if(tipo == 'invite_request'){
+      return nombre+' solicitó invitar a alguien al evento';
+    }
+    else if(tipo == 'invitation'){
+      return '¡Nueva invitacion!';
+    }
+  }
+
+  getSub(nombre, tipo){
+    if(tipo == 'friend_request'){
+      return 'Puedes aceptar o rechazar la solicitud para seguirte.'
+    }
+    else if(tipo == 'invite_request'){
+      return '¿Deseas permitir que agregue a esta persona al evento?';
+    }
+    else if(tipo == 'invitation'){
+      return 'Tu amigo '+nombre+' te ha invitado a un evento.';
+    }
+  }
+
+
+
   ionViewDidLoad() {
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
-      content: 'Loading...'
+      content: 'Cargando...'
     });
     this.general_loader.present();
+    this.af.object('Users').snapshotChanges().subscribe(action => {
+      this.usuarios$ = action.payload.val();
+    });
     this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
       this.users$ = action.payload.val();
-      this.noms_balance = this.users$.noms;
+      this.requests = [];
+      this.convertRequests();
     });
-    this.getClans();
   }
 
   getTextM(miembros){

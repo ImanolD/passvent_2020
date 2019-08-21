@@ -36,6 +36,7 @@ public user_preferences: any = [];
 public filtered_a: any = [];
 
 public f_selected: any = 1;
+public eventos: any = [];
 
   @ViewChild('map') mapElement: ElementRef;
    map: any;
@@ -206,15 +207,15 @@ public f_selected: any = 1;
   populateMap(){
     this.done_g = true;
     let vm = this;
-    for(let i=0; i<this.activities_all.length; i++){
+    for(let i=0; i<this.eventos.length; i++){
 
-    this.coordenadas(this.activities_all[i], this.activities_all[i].location, this.activities_all[i].title_complete,  function(location){
-        vm.activities_all[i].location = location;
+    this.coordenadas(this.eventos[i], this.eventos[i].location, this.eventos[i].title,  function(location){
+        vm.eventos[i].location = location;
         let om = vm;
         vm.getDistance(location, function(distance, text){
           console.log(distance+' km');
-          vm.activities_all[i].distance = text;
-          vm.activities_all[i].distance_number = distance;
+          vm.eventos[i].distance = text;
+          vm.eventos[i].distance_number = distance;
         });
     });
 
@@ -385,16 +386,50 @@ public f_selected: any = 1;
     });
   }
 
+  getEventos(){
+    this.af.object('Events').snapshotChanges().subscribe(action => {
+      this.response$ = action.payload.val();
+      this.eventos = [];
+      this.convertEventos();
+    });
+  }
+
+  convertEventos(){
+    let a = this.response$;
+    for(let key in a){
+      this.eventos.push({
+        'title': a[key].title,
+        'location': a[key].location,
+        'cuesta': a[key].cuesta,
+        'start_day': a[key].start_day,
+        'start_time': a[key].start_time,
+        'end_day': a[key].end_day,
+        'end_time': a[key].end_time,
+        'externa': a[key].externa,
+        'gallery': a[key].gallery,
+        'gallery_all': a[key].gallery_all,
+        'limit': a[key].limit,
+        'private': a[key].private,
+        'img': (a[key].img ? a[key].img : ''),
+        'dia': moment(a[key].start_day).format('LL'),
+        'distance': 0,
+        'distance_number': ''
+      });
+    }
+    //this.activities = this.activities.filter( a => a.creator == firebase.auth().currentUser.uid);
+    console.log(this.eventos);
+     if(!this.done_g) this.populateMap();
+  }
+
 
   ionViewDidLoad(){
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
-      content: 'Loading...'
+      content: 'Cargando...'
     });
     this.general_loader.present();
-    this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
+    this.af.object('Users/').snapshotChanges().subscribe(action => {
       this.users$ = action.payload.val();
-      this.noms_balance = this.users$.noms;
     });
     this.loadMap();
   }
@@ -425,8 +460,7 @@ public f_selected: any = 1;
       let marker = new google.maps.Marker({
         map: this.map,
         animation: google.maps.Animation.DROP,
-        position: this.map.getCenter(),
-        icon: 'https://firebasestorage.googleapis.com/v0/b/dev-nomads.appspot.com/o/isotipo_nomu.png?alt=media&token=ebb66981-09d6-4dd9-bcd3-8915e4b16581'
+        position: this.map.getCenter()
       });
 
       let content = "<h4>Here you are!</h4>";
@@ -445,6 +479,7 @@ public f_selected: any = 1;
       });
       if(this.general_loader) this.general_loader.dismiss();
       //this.getActivities();
+      this.getEventos();
     }
 
 }

@@ -6,6 +6,8 @@ import firebase from 'firebase';
 import { ActivityPage } from '../activity/activity';
 import { EditactPage } from '../editact/editact';
 import { NeweventPage } from '../newevent/newevent';
+import * as moment from 'moment';
+import { DomSanitizer } from '@angular/platform-browser';
 
 /**
  * Generated class for the MyactivitiesPage page.
@@ -28,7 +30,9 @@ public general_loader: any;
   public navParams: NavParams,
   public af: AngularFireDatabase,
   public loadingCtrl: LoadingController,
-  public alertCtrl: AlertController) {
+  public alertCtrl: AlertController,
+  public sanitizer: DomSanitizer) {
+    moment.locale('es');
   }
 
   confirmEdit(act){
@@ -52,6 +56,10 @@ public general_loader: any;
     }).present();
   }
 
+  sanitizeThis(image){
+    return this.sanitizer.bypassSecurityTrustStyle('url('+image+')');
+  }
+
 
 
   convertActivities(){
@@ -70,6 +78,8 @@ public general_loader: any;
         'gallery_all': a[key].gallery_all,
         'limit': a[key].limit,
         'private': a[key].private,
+        'img': (a[key].img ? a[key].img : ''),
+        'dia': moment(a[key].start_day).format('LL')
       });
     }
     //this.activities = this.activities.filter( a => a.creator == firebase.auth().currentUser.uid);
@@ -97,7 +107,7 @@ public general_loader: any;
   ionViewDidLoad() {
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
-      content: 'Loading...'
+      content: 'Cargando...'
     });
     this.general_loader.present();
     this.getActivities();

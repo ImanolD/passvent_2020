@@ -40,9 +40,10 @@ import { EditeventPage } from '../pages/editevent/editevent';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { ReservationsPage } from '../pages/reservations/reservations';
 import { AllPage } from '../pages/all/all';
-import { NeweventPage } from '../pages/newevent/newevent';
 
 import { Keyboard } from '@ionic-native/keyboard';
+
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   templateUrl: 'app.html'
@@ -50,17 +51,19 @@ import { Keyboard } from '@ionic-native/keyboard';
 export class MyApp {
 
 
-  rootPage:any = TabsPage;
+  rootPage:any = WelcomePage;
 
-  constructor(config: Config, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, modalCtrl: ModalController, keyboard: Keyboard) {
+  constructor(config: Config, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, modalCtrl: ModalController, keyboard: Keyboard, afAuth: AngularFireAuth) {
     platform.ready().then(() => {
 
-      //config.set('backButtonIcon', 'fa-fal-angle-left');
+      //config.set('backButtconIcon', 'fa-fal-angle-left');
 
-      localStorage.setItem('Tipo', 'nomads');
-      if (localStorage.getItem('Accepted') == 'caca'){
-        this.rootPage = TabsPage;
-      }
+      afAuth.authState.subscribe(user => {
+        if(user){
+          this.rootPage = TabsPage;
+        }
+       });
+
       //keyboard.disableScroll(true);
       statusBar.styleDefault();
       let splash = modalCtrl.create(SplashPage);
