@@ -7,358 +7,170 @@
 
 
 <ion-content>
+
   <div class="profile page">
 
     <div class="person f-center">
 
       <div class="info f-center">
-        <p class="number">100</p>
+        <p class="number">{{this.user_data.events_gone}}</p>
         <p>Asistidos</p>
       </div>
 
       <div class="picture f-center">
-        <div class="circle"></div>
+        <div [style.background-image]="sanitizeThis(this.user_data.picture)" class="circle"></div>
       </div>
 
       <div class="info f-center">
-        <p class="number">100</p>
+        <p class="number">{{this.user_data.events_created}}</p>
         <p>Creados</p>
 
       </div>
 
-      <i routerLink="/profile-info" class="fas fa-cog"></i>
-      <i class="fas fa-qrcode"></i>
+      <i (click)="editarPerfil()" class="fas fa-cog"></i>
+      <i (click)="openQr()" class="fas fa-qrcode"></i>
 
     </div>
 
     <br>
-    <p class="name">Carlos Esparza</p>
+    <p class="name">{{this.user_data.name}}</p>
 
     <div class="about">
       <br>
-      <a href="www.facebook.com">https://www.facebook.com/</a>
-      <p class="desc"> <br> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat.</p>
+
+      <a *ngIf="this.user_data.web != ''" href="{{this.user_data.web}}">{{this.user_data.web}}</a>
+      <a *ngIf="this.user_data.web == ''">Agrega un link a tu perfil</a>
+
+
+      <p *ngIf="this.user_data.description == ''" class="desc"><br>Al parecer no tienes una descripción agregada aún, agrega una en la esquina superior derecha.</p>
+      <p *ngIf="this.user_data.description != ''" class="desc"><br>{{this.user_data.description}}</p>
     </div> <br>
 
     <p class="title">Amigos <button routerLink="/freinds" type="button" name="button" class="more orange">Ver Todos</button></p>
 
-    <div class="people f-center">
 
-      <div class="item f-center add empty">
-        <div class="picture"></div>
-        <p class="light grey"></p>
-      </div>
+    <div class="slider-amigos">
 
-      <div class="item f-center">
-        <div class="picture"></div>
-        <p class="light grey">Alex Ruiz</p>
+      <div (click)="addFriends()" class="persona">
+        <div class="picture add"></div>
+        <div class="light grey">Agregar Amigo</div>
       </div>
 
-      <div class="item f-center">
-        <div class="picture"></div>
-        <p class="light grey">Alex Ruiz</p>
+      <div *ngFor="let f of this.user_data.friends">
+        <div class="persona">
+          <div class="picture" [style.background-image]="sanitizeThis(f.data.picture.data.url)"></div>
+          <div class="light grey">{{f.data.name}}</div>
+        </div>
       </div>
-      <div class="item f-center">
-        <div class="picture"></div>
-        <p class="light grey">Alex Ruiz</p>
-      </div>
-      <div class="item f-center">
-        <div class="picture"></div>
-        <p class="light grey">Alex Ruiz</p>
-      </div>
-      <div class="item f-center">
-        <div class="picture"></div>
-        <p class="light grey">Alex Ruiz</p>
-      </div>
-      <div class="item f-center">
-        <div class="picture"></div>
-        <p class="light grey">Alex Ruiz</p>
-      </div>
-      <div class="item f-center">
-        <div class="picture"></div>
-        <p class="light grey">Alex Ruiz</p>
-      </div>
-      <div class="item f-center">
-        <div class="picture"></div>
-        <p class="light grey">Alex Ruiz</p>
-      </div>
-      <div class="item f-center">
-        <div class="picture"></div>
-        <p class="light grey">Alex Ruiz</p>
-      </div>
-      <div class="item f-center">
-        <div class="picture"></div>
-        <p class="light grey">Alex Ruiz</p>
-      </div>
+
 
     </div>
+
 
     <br><br>
 
     <p class="title">Eventos que asistirás <button type="button" name="button" class="more orange">Ver Todos</button></p>
     <div class="events">
-      <div class="card simple" routerLink="/event">
-        <div class="actions">
+      <div *ngFor="let e of this.eventos">
+        <div *ngIf="this.filterEvents('going', e)" class="card simple" (click)="openEvento(e)">
+          <div class="actions">
 
-          <div class="asistants">
-            <div class="photos">
-              <div class="circle"></div>
-              <div class="circle"></div>
-              <div class="circle"></div>
+            <div class="asistants">
+              <div *ngIf="this.cuantosAmigos(e.attendants) != 0" class="photos">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+              </div>
+              <p class="light grey">{{this.cuantosAmigos(e.attendants)}} Amigos asistirán a</p>
             </div>
-            <p class="light grey">100 Amigos asistirán a</p>
           </div>
-        </div>
 
-        <p class="title medium">Event Name</p>
+          <p class="title medium">{{e.title}}</p>
 
-        <div class="bottom">
-          <div class="event-info">
-            <div class="overlay">
-              <div class="overlay-content">
-                <p>Fecha: 25 de mayo</p>
-                <p>Lugar: Lugar</p>
-                <p>Hora: 12:00 p.m</p>
+          <div class="bottom">
+            <div class="event-info">
+              <div class="overlay" [style.background-image]="sanitizeThis(e.img)">
+                <div class="overlay-content">
+                  <p>Fecha: {{e.dia}}</p>
+                  <p>Lugar: {{e.location}}</p>
+                  <p>Hora: {{e.start_time}}</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
-      <div class="card simple" routerLink="/event">
-        <div class="actions">
 
-          <div class="asistants">
-            <div class="photos">
-              <div class="circle"></div>
-              <div class="circle"></div>
-              <div class="circle"></div>
-            </div>
-            <p class="light grey">100 Amigos asistirán a</p>
-          </div>
-        </div>
-
-        <p class="title medium">Event Name</p>
-
-        <div class="bottom">
-          <div class="event-info">
-            <div class="overlay">
-              <div class="overlay-content">
-                <p>Fecha: 25 de mayo</p>
-                <p>Lugar: Lugar</p>
-                <p>Hora: 12:00 p.m</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div class="card simple" routerLink="/event">
-        <div class="actions">
-
-          <div class="asistants">
-            <div class="photos">
-              <div class="circle"></div>
-              <div class="circle"></div>
-              <div class="circle"></div>
-            </div>
-            <p class="light grey">100 Amigos asistirán a</p>
-          </div>
-        </div>
-
-        <p class="title medium">Event Name</p>
-
-        <div class="bottom">
-          <div class="event-info">
-            <div class="overlay">
-              <div class="overlay-content">
-                <p>Fecha: 25 de mayo</p>
-                <p>Lugar: Lugar</p>
-                <p>Hora: 12:00 p.m</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
 
     </div>
 
     <p class="title">Eventos Organizados <button type="button" name="button" class="more orange">Ver Todos</button></p>
     <div class="events">
-      <div class="card simple" routerLink="/event">
-        <div class="actions">
+      <div *ngFor="let e of this.eventos">
+        <div *ngIf="this.filterEvents('admin', e)" class="card simple" (click)="openEvento(e)">
+          <div class="actions">
 
-          <div class="asistants">
-            <div class="photos">
-              <div class="circle"></div>
-              <div class="circle"></div>
-              <div class="circle"></div>
+            <div class="asistants">
+              <div *ngIf="this.cuantosAmigos(e.attendants) != 0" class="photos">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+              </div>
+              <p class="light grey">{{this.cuantosAmigos(e.attendants)}} Amigos asistirán a</p>
             </div>
-            <p class="light grey">100 Amigos asistirán a</p>
           </div>
-        </div>
 
-        <p class="title medium">Event Name</p>
+          <p class="title medium">{{e.title}}</p>
 
-        <div class="bottom">
-          <div class="event-info">
-            <div class="overlay">
-              <div class="overlay-content">
-                <p>Fecha: 25 de mayo</p>
-                <p>Lugar: Lugar</p>
-                <p>Hora: 12:00 p.m</p>
+          <div class="bottom">
+            <div class="event-info">
+              <div class="overlay" [style.background-image]="sanitizeThis(e.img)">
+                <div class="overlay-content">
+                  <p>Fecha: {{e.dia}}</p>
+                  <p>Lugar: {{e.location}}</p>
+                  <p>Hora: {{e.start_time}}</p>
+                </div>
               </div>
             </div>
           </div>
+
         </div>
-
-      </div>
-      <div class="card simple" routerLink="/event">
-        <div class="actions">
-
-          <div class="asistants">
-            <div class="photos">
-              <div class="circle"></div>
-              <div class="circle"></div>
-              <div class="circle"></div>
-            </div>
-            <p class="light grey">100 Amigos asistirán a</p>
-          </div>
-        </div>
-
-        <p class="title medium">Event Name</p>
-
-        <div class="bottom">
-          <div class="event-info">
-            <div class="overlay">
-              <div class="overlay-content">
-                <p>Fecha: 25 de mayo</p>
-                <p>Lugar: Lugar</p>
-                <p>Hora: 12:00 p.m</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div class="card simple" routerLink="/event">
-        <div class="actions">
-
-          <div class="asistants">
-            <div class="photos">
-              <div class="circle"></div>
-              <div class="circle"></div>
-              <div class="circle"></div>
-            </div>
-            <p class="light grey">100 Amigos asistirán a</p>
-          </div>
-        </div>
-
-        <p class="title medium">Event Name</p>
-
-        <div class="bottom">
-          <div class="event-info">
-            <div class="overlay">
-              <div class="overlay-content">
-                <p>Fecha: 25 de mayo</p>
-                <p>Lugar: Lugar</p>
-                <p>Hora: 12:00 p.m</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
 
     </div>
 
     <p class="title">Eventos que asististe <button type="button" name="button" class="more orange">Ver Todos</button></p>
     <div class="events">
-      <div class="card simple" routerLink="/event">
-        <div class="actions">
+      <div *ngFor="let e of this.eventos">
+        <div *ngIf="this.filterEvents('hi', e)" class="card simple" (click)="openEvento(e)">
+          <div class="actions">
 
-          <div class="asistants">
-            <div class="photos">
-              <div class="circle"></div>
-              <div class="circle"></div>
-              <div class="circle"></div>
+            <div class="asistants">
+              <div *ngIf="this.cuantosAmigos(e.attendants) != 0" class="photos">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+              </div>
+              <p class="light grey">{{this.cuantosAmigos(e.attendants)}} Amigos asistirán a</p>
             </div>
-            <p class="light grey">100 Amigos asistirán a</p>
           </div>
-        </div>
 
-        <p class="title medium">Event Name</p>
+          <p class="title medium">{{e.title}}</p>
 
-        <div class="bottom">
-          <div class="event-info">
-            <div class="overlay">
-              <div class="overlay-content">
-                <p>Fecha: 25 de mayo</p>
-                <p>Lugar: Lugar</p>
-                <p>Hora: 12:00 p.m</p>
+          <div class="bottom">
+            <div class="event-info">
+              <div class="overlay" [style.background-image]="sanitizeThis(e.img)">
+                <div class="overlay-content">
+                  <p>Fecha: {{e.dia}}</p>
+                  <p>Lugar: {{e.location}}</p>
+                  <p>Hora: {{e.start_time}}</p>
+                </div>
               </div>
             </div>
           </div>
+
         </div>
-
-      </div>
-      <div class="card simple" routerLink="/event">
-        <div class="actions">
-
-          <div class="asistants">
-            <div class="photos">
-              <div class="circle"></div>
-              <div class="circle"></div>
-              <div class="circle"></div>
-            </div>
-            <p class="light grey">100 Amigos asistirán a</p>
-          </div>
-        </div>
-
-        <p class="title medium">Event Name</p>
-
-        <div class="bottom">
-          <div class="event-info">
-            <div class="overlay">
-              <div class="overlay-content">
-                <p>Fecha: 25 de mayo</p>
-                <p>Lugar: Lugar</p>
-                <p>Hora: 12:00 p.m</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div class="card simple" routerLink="/event">
-        <div class="actions">
-
-          <div class="asistants">
-            <div class="photos">
-              <div class="circle"></div>
-              <div class="circle"></div>
-              <div class="circle"></div>
-            </div>
-            <p class="light grey">100 Amigos asistirán a</p>
-          </div>
-        </div>
-
-        <p class="title medium">Event Name</p>
-
-        <div class="bottom">
-          <div class="event-info">
-            <div class="overlay">
-              <div class="overlay-content">
-                <p>Fecha: 25 de mayo</p>
-                <p>Lugar: Lugar</p>
-                <p>Hora: 12:00 p.m</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
 
     </div>

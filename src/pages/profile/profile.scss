@@ -1,5 +1,5 @@
 page-profile {
-  
+
   .code-info{
     display: flex;
     justify-content: center;
@@ -13,6 +13,44 @@ page-profile {
     margin-right: 5%;
     .mine{
       margin-right: 3%;
+    }
+  }
+
+  .slider-amigos{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-left: 5%;
+    .persona{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding-right: 8%;
+    }
+    .light{
+      display: inline-block;
+    }
+    .picture{
+      height: 5em;
+      width: 5em;
+      border-radius: 2.5em;
+      border: .3em solid white;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      background-image: url("../assets/placeholders/chem.jpeg");
+      background-size: cover;
+      &.add{
+        background-image: none;
+        background-color: $orange;
+        color: white;
+        font-size: 1em;
+      }
+      &.placeholder{
+        box-shadow: none;
+        background-color: white;
+        margin-right: 10em;
+      }
     }
   }
   .superior{
@@ -38,7 +76,7 @@ page-profile {
     width: 10vh;
     height: 10vh;
     border-radius: 50%;
-    //background-image: url('../../assets/img/imanol.png');
+    background-image: url('../assets/img/imanol.png');
     background-color: #00B0FF;
     background-repeat: no-repeat;
     background-size: cover;
@@ -266,7 +304,7 @@ page-profile {
 
   .person {
     display: flex;
-    padding-top: 0.8em;
+    padding-top: 4.5em;
     width: 100%;
 
     .picture {
@@ -279,7 +317,7 @@ page-profile {
         border-radius: 60px;
         border: 3px solid white;
         box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-        background-image: url("../../assets/placeholders/esp.jpeg");
+        background-image: url("../assets/placeholders/esp.jpeg");
         background-size: cover;
         background-repeat: no-repeat;
         display: block;

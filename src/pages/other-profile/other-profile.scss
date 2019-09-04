@@ -1,0 +1,120 @@
+.profile{
+  .name{
+    font-size: 22px;
+    font-weight: 500;
+    text-align: center;
+    width: 100%;
+  }
+  .fa-cog{
+    color: #7A7A7A;
+    font-size: 25px;
+    position: absolute;
+    top: 40px;
+    right: 20px;
+  }
+  .fa-ellipsis-h{
+    color: #7A7A7A;
+    font-size: 25px;
+    position: absolute;
+    top: 40px;
+    right: 55px;
+  }
+  .person{
+    display: flex;
+    padding-top: .8em;
+    .picture{
+      width: 32%;
+      .circle{
+        height: 120px;
+        width: 120px;
+        border-radius: 60px;
+        border: 5px solid white;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        background-image: url("../../assets/placeholders/esp.jpeg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: block;
+        margin: auto;
+      }
+    }
+    .info{
+      width: 32%;
+      flex-direction: column;
+      padding: 15px;
+      color: #FF5722;
+      .number{
+        font-size: 25px;
+        font-weight: 600;
+        text-align: center !important;
+        position: relative;
+        bottom: -10px;
+      }
+    }
+  }
+
+
+}
+
+.slider-amigos{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin-left: 5%;
+  .persona{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-right: 8%;
+  }
+  .light{
+    display: inline-block;
+  }
+  .picture{
+    height: 5em;
+    width: 5em;
+    border-radius: 2.5em;
+    border: .3em solid white;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    background-image: url("../assets/placeholders/chem.jpeg");
+    background-size: cover;
+    &.add{
+      background-image: none;
+      background-color: $orange;
+      color: white;
+      font-size: 1em;
+    }
+    &.placeholder{
+      box-shadow: none;
+      background-color: white;
+      margin-right: 10em;
+    }
+  }
+}
+
+.about{
+  text-align: left;
+  padding: 1em;
+  a{
+    font-size: 16px !important;
+    text-align: center !important;
+  }
+  .desc{
+    font-size: 14px;
+    margin-top: 15px;
+  }
+  .follow-btns{
+    display: flex;
+    width: 80%;
+    margin-left: 40px;
+    button{
+      width: 80%;
+    }
+    .small{
+      width: 18%;
+      margin-left: 5px;
+    }
+  }
+
+}

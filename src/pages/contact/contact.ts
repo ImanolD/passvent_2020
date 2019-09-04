@@ -11,6 +11,7 @@ import { ActivityPage } from '../activity/activity';
 import { EventPage } from '../event/event';
 import * as moment from 'moment';
 import { DetailsPage } from '../details/details';
+import { MapaPage } from '../mapa/mapa';
 
 @Component({
   selector: 'page-contact',
@@ -50,6 +51,10 @@ public eventos: any = [];
     public sanitizer: DomSanitizer,
     public modalCtrl: ModalController) {
 
+  }
+
+  openMapa(){
+    this.navCtrl.push(MapaPage);
   }
 
 
@@ -413,12 +418,64 @@ public eventos: any = [];
         'img': (a[key].img ? a[key].img : ''),
         'dia': moment(a[key].start_day).format('LL'),
         'distance': 0,
-        'distance_number': ''
+        'distance_number': '',
+        'creator': this.getCreator(a[key].creator, 'name'),
+        'creator_img': this.getCreator(a[key].creator, 'img'),
+        'creator_index': a[key].creator,
+        'description': a[key].description,
+        'status': this.getStatus(a[key].attendants, a[key].private),
+        'attendants': a[key].attendants
       });
+    }
+
+    let e = this.eventos;
+    for(let key in e){
+      for(let lla in e[key].attendants){
+        if(this.isAmigo(e[key].attendants[lla].index)) e[key].attendants[lla].isFriend = true;
+        else e[key].attendants[lla].isFriend = false;
+      }
     }
     //this.activities = this.activities.filter( a => a.creator == firebase.auth().currentUser.uid);
     console.log(this.eventos);
-     if(!this.done_g) this.populateMap();
+
+    //CON ESTO SE LLENA EL MAPA
+
+    //if(!this.done_g) this.populateMap();
+  }
+
+  cuantosAmigos(conteo){
+    return conteo.filter(c=>c.isFriend).length;
+  }
+
+  isAmigo(indice){
+    let u = this.users$;
+    let f;
+    for(let key in u){
+      if(key == firebase.auth().currentUser.uid){
+        f = u[key].friends;
+        for(let lla in f){
+          if(f[lla].index == indice) return true;
+        }
+      }
+    }
+    return false;
+  }
+
+
+  getCreator(indice, que){
+    let u = this.users$;
+    for(let key in u){
+      if(key == indice){
+        if(que == 'name') return u[key].name;
+        else if(que == 'img') return u[key].picture.data.url;
+      }
+    }
+  }
+
+  getStatus(lista, privado){
+    for(let key in lista){
+      return lista[key].index == firebase.auth().currentUser.uid ? lista[key].status : !privado ? 'Invited' : 'Not';
+    }
   }
 
 
@@ -427,11 +484,12 @@ public eventos: any = [];
       spinner: 'bubbles',
       content: 'Cargando...'
     });
-    this.general_loader.present();
+    //this.general_loader.present();
     this.af.object('Users/').snapshotChanges().subscribe(action => {
       this.users$ = action.payload.val();
     });
-    this.loadMap();
+    this.getEventos();
+    //this.loadMap();
   }
 
 
@@ -479,7 +537,7 @@ public eventos: any = [];
       });
       if(this.general_loader) this.general_loader.dismiss();
       //this.getActivities();
-      this.getEventos();
+
     }
 
 }

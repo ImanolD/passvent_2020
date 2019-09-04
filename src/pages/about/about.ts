@@ -33,6 +33,7 @@ public noms_balance: any = '';
 
 public f_selected: any = 1;
 public requests: any = [];
+public boletos: any = [];
 
   constructor(public navCtrl: NavController,
   public af: AngularFireDatabase,
@@ -67,6 +68,90 @@ public requests: any = [];
       }
     }
     return false;
+  }
+
+  //Eliminar amigos
+  confirmErase(indice, request){
+    this.alertCtrl.create({
+      title: '¿Deseas rechazar esta solicitud de amistad?',
+      message: 'Esta persona no será notificada',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () =>{
+
+          }
+        },
+        {
+          text: 'Rechazar Solicitud',
+          handler: () =>{
+            this.eraseRequest(indice, request);
+          }
+        },
+      ]
+    }).present();
+  }
+
+  eraseRequest(indice, request){
+    this.af.list('Users/'+firebase.auth().currentUser.uid+'/requests/'+request).remove();
+  }
+
+
+
+  //Agregar amigos
+  confirmAdd(indice, request){
+    this.alertCtrl.create({
+      title: '¿Deseas aceptar esta solicitud de amistad?',
+      message: 'Esta persona será agregada a tus amigos',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () =>{
+
+          }
+        },
+        {
+          text: 'Aceptar Solicitud',
+          handler: () =>{
+            this.acceptFriend(indice, request);
+          }
+        },
+      ]
+    }).present();
+  }
+
+  acceptFriend(indice, request){
+    let index = this.generateUUID();
+
+    this.af.list('Users/'+firebase.auth().currentUser.uid+'/requests/'+request).remove();
+    this.af.list('Users/'+firebase.auth().currentUser.uid+'/friends').update(indice, {'status': 'friends'});
+    this.af.list('Users/'+indice+'/friends').update(firebase.auth().currentUser.uid, {'index': firebase.auth().currentUser.uid, 'status':'friends'});
+
+    //Notificacion para el usuario y push notification
+    this.af.list('Users/'+indice+'/requests').update(index, {
+      'title': '¡Nuevo amigo en Passvent!',
+      'subtitle': 'Tienes un nuevo amigo en passvent!',
+      'index': index,
+      'type': 'notice'
+    });
+    this.af.list('Notifications').update(index, {
+      'title': '¡Nuevo amigo en Passvent!',
+      'subtitle': 'Tienes un nuevo amigo en passvent!',
+      'index': indice
+    });
+
+    this.af.list('Users/'+firebase.auth().currentUser.uid+'/requests').update(index, {
+      'title': '¡Nuevo amigo en Passvent!',
+      'subtitle': 'Tienes un nuevo amigo en passvent!',
+      'index': index,
+      'type': 'notice'
+    });
+    this.af.list('Notifications').update(index, {
+      'title': '¡Nuevo amigo en Passvent!',
+      'subtitle': 'Tienes un nuevo amigo en passvent!',
+      'index': firebase.auth().currentUser.uid
+    });
+
   }
 
   convertClans(){
@@ -205,6 +290,16 @@ public requests: any = [];
 
   openFilters(){
     this.navCtrl.push(FiltersPage);
+  }
+
+  private generateUUID(): any {
+    var d = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx'.replace(/[xy]/g, function (c) {
+    var r = (d + Math.random() * 16) % 16 | 0;
+        d = Math.floor(d / 16);
+        return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+     });
+    return uuid;
   }
 
 }

@@ -1,0 +1,104 @@
+
+<ion-header *ngIf="type != 'friend'">
+  <ion-navbar color="white">
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="freinds">
+    <div class="search">
+
+      <div class="input">
+        <input [(ngModel)]="search" type="text" name="" value="" placeholder="Buscar">
+      </div>
+
+    </div>
+
+    <!-- <div *ngIf="type != 'add'" class="filters two">
+      <div class="buttons">
+        <button class="button-outline blue"> Seguidores</button>
+        <button class="button-outline blue"> Amigos en Común</button>
+      </div>
+    </div> -->
+
+
+    <div *ngIf="type == 'friend'">
+      <div *ngFor="let u of this.filterAmigos()" (click)="openProfile(u)">
+        <div *ngIf="!u.isamigo" class="persona-container">
+          <img src="{{u.picture.data.url}}">
+          <div class="title medium name">{{u.name}}</div>
+          <button (click)="confirmAdd(u)" class="blue" type="button" name="button"><i class="fas fa-user-times"></i>Seguir</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="type == 'staff'">
+      <div *ngFor="let u of this.filterAmigos(); let in=index">
+        <div *ngIf="u.isamigo" class="persona-container">
+          <img src="{{u.picture.data.url}}">
+          <div class="title medium name">{{u.name}}</div>
+          <button *ngIf="!u.selected && !this.isIn(u.index)" (click)="confirmAgregar(u, 'staff', in)" class="blue" type="button" name="button"><i class="fas fa-user-times"></i>Añadir como staff</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="type == 'admin'">
+      <div *ngFor="let u of this.filterAmigos(); let in=index">
+        <div *ngIf="u.isamigo" class="persona-container">
+          <img src="{{u.picture.data.url}}">
+          <div class="title medium name">{{u.name}}</div>
+          <button *ngIf="!u.selected && !this.isIn(u.index)" (click)="confirmAgregar(u, 'anfitrión', in)" class="blue" type="button" name="button"><i class="fas fa-user-times"></i>Añadir como anfitrion</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="type == 'fotografo'">
+      <div *ngFor="let u of this.filterAmigos(); let in=index">
+        <div *ngIf="u.isamigo" class="persona-container">
+          <img src="{{u.picture.data.url}}">
+          <div class="title medium name">{{u.name}}</div>
+          <button *ngIf="!u.selected && !this.isIn(u.index)" (click)="confirmAgregar(u, 'fotógrafo', in)" class="blue" type="button" name="button"><i class="fas fa-user-times"></i>Añadir como fotografo</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="type == 'invite'">
+      <div *ngFor="let u of this.filterAmigos(); let in=index">
+        <div *ngIf="u.isamigo" class="persona-container">
+          <img src="{{u.picture.data.url}}">
+          <div class="title medium name">{{u.name}}</div>
+          <button *ngIf="!u.selected && !this.isIn(u.index)" (click)="confirmAgregar(u, 'invitado', in)" class="blue" type="button" name="button"><i class="fas fa-user-times"></i>Solicitar Invitado</button>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <!-- <div class="table">
+
+      <div *ngFor="let u of this.filterAmigos()" (click)="openProfile(u)">
+        <div class="freind">
+
+          <div class="container-img">
+            <ion-img src="{{u.picture.data.url}}"></ion-img>
+          </div>
+
+          <p class="grey">{{u.name}}</p>
+
+          <div class="container">
+            <button *ngIf="!u.isamigo" (click)="confirmAdd(u)" class="blue" type="button" name="button"><i class="fas fa-user-times"></i>Seguir</button>
+          </div>
+
+        </div>
+      </div>
+
+
+
+    </div> -->
+
+  </div>
+
+
+</ion-content>

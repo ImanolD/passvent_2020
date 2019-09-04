@@ -1,0 +1,110 @@
+page-editprofile {
+  .person-info{
+  margin-bottom: 5vh;
+  .search{
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+    .input{
+      width: 100%;
+      input{
+        background-color: #EFEFEF;
+        border: 1px solid white;
+        border-radius: 5px;
+        width: 100%;
+        height: 2em;
+        padding-left: 10px;
+        text-indent: 10px;
+      }
+      input::placeholder{
+        font-weight: 300;
+        font-size: .8em;
+        margin-bottom: 1em;
+        text-indent: .8em;
+      }
+      input:focus{
+        outline: none;
+      }
+      textarea{
+        background-color: #EFEFEF;
+        border: 1px solid white;
+        border-radius: 5px;
+        width: 100%;
+        padding-left: 10px;
+        text-indent: 10px;
+      }
+      textarea::placeholder{
+        font-weight: 300;
+        font-size: .8em;
+        margin-bottom: 1em;
+        text-indent: .8em;
+      }
+      textarea::focus{
+        outline: none;
+      }
+    }
+  }
+  .info{
+    text-align: center;
+    .picture{
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       margin-top: 5vh;
+       padding: 5em;
+       position: relative;
+       height: 5em;
+      .change{
+        height: 1em;
+        width: 1em;
+        position: absolute;
+        top: 10px;
+        left: 140px;
+        border-radius: 1.2em;
+        z-index: 100;
+        ion-img{
+          height: .5em;
+        }
+
+      }
+      ion-img{
+        z-index: 0;
+        height: 120px;
+        width: 120px;
+      }
+
+    }
+
+    .light{
+      font-size: .9em;
+      padding-left: 3.6em;
+    }
+  }
+  .options{
+    margin-top: 2em;
+    .row{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: left;
+      padding: 0px 2.5em;
+      width: 100%;
+      margin-top: 1.2em;
+      flex-wrap: nowrap;
+      .img{
+        width: 40%;
+      }
+      ion-img{
+        height: 2em;
+      }
+      .desc{
+        font-size: .8em;
+        padding: 1.7em 0em 0em 2.5em;
+        .medium{
+          font-size: 1em;
+        }
+      }
+    }
+  }
+}
+}

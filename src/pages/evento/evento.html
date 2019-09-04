@@ -31,16 +31,15 @@
 
 
       <ion-img navPop class="back" src="assets/nav/back.svg"></ion-img>
-      <ion-img class="qr" src="assets/nav/qr-code.svg"></ion-img>
 
       <div class="info medmium white">
         <div class="asistants">
-          <div class="photos">
+          <div *ngIf="this.cuantosAmigos(this.evento_data.attendants) != 0" class="photos">
             <div class="circle"></div>
             <div class="circle"></div>
             <div class="circle"></div>
           </div>
-          <p class="light white">0 Amigos asistirán a</p>
+          <p class="light white">{{this.cuantosAmigos(this.evento_data.attendants)}} Amigos asistirán a</p>
         </div>
         <p>{{this.evento_data.title}}</p>
       </div>
@@ -68,13 +67,16 @@
 
     <br>
 
-    <button *ngIf="this.isOwner()" class="button orange center" type="button" name="button"><i class="fas fa-edit"></i>Editar Evento</button> <br>
+    <button (click)="openEdit()" *ngIf="this.evento_data.rol == 'admin' || this.evento_data.rol == 'anfitrión'" class="button orange center" type="button" name="button"><i class="fas fa-edit"></i>Editar Evento</button> <br>
 
-    <div *ngIf="!this.isOwner()" class="asistance">
+    <button (click)="openScanned()" *ngIf="this.evento_data.rol == 'staff'" class="button orange center" type="button" name="button"><i class="fas fa-edit"></i>Escanear Asistentes</button> <br>
+
+
+    <div *ngIf="this.evento_data.rol == 'nada' || this.evento_data.rol == 'invitado'" class="asistance">
       <p class="title">¿Asistirás?</p>
       <div class="filters">
         <button style="height:40px;" class="button-outline green"> Sí </button>
-        <button style="height:40px; position:relative; top:-6px;" class="button-outline blue"> Estoy Interesado </button>
+        <button style="height:40px; position:relative; top:0px;" class="button-outline blue"> Estoy Interesado </button>
         <button style="height:40px;" class="button-outline red"> No </button>
       </div>
     </div>
@@ -152,52 +154,56 @@
 
     <br>
 
-    <p class="title">Mira quien más asistirá <button type="button" name="button" class="more orange">Ver Todos</button><button *ngIf="this.isOwner()" type="button" name="button" class="more grey"><i class="fas fa-edit"></i> Editar</button></p>
-    <div class="people f-center">
 
+    <div *ngIf="this.cuantosAmigos(this.evento_data.attendants) != 0">
+      <p class="title">Mira quien más asistirá <button (click)="openInvitados(1)" type="button" name="button" class="more orange">Ver Todos</button><button *ngIf="this.isOwner()" (click)="openInvitados(2)" type="button" name="button" class="more grey"><i class="fas fa-edit"></i> Editar</button></p>
+      <div class="people f-center">
 
+        <div class="item f-center">
+          <div class="picture placeholder"></div>
+        </div>
 
-      <div class="item f-center">
-        <div class="picture placeholder"></div>
+        <div class="item f-center">
+          <div class="picture add f-center"><i class="fas fa-plus"></i></div>
+          <p class="light grey">Solicitar Invitado</p>
+        </div>
+
+        <div class="item f-center">
+          <div class="picture"></div>
+          <p class="light grey">Alex Ruiz</p>
+        </div>
+
+        <div class="item f-center">
+          <div class="picture"></div>
+          <p class="light grey">Alex Ruiz</p>
+        </div>
+        <div class="item f-center">
+          <div class="picture"></div>
+          <p class="light grey">Alex Ruiz</p>
+        </div>
+        <div class="item f-center">
+          <div class="picture"></div>
+          <p class="light grey">Alex Ruiz</p>
+        </div>
+
       </div>
-
-      <div class="item f-center">
-        <div class="picture add f-center"><i class="fas fa-plus"></i></div>
-        <p class="light grey">Solicitar Invitado</p>
-      </div>
-
-      <div class="item f-center">
-        <div class="picture"></div>
-        <p class="light grey">Alex Ruiz</p>
-      </div>
-
-      <div class="item f-center">
-        <div class="picture"></div>
-        <p class="light grey">Alex Ruiz</p>
-      </div>
-      <div class="item f-center">
-        <div class="picture"></div>
-        <p class="light grey">Alex Ruiz</p>
-      </div>
-      <div class="item f-center">
-        <div class="picture"></div>
-        <p class="light grey">Alex Ruiz</p>
-      </div>
-
     </div>
 
-    <p class="title">Galería <button type="button" name="button" class="more orange">Ver Todos</button><button *ngIf="this.isOwner()" type="button" name="button" class="more grey"><i class="fas fa-edit"></i> Editar</button></p>
-    <div class="gallery f-center">
-      <div class="fotos">
-        <div class="foto"></div>
-        <div class="foto foto1"></div>
-        <div class="foto"></div>
-        <div class="foto foto1"></div>
-        <div class="foto"></div>
-        <div class="foto foto1"></div>
-        <div class="foto"></div>
-        <div class="foto foto1"></div>
 
+    <div *ngIf="this.evento_data.gallery">
+      <p class="title">Galería <button type="button" name="button" class="more orange">Ver Todos</button><button *ngIf="this.isOwner()" type="button" name="button" class="more grey"><i class="fas fa-edit"></i> Editar</button></p>
+      <div class="gallery f-center">
+        <div class="fotos">
+          <div class="foto"></div>
+          <div class="foto foto1"></div>
+          <div class="foto"></div>
+          <div class="foto foto1"></div>
+          <div class="foto"></div>
+          <div class="foto foto1"></div>
+          <div class="foto"></div>
+          <div class="foto foto1"></div>
+
+        </div>
       </div>
     </div>
 

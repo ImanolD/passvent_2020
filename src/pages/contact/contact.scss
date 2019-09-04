@@ -4,6 +4,11 @@ page-contact {
     overflow: hidden!important;
   }
 
+
+    .toolbar-background-ios{
+      border-style: none!important;
+    }
+
   .input-container{
     //border: 1px solid red;
     width: 100%;
@@ -11,14 +16,18 @@ page-contact {
     padding: 2%;
     border-radius: 0 0 12px 12px!important;
     .input-search{
-      background-color: white;
-      font-family: 'Custom';
+      background-color: #EFEFEF;
+      border: 1px solid white;
       font-size: 100%;
       padding: 3%;
       width: 100%;
       color: black;
-      border: 1px solid rgba(0 ,0, 0, 0.2);
-      border-radius: 5px!important;
+      background-image: url("../../assets/map/search.svg");
+      background-position: 4% 50%;
+      background-repeat: no-repeat;
+      background-size: 1em;
+      text-indent: 10%;
+      border-radius: 10px!important;
     }
     z-index: 100!important;
   }
@@ -27,21 +36,25 @@ page-contact {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
     margin-top: 3%;
     margin-bottom: 3%;
     .btn-filters{
       padding: .3em;
       border: 1px solid rgba(0, 0, 0, 0.2);
-      color: rgba(0, 0, 0, 0.2);
+      color: rgba(0, 0, 0, 0.3);
       border-radius: 5px;
-      font-size: 90%;
+      font-size: 100%;
       width: 30%;
+      margin: .2em;
       text-align: center;
-      font-weight: 700;
+      font-weight: 600;
     }
     .selected{
       background-color: #FF5722;
+      border: 1px solid #FF5722;
       color: white!important;
+      font-weight: 700;
     }
   }
 
@@ -63,7 +76,6 @@ page-contact {
     //background-color: #7D29FB;
     //box-shadow: 0px 0px 5px #8141CB!important;
     border-radius: 8px 8px 0 0!important;
-    font-family: 'Custom';
     z-index: 100!important;
     //background: linear-gradient(#008573, #0C0C0C 70%)!important;
        // background-color: #1BBF80;
@@ -136,7 +148,6 @@ page-contact {
           justify-content: flex-end;
           margin-top: -32%!important;
           p{
-            font-family: 'Custom';
             font-weight: 600!important;
             font-size: 70%;
             color: white;
@@ -190,7 +201,6 @@ page-contact {
           filter: opacity(.8);
         }
         .act-title{
-          font-family: 'Custom';
           font-weight: 400!important;
           font-size: 60%;
           color: white;
@@ -200,7 +210,6 @@ page-contact {
           margin-top: 5%;
         }
         .act-distance{
-          font-family: 'Custom';
           font-weight: 600!important;
           font-size: 60%;
           color: white;

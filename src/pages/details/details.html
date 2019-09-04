@@ -14,8 +14,8 @@
       <div *ngIf="!this.act.isEvent" class="text">
         <div class="top">{{this.act.title}}</div>
         <div *ngIf="this.act.next_time != 'not today'">
-          <div class="hints">Next: {{this.act.next_time}}</div>
-          <div class="hints">Spaces: {{this.act.next_spaces}}</div>
+          <div class="hints">Lugar: {{this.act.location}}</div>
+          <div class="hints">Fecha: {{this.act.start_day}}</div>
         </div>
         <div *ngIf="this.act.next_time == 'not today'">
           <div class="hints">No classes today!</div>
@@ -29,8 +29,8 @@
       </div>
   </div>
   <div class="btm-part">
-    <div *ngIf="this.act.isEvent" class="cost">Cost: {{this.act.cost}} noms</div>
-    <div *ngIf="!this.act.isEvent" class="cost">Cost: {{this.act.class_price}} noms</div>
+    <!-- <div *ngIf="this.act.isEvent" class="cost">Cost: {{this.act.cost}}</div>
+    <div *ngIf="!this.act.isEvent" class="cost">Cost: {{this.act.class_price}}</div> -->
     <img src="assets/img/go.png" class="go">
   </div>
 </div>

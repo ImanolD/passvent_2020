@@ -8,7 +8,7 @@ page-details {
   }
 
    .modal1{
-    background-color: rgba(12, 12, 12, .8);
+    background-color: white;
     width: 60%;
     margin-left: 20%;
     border-radius: 5px;
@@ -34,7 +34,7 @@ page-details {
         justify-content: flex-start;
         align-items: flex-start;
         font-size: 90%;
-        color: white;
+        color: #FF5722;
         .top{
           font-weight: 700;
           text-align: left;
@@ -51,7 +51,7 @@ page-details {
       align-items: center;
       .cost{
         font-size: 90%;
-        color: white;
+        color: #FF5722;
         font-weight: 700;
       }
       .go{

@@ -10,6 +10,11 @@ import * as moment from 'moment';
 import { ChatsPage } from '../chats/chats';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { EditeventPage } from '../editevent/editevent';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { InvitadosPage } from '../invitados/invitados';
+import { PersonaPage } from '../persona/persona';
+
 /**
  * Generated class for the EventoPage page.
  *
@@ -43,12 +48,36 @@ export class EventoPage {
     public sanitizer: DomSanitizer,
     public modalCtrl: ModalController,
     public socialSharing: SocialSharing,
-    public launchNavigator: LaunchNavigator) {
+    public launchNavigator: LaunchNavigator,
+    public barcodeScanner: BarcodeScanner) {
       moment.locale('es');
       this.evento_data = this.navParams.get('Evento');
       this.evento_data.dia = moment(this.evento_data.start_day).format('LL')
       console.log(this.evento_data);
     }
+
+    openScanned(){
+
+   this.barcodeScanner.scan().then((barcodeData) => {
+      let a = this.getPerson(barcodeData.text);
+      this.af.list('test').push(a);
+      let modal = this.modalCtrl.create(PersonaPage, {'persona': a});
+      modal.present();
+    }, err => {
+      console.log(err)
+    });
+   }
+
+
+getPerson(indice){
+  let p = this.people$;
+  for(let key in p){
+    if(key == indice) return p[key];
+  }
+}
+
+
+
 
     getData(dato){
       let p = this.people$;
@@ -64,6 +93,19 @@ export class EventoPage {
       }
 
     }
+
+    openInvitados(tipo){
+      this.navCtrl.push(InvitadosPage, {'users': this.evento_data.attendants, 'type': tipo});
+    }
+
+    openEdit(){
+      this.navCtrl.push(EditeventPage, {'Event': this.evento_data});
+    }
+
+
+      cuantosAmigos(conteo){
+        return conteo.filter(c=>c.isFriend).length;
+      }
 
     isOwner(){
       return this.evento_data.creator_index == firebase.auth().currentUser.uid;

@@ -29,6 +29,8 @@ export class EditeventPage {
  public isClan: any = false;
  public GoogleAutocomplete: any = new google.maps.places.AutocompleteService();
  public autocompleteItems: any = [];
+ public boletos: any = [];
+ public foto: any = '';
 
   constructor( public navCtrl: NavController,
     public navParams: NavParams,
@@ -39,10 +41,15 @@ export class EditeventPage {
     public camera: Camera,
     public sanitizer: DomSanitizer,
     public modalCtrl: ModalController) {
-     this.type = localStorage.getItem('Tipo');
-     if(this.navParams.get('Clan')) this.isClan = true;
-
      this.event_data = this.navParams.get('Event');
+  }
+
+  addBoleto(){
+    this.boletos.push({
+      'name': '',
+      'cost': '',
+      'description': ''
+    });
   }
 
   sanitizeThis(image){
@@ -93,7 +100,7 @@ export class EditeventPage {
   }
 
   canAdvance(){
-    return this.event_data.title != '' && this.event_data.day != '' && this.event_data.time != '' && this.event_data.location != '' && this.event_data.difficulty != '' && this.event_data.img != '' && this.event_data.about_event != '' && this.event_data.provided != '' && this.event_data.about_organizer != '' && this.event_data.spaces_available != '' && this.event_data.cost != '';
+    return this.event_data.title != '' && this.event_data.day != '' && this.event_data.time != '' && this.event_data.location != '' && this.event_data.img != '' && this.event_data.about_event != '' && this.event_data.provided != '' && this.event_data.about_organizer != '' && this.event_data.spaces_available != '' && this.event_data.cost != '';
   }
 
   ionViewDidLoad() {
@@ -103,13 +110,11 @@ export class EditeventPage {
   createEvent(){
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
-      content: 'Updating...'
+      content: 'Actualizando evento...'
     });
     this.general_loader.present();
 
     let indice = this.event_data.index;
-    this.event_data.creator = firebase.auth().currentUser.uid;
-    this.event_data.media = [];
 
     this.af.list('Users/'+firebase.auth().currentUser.uid+'/Events').update(indice, {
       'index': indice,
@@ -119,8 +124,8 @@ export class EditeventPage {
         .then(() => {
           this.general_loader.dismiss();
           this.alertCtrl.create({
-            title: 'Event Updated',
-            message: 'Your event was updated succesfully',
+            title: 'Evento Actualizado',
+            message: 'Tu evento fue actualizado con éxito',
             buttons: ['Ok']
           }).present();
           this.navCtrl.pop();
@@ -129,20 +134,20 @@ export class EditeventPage {
 
   presentOptions() {
      let actionSheet = this.actionSheetCtrl.create({
-       title: 'What would you like?',
+       title: '¿Que te gustaría hacer?',
        buttons: [
          {
-           text: 'Take a picture',
+           text: 'Tomar una foto',
            handler: () => {
              this.tomarFoto();
            }
          },{
-           text: 'Select a picture',
+           text: 'Escoger una foto',
            handler: () => {
              this.escogerFoto();
            }
          },{
-           text: 'Cancel',
+           text: 'Cancelar',
            role: 'cancel',
            handler: () => {
              console.log('Cancel clicked');
@@ -156,19 +161,21 @@ export class EditeventPage {
 
    avisarNoms(){
      console.log('hi');
-     this.alertCtrl.create({
-       title: 'Cost in NOMS',
-       subTitle: 'Making the conversion',
-       message: 'The cost in noms is: '+(this.event_data.cost/20)+' noms since 1 NOM = $20 MXN',
-       buttons: [
-        {
-        text: 'Ok',
-        handler: () =>{
-          this.event_data.cost = this.event_data.cost / 20;
-        }
-        }
-         ]
-     }).present();
+     if(this.event_data.cost){
+       this.alertCtrl.create({
+         title: 'Cost in NOMS',
+         subTitle: 'Making the conversion',
+         message: 'The cost in noms is: '+(this.event_data.cost/20)+' noms since 1 NOM = $20 MXN',
+         buttons: [
+          {
+          text: 'Ok',
+          handler: () =>{
+            this.event_data.cost = this.event_data.cost / 20;
+          }
+          }
+           ]
+       }).present();
+     }
    }
 
 
@@ -176,7 +183,7 @@ export class EditeventPage {
     let vm = this;
        this.general_loader = this.loadingCtrl.create({
          spinner: 'bubbles',
-         content: 'Uploading Picture...'
+         content: 'Subiendo Foto...'
         });
        const options: CameraOptions={
         quality: 50,
@@ -195,6 +202,7 @@ export class EditeventPage {
              vm.general_loader.dismiss();
              if(vm.current_index == 1)  vm.event_data.img = url;
              else vm.event_data.media.push({'url': url});
+             vm.foto = url;
            })
          });
        });
@@ -203,7 +211,7 @@ export class EditeventPage {
     let vm = this;
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
-      content: 'Uploading Picture...'
+      content: 'Subiendo Foto...'
      });
 
       const options: CameraOptions={
@@ -225,6 +233,7 @@ export class EditeventPage {
             if(vm.current_index == 1)  vm.event_data.img = url;
             else vm.event_data.media.push({'url': url});
             //this.fotos[this.fotos.length] = url;
+            vm.foto = url;
           })
         });
       });}

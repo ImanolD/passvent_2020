@@ -1,0 +1,119 @@
+<!--
+  Generated template for the InvitadosPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="white">
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="search">
+    <div class="input">
+      <input [(ngModel)]="search" type="text" name="" value="" placeholder="Buscar">
+    </div>
+  </div>
+
+
+  <div class="botones-arriba">
+    <div (click)="changeClass(1)" class="{{this.getClass(1)}}">Invitados</div>
+    <div *ngIf="tipo == 2" (click)="changeClass(2)" class="{{this.getClass(2)}}">Staff</div>
+    <div *ngIf="tipo == 2" (click)="changeClass(3)" class="{{this.getClass(3)}}">Solicitudes</div>
+  </div>
+
+  <div *ngIf="f_selected == 1" class="botones-arriba">
+    <div (click)="changeClass2(1)" class="{{this.getClass2(1)}}">Asistirán</div>
+    <div (click)="changeClass2(2)" class="{{this.getClass2(2)}}">Interesados</div>
+    <div (click)="changeClass2(3)" class="{{this.getClass2(3)}}">Rechazados</div>
+  </div>
+
+  <div *ngIf="f_selected == 2" class="botones-arriba">
+    <div (click)="changeClass2(1)" class="{{this.getClass2(1)}}">CoAnfitriones</div>
+    <div (click)="changeClass2(2)" class="{{this.getClass2(2)}}">Fotografos</div>
+    <div (click)="changeClass2(3)" class="{{this.getClass2(3)}}">Seguridad</div>
+  </div>
+
+
+
+  <div *ngIf="f_selected == 1">
+
+    <div *ngIf="f_selected2 == 1">
+      <div class="divider verde">Invitados en el evento</div>
+
+      <div *ngFor="let f of this.returnUsers()">
+        <div *ngIf="f.inevent" class="persona-container">
+          <img src="{{f.data.picture.data.url}}">
+          <div class="title medium name">{{f.data.name}}</div>
+          <button *ngIf="tipo == 2" class="red" type="button" name="button"><i class="fas fa-user-times"></i>Eliminar del evento</button>
+        </div>
+      </div>
+
+      <div class="divider naranja">Invitados por llegar</div>
+
+      <div *ngFor="let f of this.returnUsers()">
+        <div *ngIf="!f.inevent" class="persona-container">
+          <img src="{{f.data.picture.data.url}}">
+          <div class="title medium name">{{f.data.name}}</div>
+          <button *ngIf="tipo == 2" class="red" type="button" name="button"><i class="fas fa-user-times"></i>Eliminar del evento</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="f_selected == 2">
+
+    <div *ngIf="f_selected2 == 1">
+      <div *ngFor="let f of this.returnUsers()">
+        <div *ngIf="f.role == 'anfitrión' " class="persona-container">
+          <img src="{{f.data.picture.data.url}}">
+          <div class="title medium name">{{f.data.name}}</div>
+          <button *ngIf="tipo == 2" class="red" type="button" name="button"><i class="fas fa-user-times"></i>Eliminar del evento</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="f_selected2 == 2">
+      <div *ngFor="let f of this.returnUsers()">
+        <div *ngIf="f.role == 'fotógrafo' " class="persona-container">
+          <img src="{{f.data.picture.data.url}}">
+          <div class="title medium name">{{f.data.name}}</div>
+          <button *ngIf="tipo == 2" class="red" type="button" name="button"><i class="fas fa-user-times"></i>Eliminar del evento</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="f_selected2 == 3">
+      <div *ngFor="let f of this.returnUsers()">
+        <div *ngIf="f.role == 'staff' " class="persona-container">
+          <img src="{{f.data.picture.data.url}}">
+          <div class="title medium name">{{f.data.name}}</div>
+          <button *ngIf="tipo == 2" class="red" type="button" name="button"><i class="fas fa-user-times"></i>Eliminar del evento</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="f_selected == 3">
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <ion-fab right bottom>
+    <button *ngIf="tipo == 2" ion-fab color="orange"><ion-icon name="md-add"></ion-icon></button>
+  </ion-fab>
+
+</ion-content>

@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="white">
+  <ion-navbar color="lowlow">
     <ion-buttons (click)="openChats()" end>
       <button ion-button>
         <ion-icon name="ios-chatbubbles" color="white"></ion-icon>
@@ -9,25 +9,50 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="home-page">
+<ion-content class="home-page">
+
+
+  <!-- <div class="evento">
+    <div class="info-creador">
+      <div class="foto-creador"></div>
+      <div class="light grey nombre-creador"><b>Imanol Daran Argueta</b> te invitó a:</div>
+    </div>
+    <div class="informacion">
+      <div class="imagen-evento">
+         <div class="light grey amigosvan">10 amigos asistirán</div>
+        <div class="overlay-black"></div>
+        <img src="assets/img/clans_example.png">
+      </div>
+      <div class="right-info">
+        <div class="title medium">Evento creado para probar..</div>
+        <div class="light grey">Fecha: 15 de Septiembre</div>
+        <div class="light grey">Lugar: Plaza San Luis</div>
+        <div class="light grey">Hora: 1:00 pm</div>
+        <div class="boton-details">Ver más</div>
+      </div>
+    </div>
+    <hr>
+  </div> -->
+
+
 
  <div class="events">
    <div *ngFor="let e of this.eventos">
-     <div *ngIf="!e.private" class="card" (click)="openEvento(e)">
+     <div *ngIf="this.checkIncluded(e.private, e.attendants)" class="card" (click)="openEvento(e)">
        <div class="actions">
 
          <div class="asistants">
-           <div class="photos">
+           <div *ngIf="this.cuantosAmigos(e.attendants) != 0" class="photos">
              <div class="circle"></div>
              <div class="circle"></div>
              <div class="circle"></div>
            </div>
-           <p class="light grey">0 Amigos asistirán a</p>
+           <p class="light grey">{{this.cuantosAmigos(e.attendants)}} Amigos asistirán a</p>
          </div>
 
          <div class="buttons">
 
-           <div *ngIf="e.status == 'Invited'">
+           <div *ngIf="e.status == 'Pending'">
              <ion-img src="../assets/card-actions/error.svg"></ion-img>
              <ion-img src="../assets/card-actions/information.svg"></ion-img>
              <ion-img src="../assets/card-actions/checked.svg"></ion-img>
@@ -66,8 +91,14 @@
          <div class="host">
 
            <div class="info">
-             <div class="img im1" [style.background-image]="sanitizeThis(e.creator_img)"></div>
-             <p class="medium">{{e.creator}}</p>
+             <div *ngIf="e.admins > 1" class="images">
+              <div class="img many im6"></div>
+              <div class="img many im6"></div>
+              <div [style.background-image]="sanitizeThis(e.creator_img)" class="img many im6"></div>
+            </div>
+             <div *ngIf="e.admins == 1" class="img im1" [style.background-image]="sanitizeThis(e.creator_img)"></div>
+             <p *ngIf="e.admins > 1" class="medium">{{this.getMensaje(e.creator, e.admins)}}</p>
+             <p *ngIf="e.admins == 1" class="medium">{{e.creator}}</p>
            </div>
 
          </div>

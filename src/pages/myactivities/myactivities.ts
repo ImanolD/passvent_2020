@@ -65,22 +65,24 @@ public general_loader: any;
   convertActivities(){
     let a = this.response$;
     for(let key in a){
-      this.activities.push({
-        'title': a[key].title,
-        'location': a[key].location,
-        'cuesta': a[key].cuesta,
-        'start_day': a[key].start_day,
-        'start_time': a[key].start_time,
-        'end_day': a[key].end_day,
-        'end_time': a[key].end_time,
-        'externa': a[key].externa,
-        'gallery': a[key].gallery,
-        'gallery_all': a[key].gallery_all,
-        'limit': a[key].limit,
-        'private': a[key].private,
-        'img': (a[key].img ? a[key].img : ''),
-        'dia': moment(a[key].start_day).format('LL')
-      });
+      if(a[key].creator == firebase.auth().currentUser.uid){
+        this.activities.push({
+          'title': a[key].title,
+          'location': a[key].location,
+          'cuesta': a[key].cuesta,
+          'start_day': a[key].start_day,
+          'start_time': a[key].start_time,
+          'end_day': a[key].end_day,
+          'end_time': a[key].end_time,
+          'externa': a[key].externa,
+          'gallery': a[key].gallery,
+          'gallery_all': a[key].gallery_all,
+          'limit': a[key].limit,
+          'private': a[key].private,
+          'img': (a[key].img ? a[key].img : ''),
+          'dia': moment(a[key].start_day).format('LL')
+        });
+      }
     }
     //this.activities = this.activities.filter( a => a.creator == firebase.auth().currentUser.uid);
     this.general_loader.dismiss();

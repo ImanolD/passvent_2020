@@ -238,6 +238,20 @@ export class HomePage {
     this.getFavorites();
   }
 
+  checkIncluded(status, list){
+    if(status){
+      return this.isIncluded(list);
+    }
+    return true;
+  }
+
+  isIncluded(list){
+    for(let key in list){
+      if(list[key].index == firebase.auth().currentUser.uid) return true;
+    }
+    return false;
+  }
+
   convertActivities(){
     let a = this.response$;
     this.location_loader = this.loadingCtrl.create({
@@ -436,18 +450,83 @@ export class HomePage {
         'creator_img': this.getCreator(a[key].creator, 'img'),
         'creator_index': a[key].creator,
         'description': a[key].description,
-        'status': this.getStatus(a[key].attendants, a[key].private)
+        'status': this.getStatus(a[key].attendants, a[key].private),
+        'attendants': this.fillFriends(a[key].attendants),
+        'admins': this.getAdmins(a[key].attendants),
+        'rol': this.getRol(a[key].attendants)
       });
+    }
+
+    let e = this.eventos;
+    for(let key in e){
+      for(let lla in e[key].attendants){
+        if(this.isAmigo(e[key].attendants[lla].index)) e[key].attendants[lla].isFriend = true;
+        else e[key].attendants[lla].isFriend = false;
+      }
     }
     //this.activities = this.activities.filter( a => a.creator == firebase.auth().currentUser.uid);
     this.general_loader.dismiss();
     console.log(this.eventos);
   }
 
-  getStatus(lista, privado){
-    for(let key in lista){
-      return lista[key].index == firebase.auth().currentUser.uid ? lista[key].status : !privado ? 'Invited' : 'Not';
+  fillFriends(f){
+    let aux = [];
+    let a;
+    for(let key in f){
+        a = this.getPerson(f[key].index);
+        aux.push({
+          'index': f[key].index,
+          'inevent': f[key].inevent,
+          'isOwner': f[key].isOwner,
+          'role': f[key].role,
+          'status': f[key].status,
+          'data': a
+        });
     }
+    return aux;
+  }
+
+  getPerson(indice){
+    let p = this.users$;
+    for(let key in p){
+      if(key == indice) return p[key];
+    }
+  }
+
+  getRol(lista){
+    let aux = lista.filter(l=>l.index == firebase.auth().currentUser.uid);
+    if(aux.length != 0) return aux[0].role;
+    return 'nada';
+  }
+
+  getAdmins(lista){
+    return lista.filter(l=>l.isOwner).length;
+  }
+
+  cuantosAmigos(conteo){
+    return conteo.filter(c=>c.isFriend).length;
+  }
+
+  isAmigo(indice){
+    let u = this.users$;
+    let f;
+    for(let key in u){
+      if(key == firebase.auth().currentUser.uid){
+        f = u[key].friends;
+        for(let lla in f){
+          if(f[lla].index == indice) return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  getStatus(lista, privado){
+    for(let i=0; i<lista.length; i++){
+      console.log(lista[i]);
+      if(lista[i].index == firebase.auth().currentUser.uid) return lista[i].status;
+    }
+    return !privado ? 'Invited' : 'Not'
   }
 
   getCreator(indice, que){
@@ -529,6 +608,12 @@ export class HomePage {
     // }, (err) => {
     //   console.log(err);
     // });
+  }
+
+  getMensaje(creador, admins){
+    let total = admins-1;
+    let m = creador.split(' ');
+    return m[0]+' y '+total+' más';
   }
 
   ionViewDidLoad() {

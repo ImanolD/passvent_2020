@@ -12,6 +12,157 @@ page-evento {
       font-size: 12px;
 
     }
+
+
+
+        .chat-area{
+        //border: 1px solid red;
+        height: calc(100% - 210px);
+        overflow: scroll;
+        padding-bottom: 25%;
+      .inputmsg{
+        display: block;
+          margin: auto;
+          background-color: rgba(240, 240, 240, 1);
+          border:1px #BDBCC1;
+          color: rgba(0, 0, 0, .5);
+          font-weight: normal;
+          border-radius: 8px;
+          width: 65%;
+          height: 6%;
+          font-size: 15px;
+          background-repeat:no-repeat;
+          background-position:5%;  padding-left:15px;
+          animation-duration: 1s;
+          font-family: 'Custom';
+      }
+      .inputmsg:hover{
+        background-color: rgba(228, 228, 228, 1);
+      }
+
+      .camerainput{
+        position: absolute;
+        left: 5%;
+      }
+
+      .msg-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-top: 5%;
+        //border: 1px solid red;
+        .sender-name{
+          font-family: 'Custom';
+          color: white;
+          font-size: 80%;
+          padding-bottom: 2%;
+        }
+      }
+
+      .msguser{
+        //border: 1px solid red;
+        width: 60%;
+        margin-left: 40%;
+        margin-right: 0%;
+        border-radius: 9px 0 9px 9px;
+        color: white;
+        background: #229B86;
+        //border-radius: 8px 0 0 8px 8px;
+        font-family: 'Custom';
+        color: #FFFFFF;
+        letter-spacing: 0;
+        font-weight: 700;
+        position: relative;
+        font-size: 85%;
+        //border: 2px solid black;
+    /* Bitmap: */
+        p{
+          padding: 5%;
+        }
+        img{
+          padding: 5%;
+          display: block;
+          margin: 0 auto;
+        }
+        .userbuble{
+          position: absolute;
+          right: -20%;
+          top: -25%;
+          //border: 3px solid red;
+        }
+      }
+
+      .msgwhole{
+        animation-duration: 1.5s;
+        position: relative;
+        .sophiebuble{
+          position: absolute;
+          left: 1%;
+          width: 8%;
+        }
+      }
+
+      .msgsophie{
+        max-width: 60%;
+        //margin-right: 50%;
+        margin-top: -4%!important;
+        margin-left: 0%;
+        border-radius: 0 9px 9px 9px;
+        background-color: #FFFFFF;
+        box-shadow: 0 2px 9px 0 rgba(0,0,0,0.52);
+        //display: inline;
+
+        /* ¡Hola! Mi nombre es: */
+        font-family: 'Custom';
+        font-size: 85%;
+        color: #000000;
+        letter-spacing: 0;
+        p{
+          padding: 5%;
+        }
+      }
+
+      .enviarbtn{
+        position: absolute;
+        right: 3%;
+        top: 30%;
+        background-color: transparent;
+        color: #F6A51F;
+      }
+    }
+
+    .announcement-board{
+      background-color: white;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      width: 90%;
+      margin-left: 5%;
+      border-radius: 10px;
+      height: 700px;
+      .top-bar{
+        color: #FF5722;
+        text-align: center;
+        font-weight: 600;
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        width: 100%;
+        border-radius: 10px 10px 0px 0px;
+      }
+      .down-bar{
+        color: #FF5722;
+        text-align: center;
+        font-weight: 600;
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        width: 100%;
+        border-radius: 10px 10px 0px 0px;
+        position: absolute;
+        bottom: 0;
+      }
+    }
+
     .image {
       width: 100%;
       height: 30vh;

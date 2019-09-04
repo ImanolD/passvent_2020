@@ -112,6 +112,7 @@
         <variable name="APP_ID" value="725351474533402" />
         <variable name="APP_NAME" value="9b4c46055fd9414006361ed8b720aa78" />
     </plugin>
+    <plugin name="phonegap-plugin-barcodescanner" spec="8.1.0" />
     <engine name="android" spec="6.3.0" />
     <engine name="ios" spec="4.5.5" />
 </widget>

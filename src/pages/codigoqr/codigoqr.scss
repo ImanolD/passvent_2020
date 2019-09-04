@@ -1,0 +1,62 @@
+page-codigoqr {
+  .todo{
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 110%;
+    position: absolute;
+    top: 0%;
+  }
+
+   .modal1{
+    background-color: white;
+    width: 60%;
+    margin-left: 20%;
+    border-radius: 5px;
+    padding: 3%;
+    //margin-top: 30%;
+    position: absolute;
+    top: 30%;
+    font-family: 'Custom';
+    .top-part{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 8%;
+      .img{
+        width: 40%;
+        height: 80px;
+        border-radius: 12px;
+      }
+      .text{
+        margin-left: 5%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        font-size: 90%;
+        color: #FF5722;
+        .top{
+          font-weight: 700;
+          text-align: left;
+        }
+        .hints{
+          font-weight: 400;
+          text-align: left;
+        }
+      }
+    }
+    .btm-part{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .cost{
+        font-size: 90%;
+        color: #FF5722;
+        font-weight: 700;
+      }
+      .go{
+        width: 10%;
+      }
+    }
+   }
+}

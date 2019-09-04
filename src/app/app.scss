@@ -36,6 +36,12 @@ ion-header{
     border: none!important;
   }
 }
+input{
+  text-indent: 10px;
+}
+ion-img{
+  background-color: white!important;
+}
 
 
 ion-navbar{
@@ -44,7 +50,6 @@ ion-navbar{
     color: #FF5722;
     text-align: center;
     //font-family: 'Montserrat', sans-serif;
-    font-family: 'Custom';
     //font-weight: 600!important;
     font-size: 130%;
     font-weight: 700!important;
@@ -318,56 +323,74 @@ $medium: 500;
 $semibold: 600;
 $bold:700;
 
+//
+
+// Iphone Padding
+
 .page-content{
-  margin-top: 70px;
+  margin-top: 100px;
+  padding-bottom: 60px;
 }
+
+//
+
+// Typography
 
 p{
   font-family: 'Poppins', sans-serif !important;
   margin: 0px !important;
 }
+
 a{
   color: $blue;
   text-decoration: none;
 }
+
 .text-center{
   text-align: center;
 }
+
 .orange{
   color: $orange;
 }
+
 .grey{
   color: $grey;
 }
+
 .white{
   color: white;
 }
+
 .e-light{
   font-weight: 300;
 }
+
 .light{
   font-weight: 300;
 }
+
 .regular{
   font-weight: 400;
 }
+
 .medium{
   font-weight: 500;
 }
+
 .semibold{
   font-weight: 600;
 }
+
 .bold{
   font-weight: 700;
 }
+
 .text-left{
   text-align: left;
   float: left;
 }
-.title{
-  font-size: 26px;
-  font-weight: $semibold;
-}
+
 .title{
   font-weight: $medium;
   font-size: 16px;
@@ -375,6 +398,7 @@ a{
   margin-top: 20px !important;
   margin-bottom: 10px !important;
 }
+
 .subtitle{
   color: $grey;
   font-weight: $light;
@@ -394,6 +418,10 @@ a{
   top: 20px;
 }
 
+//
+
+// Flex
+
 .f-center{
   display: flex;
   justify-content: center;
@@ -409,6 +437,10 @@ a{
   display: flex;
   justify-content: space-between;
 }
+
+//
+
+// Header
 
 .nav-header{
   text-align: center;
@@ -438,6 +470,9 @@ a{
   }
 }
 
+//
+
+// Bottom Menu
 
 .tabs{
   display: flex;
@@ -474,7 +509,7 @@ a{
       border: 3px solid white;
       border-radius: 17px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-      background-image: url("assets/placeholders/chem.jpeg");
+      background-image: url("../assets/placeholders/chem.jpeg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -521,6 +556,10 @@ a{
   }
 }
 
+//
+
+// Buttons
+
 .button{
   color: white;
   height: 55px;
@@ -536,57 +575,86 @@ a{
   &.blue{
     background-color: $blue;
   }
-  &.transparent{
-    background-color: rgba(255, 255, 255, .3);
-  }
   &.small{
     height: 30px;
     font-size: 10px;
     border-radius: 5px;
     padding-top: 5px;
   }
-  &.app{
+  &.medium{
     font-weight: $semibold;
     font-size: 16px;
     display: block;
     margin: 0 auto;
-    height: 2em;
+    height: 3em;
   }
-  &.small{
-    font-size: 10px;
-    margin-top: .8em
+  &.center{
+    display: block;
+    margin: 0 auto;
   }
 }
 
 .button-outline{
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid #BDBDBD;
+  color: #BDBDBD;
   font-size: 11px;
   border-radius: 5px;
   padding: 5px 10px;
-  width: 30%;
   margin-left: 10px;
   font-weight: $bold;
   &.green{
     border: 1px solid $green;
     color: $green;
+    &.active{
+      background-color: $green;
+      color: white;
+    }
   }
   &.red{
     border: 1px solid $red;
     color: $red;
+    &.active{
+      background-color: $red;
+      color: white;
+    }
   }
   &.blue{
     border: 1px solid $blue;
     color: $blue;
+    &.active{
+      background-color: $blue;
+      color: white;
+    }
+  }
+  &.orange{
+    border: 1px solid $orange;
+    color: $orange;
+    &.active{
+      background-color: $orange;
+      color: white;
+    }
   }
   &.half{
     width: 45%;
   }
+}
 
+
+.filters{
+  padding: 10px 0px;
+  .button-outline{
+    width: 30%;
+  }
+  &.two{
+    .button-outline{
+      width: 45%;
+    }
+  }
 }
 
 .more{
-  background-color: $blue;
+  background-color: #BDBDBD;
   width: 80px;
   font-weight: $bold;
   color: white;
@@ -601,6 +669,8 @@ a{
     background-color: $orange;
   }
 }
+
+//
 
 .page-instructions{
   padding: 10px 15px 0px 15px;
@@ -618,6 +688,8 @@ a{
     padding-left: 10px;
   }
 }
+
+// Events
 
 .events{
   padding: 15px;
@@ -692,7 +764,7 @@ a{
       display: flex;
       .event-info{
         height: 70px;
-        background-image: url("assets/placeholders/peda.jpeg");
+        background-image: url("../assets/placeholders/peda.jpeg");
         background-size: cover;
         background-repeat: no-repeat;
         width: 60%;
@@ -779,94 +851,144 @@ a{
         }
       }
     }
-  }
-}
-
-.profile-events{
-  width: 100%;
-  overflow-x: scroll;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-left: 300px;
-  .card{
-    display: inline !important;
-    min-width: 300px !important;
-    margin-right: 1em;
-  }
-}
-
-.events-simple{
-  padding: 15px;
-  p{
-    margin: 0 !important;
-  }
-  .card{
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    background-color: white;
-    position: relative;
-    width: 100%;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    .actions{
-      width: 100%;
-      font-size: 14px;
-      padding: 10px 0px 0px 15px;
-      display: flex;
-      justify-content: space-between;
-      .asistants{
-        display: flex;
-        ion-img{
-          height: 15px;
-          width: 15px;
-          margin-left: 10px;
-        }
-        .photos{
-          padding:0px 2px;
-          .circle{
-            height: 15px;
-            width: 15px;
-            border: 1px solid white;
-            display: inline-block;
-            background-color: #E02020;
-            border-radius: 50%;
-            margin-left: -5px;
-            box-shadow: 0 1px 1px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
+    &.simple{
+      .bottom{
+        .event-info{
+          width: 100%;
+          max-width: none;
+          border-radius: 0px 0px 8px 8px;
+          .overlay{
+            border-radius: 0px 0px 8px 8px;
           }
         }
       }
     }
-    .title{
-      padding-left: 15px;
-    }
-    .bottom{
-      display: flex;
-      .event-info{
-        height: 70px;
-        background-image: url("assets/placeholders/peda.jpeg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        width: 100%;
-        border-radius: 0px 0px 8px 8px;
-        position: relative;
-        .overlay{
-          height: 100%;
-          width: 100%;
-          background-color: rgba(70, 70, 70, .7);
-          position: absolute;
-          z-index: +1;
-          border-radius: 0px 0px 8px 8px;
-          font-size: 12px;
-          display: flex;
-          align-items: center;
-          padding-left: 10px;
-          color: white;
-        }
+  }
+}
+
+// User Slider
+
+.people{
+  width: 100%;
+  overflow-y: scroll;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  .item{
+    display: inline-block;
+    margin: 0em 1.5em;
+    .picture{
+      height: 5em;
+      width: 5em;
+      border-radius: 2.5em;
+      border: .3em solid white;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      background-image: url("../assets/placeholders/chem.jpeg");
+      background-size: cover;
+      &.add{
+        background-image: none;
+        background-color: $orange;
+        color: white;
+        font-size: 1em;
       }
+      &.placeholder{
+        box-shadow: none;
+        background-color: white;
+        margin-right: 10em;
+      }
+    }
+    p{
+      text-align: center;
+      margin-top: .4em !important;
     }
   }
 }
 
-.gold{
-  color: rgba(255, 215, 0, 1);
+//
+
+// User Lists
+
+.user-list{
+  padding-top: 2.5em;
+  .search{
+    width: 100%;
+    padding: 0px 1.5em;
+    margin-bottom: 1.5em;
+  }
+  .table{
+
+    height: 100%;
+    margin-top: 2em;
+    overflow-y: scroll;
+    h4{
+      background-color: $blue;
+      color: white;
+      margin-top: 0px !important;
+      margin-bottom:0px !important;
+      padding: 1em;
+      &.orange{
+        background-color: $orange;
+      }
+      &.green{
+        background-color: $green;
+      }
+    }
+    .user{
+      display: flex;
+      align-items: center;
+      padding: 0px 10px;
+      border-bottom: 1px solid #E6E6E6;
+      border-top: 1px solid #E6E6E6;
+      .container-img{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 15%;
+      }
+      ion-img{
+        height: 60px;
+      }
+      p{
+        width: 45%;
+        font-size: 16px;
+        padding-left: 15px;
+      }
+      span{
+        font-size: 12px;
+      }
+      .container-btn{
+        width: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      button{
+        border: 1px solid #7A7A7A;
+        background-color: white;
+        color: #7A7A7A;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 300;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 5px 10px;
+        i{
+          margin-right: 5px;
+        }
+        &.blue{
+          border: 1px solid #536DFE;
+          color: #536DFE;
+          width: 130px;
+        }
+        &.red{
+          border: 1px solid #E02020;
+          color: #E02020;
+          width: 140px;
+
+        }
+      }
+    }
+  }
+
 }

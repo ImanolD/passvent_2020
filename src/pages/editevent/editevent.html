@@ -4,120 +4,158 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-  <ion-navbar color="black1">
-    <ion-buttons *ngIf="type == 'nomads'" start style="margin-left: 3%!important;">
-     <!-- <div class="circles-noms">
-       <div class="div1"></div>
-       <div class="div2"></div>
-       <div class="div3"></div></div> -->
-     <!-- <p class="noms-hint">Noms</p>
-     <p class="noms-qty">{{this.noms_balance}}</p> -->
-    </ion-buttons>
-    <ion-buttons *ngIf="type == 'nomads'" (click)="openFilters()" end>
-     <!-- <div class="filters-noms">
-       <div class="div1"></div>
-       <div class="div2"></div>
-       <div class="div3"></div>
-     </div> -->
-     <!-- <button ion-button icon-only>
-       <ion-icon name="ios-options" color="white"></ion-icon>
-     </button> -->
-    </ion-buttons>
-    <p class="title">Edit Event</p>
-  </ion-navbar>
-</ion-header>
-
-
 <ion-content padding>
-  <div *ngIf="this.current_index == 1" class="container-datos w3-animate-right">
 
-     <div class="card-container">
-       <div class="input-group">
-         <p class="input-title">Event Name</p>
-         <input type="text" class="input-field" [(ngModel)]="event_data.title">
-       </div>
+  <div class="create-event">
 
-       <div class="jc-container">
-         <div class="input-group">
-           <p class="input-title">Day</p>
-            <ion-item><ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="MM DD YYYY" placeholder="Day/Month" [(ngModel)]="event_data.day"></ion-datetime></ion-item>
-         </div>
+    <div *ngIf="foto != ''" class="choose-pic f-center" [style.background-image]="sanitizeThis(this.foto)">
+      <div (click)="presentOptions()" class="pic"><i class="far fa-file-image"></i> Elige una Foto</div>
+    </div>
 
-         <div class="input-group">
-           <p class="input-title">Start Time</p>
-           <ion-item><ion-datetime displayFormat="h:mm A" pickerFormat="H mm" placeholder="06:00" [(ngModel)]="event_data.time"></ion-datetime></ion-item>
-         </div>
-       </div>
+    <div *ngIf="foto == ''" class="choose-pic f-center">
+      <div (click)="presentOptions()" class="pic"><i class="far fa-file-image"></i> Elige una Foto</div>
+    </div>
 
-       <div class="input-group">
-         <p class="input-title">Where?</p>
-         <input (click)="this.event_data.location = ''" (blur)="this.event_data.location = '';" type="text" (ngModelChange)="updateSearchResults()" class="input-field" [(ngModel)]="event_data.location">
-         <ion-list [hidden]="autocompleteItems.length == 0">
-          <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
-            {{ item.description }}
-          </ion-item>
-          </ion-list>
-       </div>
 
-       <div class="input-group">
-         <p class="input-title">Difficulty</p>
-         <input type="text" class="input-field" [(ngModel)]="event_data.difficulty">
-       </div>
 
-       <div class="input-group">
-         <p class="input-title">Picture</p>
-         <button (click)="presentOptions()" type="button" class="add-btn">Select Picture</button>
-       </div>
+    <br>
 
-       <div class="input-group">
-         <p class="input-title">About the Event</p>
-         <textarea rows="4" type="text" class="input-field" [(ngModel)]="event_data.about_event"></textarea>
-       </div>
+    <ion-input [(ngModel)]="event_data.title" class="name" placeholder="Nombre del evento"></ion-input><br>
 
-       <div class="input-group">
-         <p class="input-title">Provided</p>
-         <textarea rows="4" type="text" class="input-field" [(ngModel)]="event_data.provided"></textarea>
-       </div>
+    <div class="form">
 
-       <div class="input-group">
-         <p class="input-title">About you</p>
-         <textarea rows="4" type="text" class="input-field" [(ngModel)]="event_data.about_organizer"></textarea>
-       </div>
+      <p class="title">Fecha y Hora Inicio</p>
 
-       <div class="jc-container">
-         <div class="input-group">
-           <p class="input-title">Spaces Available</p>
-           <input type="tel" class="input-field" [(ngModel)]="event_data.spaces_available">
-         </div>
+      <div class="date-group">
+        <div class="date-data">
+          <i class="far fa-calendar"></i>
+          <p>Fecha Inicio</p>
+        </div>
+        <ion-item class="date-selector"><ion-datetime display-format="MMM DD" [(ngModel)]="event_data.start_day"></ion-datetime></ion-item>
+      </div>
 
-         <div *ngIf="type != 'nomads'" class="input-group">
-           <p class="input-title">Cost</p>
-           <input (blur)="avisarNoms()" type="tel" class="input-field" [(ngModel)]="event_data.cost">
-         </div>
-       </div>
 
-       <div *ngIf="!isClan" class="input-group">
-         <p class="input-title">Type of Event</p>
-         <div class="types-container">
-           <div (click)="changeType('public')" class="{{getType('public')}}">Public</div>
-           <div (click)="changeType('private')" class="{{getType('private')}}">Private</div>
-         </div>
-       </div>
+      <div class="date-group">
+        <div class="date-data">
+          <i class="far fa-clock"></i>
+          <p>Hora Inicio</p>
+        </div>
+        <ion-item class="date-selector"><ion-datetime display-format="HH:mm" [(ngModel)]="event_data.start_time"></ion-datetime></ion-item>
+      </div><br>
 
-     <button [disabled]="!canAdvance()" (click)="this.current_index = 2" type="button" class="next-btn">Next</button>
-     </div>
+      <p class="title">Fecha y Hora Fin</p>
 
-  </div>
+      <div class="date-group">
+        <div class="date-data">
+          <i class="far fa-calendar"></i>
+          <p>Fecha Fin</p>
+        </div>
+        <ion-item class="date-selector"><ion-datetime display-format="MMM DD" [(ngModel)]="event_data.end_day"></ion-datetime></ion-item>
+      </div>
 
-  <div *ngIf="this.current_index == 2" class="container-datos w3-animate-right">
-  <p class="title-container">Upload Media</p>
-  <div class="media-img"></div>
-  <div *ngFor="let m of this.event_data.media" class="media-img" [style.background-image]="sanitizeThis(m.url)"></div>
-  <button (click)="presentOptions()" type="button" class="add-btn" padding>+</button>
 
-  <button (click)="createEvent()" type="button" class="next-btn">Next</button>
-  <button (click)="this.current_index = 1" type="button" class="next-btn outline">Back</button>
+      <div class="date-group">
+        <div class="date-data">
+          <i class="far fa-clock"></i>
+          <p>Hora Fin</p>
+        </div>
+        <ion-item class="date-selector"><ion-datetime display-format="h:mm a" [(ngModel)]="event_data.end_time"></ion-datetime></ion-item>
+      </div><br><br>
+
+      <div class="block">
+        <i class="fas fa-map-pin"></i>
+        <p>Ubicación</p>
+        <ion-input (click)="this.event_data.location = ''" type="text" (blur)="this.event_data.location = '';" [(ngModel)]="event_data.location" (ngModelChange)="updateSearchResults()"></ion-input>
+        <ion-list [hidden]="autocompleteItems.length == 0">
+         <ion-item class="items-lista" *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+           {{ item.description }}
+         </ion-item>
+         </ion-list>
+        <!-- <div (click)="seeCorrect()" class="counter">No Asignada</div> -->
+      </div>
+
+      <div class="row">
+        <p>Evento Privado</p>
+        <ion-toggle [(ngModel)]="event_data.private" color="primary"></ion-toggle>
+      </div>
+
+      <div class="block">
+        <i class="fas fa-user-friends"></i>
+        <p>Co-Afitiones</p>
+        <div class="counter">4 Co-Anfitriones</div>
+      </div>
+
+      <div class="block">
+        <i class="fas fa-users"></i>
+        <p> Agregar Invitados</p>
+        <div class="counter">100 Invitados</div>
+      </div>
+
+      <div class="block">
+        <i class="fas fa-id-card-alt"></i>
+        <p> Agregar Staff</p>
+        <div class="counter">5 Staff</div>
+      </div>
+
+      <div class="row">
+        <p>Limite de invitados</p>
+        <ion-toggle color="primary" [(ngModel)]="limite"></ion-toggle>
+      </div>
+
+      <input [(ngModel)]="event_data.limit" *ngIf="limite" class="limit" type="tel" name="" value="" placeholder="Limite">
+
+      <p class="title"> <br> Fotos y Videos</p>
+
+      <div class="row">
+        <p>Galeria de fotos y videos</p>
+        <ion-toggle [(ngModel)]="event_data.gallery" color="primary"></ion-toggle>
+      </div>
+
+      <div class="row">
+        <p>¿Todos pueden subir fotos y videos?</p>
+        <ion-toggle [(ngModel)]="event_data.gallery_all" color="primary"></ion-toggle>
+      </div>
+
+      <div class="block">
+        <i class="fas fa-camera"></i>
+        <p>Agregar fotografo</p>
+        <div class="counter">1 Fotografo</div>
+      </div>
+
+      <p class="title">Costo</p>
+      <div class="row">
+        <p>Evento con Costo</p>
+        <ion-toggle [(ngModel)]="event_data.cuesta" color="primary"></ion-toggle>
+      </div>
+
+      <div class="row">
+        <p>Compra de boletos en página externa</p>
+        <ion-toggle color="primary" [(ngModel)]="event_data.externa"></ion-toggle>
+      </div>
+
+      <input *ngIf="event_data.externa" class="limit" type="text" name="" value="" placeholder="Link Para Venta Externa">
+      <br><br>
+
+      <div *ngIf="event_data.cuesta" class="ticket">
+
+        <div *ngFor="let b of this.boletos">
+          <input [(ngModel)]="b.name" type="text" name="" value="" placeholder="Nombre del Boleto">
+
+          <input [(ngModel)]="b.cost" type="text" name="" value="" placeholder="Costo">
+
+          <textarea [(ngModel)]="b.description" class="descri" name="name" rows="8" cols="80"></textarea>
+        </div>
+
+        <button (click)="addBoleto()" type="button" name="button">Agregar otro boleto</button>
+
+      </div>
+
+      <div class="line"></div>
+
+      <button (click)="cEvent()" class="button orange center" type="button" name="button"><i style="color:white" class="fas fa-paper-plane"></i>Crear Evento</button>
+
+    </div>
+
   </div>
 
 

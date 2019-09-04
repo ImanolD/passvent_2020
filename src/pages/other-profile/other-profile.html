@@ -1,0 +1,170 @@
+<ion-content>
+  <div class="profile page">
+
+    <div class="person">
+
+      <div class="info f-center">
+        <p class="number">{{this.usuario.events_gone}}</p>
+        <p>Asistidos</p>
+
+      </div>
+
+      <div style="margin-left:10px;" class="picture">
+        <div [style.background-image]="sanitizeThis(this.usuario.picture.data.url)" class="circle"></div>
+      </div>
+
+      <div style="float:right; margin-left:20px;" class="info f-center">
+        <p class="number">{{this.usuario.events_created}}</p>
+        <p>Organizados</p>
+
+      </div>
+
+    </div>
+
+    <br>
+    <p style="margin-left:20px;" class="name">{{this.usuario.name}}</p>
+
+    <div class="about">
+      <div class="follow-btns">
+        <button *ngIf="!this.usuario.isamigo" (click)="confirmAdd(this.usuario, 1)" class="button blue medium"type="button" name="button">Seguir</button> <button (click)="selectInputFoto()" class="button blue medium small" type="button" name="button"><i class="fas fa-user-friends"></i></button>
+
+      </div>
+      <br>
+      <a class="center" *ngIf="this.usuario.web != ''" href="{{this.usuario.web}}">{{this.usuario.web}}</a>
+      <a class="center" *ngIf="this.usuario.web == ''">Este usuario no tiene un link agregado</a>
+
+
+      <p *ngIf="this.usuario.description == ''" class="desc"><br>Este usuario no tiene una descripción agregada</p>
+      <p *ngIf="this.usuario.description != ''" class="desc"><br>{{this.usuario.description}}</p>
+    </div> <br>
+
+    <p class="title">Amigos <button routerLink="/freinds" type="button" name="button" class="more">Ver Todos</button></p>
+
+    <div class="slider-amigos">
+
+      <div class="persona">
+        <div class="picture add"></div>
+        <div class="light grey">Ningún Amigo</div>
+      </div>
+
+      <div *ngFor="let f of this.usuario.friends">
+        <div class="persona">
+          <div class="picture" [style.background-image]="sanitizeThis(f.data.picture.data.url)"></div>
+          <div class="light grey">{{f.data.name}}</div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <br><br>
+
+    <p class="title">Eventos que asistirá <button type="button" name="button" class="more orange">Ver Todos</button></p>
+    <div class="events">
+      <div *ngFor="let e of this.eventos">
+        <div *ngIf="this.filterEvents('going', e)" class="card simple" (click)="openEvento(e)">
+          <div class="actions">
+
+            <div class="asistants">
+              <div *ngIf="this.cuantosAmigos(e.attendants) != 0" class="photos">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+              </div>
+              <p class="light grey">{{this.cuantosAmigos(e.attendants)}} Amigos asistirán a</p>
+            </div>
+          </div>
+
+          <p class="title medium">{{e.title}}</p>
+
+          <div class="bottom">
+            <div class="event-info">
+              <div class="overlay" [style.background-image]="sanitizeThis(e.img)">
+                <div class="overlay-content">
+                  <p>Fecha: {{e.dia}}</p>
+                  <p>Lugar: {{e.location}}</p>
+                  <p>Hora: {{e.start_time}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+
+    <p class="title">Eventos Organizados <button type="button" name="button" class="more orange">Ver Todos</button></p>
+    <div class="events">
+      <div *ngFor="let e of this.eventos">
+        <div *ngIf="this.filterEvents('admin', e)" class="card simple" (click)="openEvento(e)">
+          <div class="actions">
+
+            <div class="asistants">
+              <div *ngIf="this.cuantosAmigos(e.attendants) != 0" class="photos">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+              </div>
+              <p class="light grey">{{this.cuantosAmigos(e.attendants)}} Amigos asistirán a</p>
+            </div>
+          </div>
+
+          <p class="title medium">{{e.title}}</p>
+
+          <div class="bottom">
+            <div class="event-info">
+              <div class="overlay" [style.background-image]="sanitizeThis(e.img)">
+                <div class="overlay-content">
+                  <p>Fecha: {{e.dia}}</p>
+                  <p>Lugar: {{e.location}}</p>
+                  <p>Hora: {{e.start_time}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <p class="title">Eventos que asistió <button type="button" name="button" class="more orange">Ver Todos</button></p>
+    <div class="events">
+      <div *ngFor="let e of this.eventos">
+        <div *ngIf="this.filterEvents('hi', e)" class="card simple" (click)="openEvento(e)">
+          <div class="actions">
+
+            <div class="asistants">
+              <div *ngIf="this.cuantosAmigos(e.attendants) != 0" class="photos">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+              </div>
+              <p class="light grey">{{this.cuantosAmigos(e.attendants)}} Amigos asistirán a</p>
+            </div>
+          </div>
+
+          <p class="title medium">{{e.title}}</p>
+
+          <div class="bottom">
+            <div class="event-info">
+              <div class="overlay" [style.background-image]="sanitizeThis(e.img)">
+                <div class="overlay-content">
+                  <p>Fecha: {{e.dia}}</p>
+                  <p>Lugar: {{e.location}}</p>
+                  <p>Hora: {{e.start_time}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>

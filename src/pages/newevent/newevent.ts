@@ -8,6 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { LocatePage } from '../locate/locate';
 import * as moment from 'moment';
 declare var google;
+import { AddFriendsPage } from '../add-friends/add-friends';
 
 /**
  * Generated class for the NeweventPage page.
@@ -42,6 +43,9 @@ export class NeweventPage {
    'creator': '',
    'attendants': [],
    'tickets': [],
+   'admins': [{'index': firebase.auth().currentUser.uid}],
+   'staff': [],
+   'fotografos': [],
    'img': 'https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
  }
  public isClan: any = false;
@@ -62,6 +66,8 @@ export class NeweventPage {
    },
  ];
 
+ public tipo: any = '';
+
 
   constructor( public navCtrl: NavController,
     public navParams: NavParams,
@@ -74,6 +80,15 @@ export class NeweventPage {
     public modalCtrl: ModalController) {
      this.type = localStorage.getItem('Tipo');
      if(this.navParams.get('Clan')) this.isClan = true;
+  }
+
+  openAddpeople(cual){
+    this.tipo = cual;
+    this.navCtrl.push(AddFriendsPage, {'type': cual, 'lista': this.event_data.attendants});
+  }
+
+  contarCual(rol){
+    return this.event_data.attendants.filter(a=>a.role == rol).length;
   }
 
   sanitizeThis(image){
@@ -147,6 +162,28 @@ export class NeweventPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NeweventPage');
+    localStorage.removeItem('added');
+  }
+
+  ionViewWillEnter(){
+    let l = localStorage.getItem('added');
+    if(l){
+      l = JSON.parse(l);
+      this.event_data.attendants = this.event_data.attendants.concat(l);
+      // if(this.tipo == 'admin'){
+      //   this.event_data.admins = this.event_data.admins.concat(l);
+      // }
+      // else if(this.tipo == 'invite'){
+      //   this.event_data.attendants = this.event_data.attendants.concat(l);
+      // }
+      // else if(this.tipo == 'staff'){
+      //   this.event_data.staff = this.event_data.staff.concat(l);
+      // }
+      // else if(this.tipo == 'fotografo'){
+      //   this.event_data.fotografos = this.event_data.fotografos.concat(l);
+      // }
+    }
+    console.log(    this.event_data);
   }
 
   createEvent(){
@@ -163,7 +200,8 @@ export class NeweventPage {
     this.event_data.attendants.push({
       'index': this.event_data.creator,
       'isOwner': true,
-      'status': 'Accepted'
+      'status': 'Accepted',
+      'inevent': false
     });
 
     this.af.list('Users/'+firebase.auth().currentUser.uid+'/schedule').push({
@@ -200,7 +238,9 @@ export class NeweventPage {
     this.event_data.index = indice;
     this.event_data.attendants.push({
       'index': this.event_data.creator,
-      'isOwner': true
+      'isOwner': true,
+      'status': 'Accepted',
+      'inevent': false
     });
 
     this.af.list('Users/'+firebase.auth().currentUser.uid+'/schedule').push({

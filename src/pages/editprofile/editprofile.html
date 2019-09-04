@@ -1,0 +1,90 @@
+<!--
+  Generated template for the EditprofilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content>
+  <div class="person-info page">
+    <div class="info">
+
+      <div (click)="presentOptions()" class="picture">
+
+        <div class="change f-center">
+          <ion-img src="assets/profile/add.svg"></ion-img>
+        </div>
+
+        <ion-img src="{{this.user.picture}}"></ion-img>
+      </div>
+
+      <div class="info">
+        <p class="medium name">Usuario</p>
+
+        <p class="e-light">{{this.user.name}}</p>
+        <br>
+        <p class="light text-left">Cambiar nombre de usuario</p>
+
+        <div class="search">
+          <div class="input">
+            <input [(ngModel)]="this.user.name" type="text" name="" value="" placeholder="¿Cómo quieres aparecer en PassVent?">
+          </div>
+        </div>
+        <br>
+        <p class="light text-left">Sitio Web</p>
+
+        <div class="search">
+          <div class="input">
+            <input [(ngModel)]="this.user.web" type="text" name="" value="" placeholder="Sitio Web">
+          </div>
+        </div>
+        <br>
+
+        <p class="light text-left">Descripción</p>
+
+        <div class="search">
+          <div class="input">
+            <textarea [(ngModel)]="this.user.description" placeholder="Escribe aqui tu descripción" name="name" rows="8" cols="80"></textarea>
+          </div>
+        </div>
+        <br>
+
+        <button (click)="modifyUser()" class="button blue app" type="button" name="button">Guardar Cambios</button>
+
+        <div class="line"></div>
+
+      </div>
+
+    </div>
+
+    <div class="options">
+      <div class="row">
+        <div class="img">
+          <ion-img src="../assets/profile/like.svg"></ion-img>
+        </div>
+        <div class="desc">
+          <p class="medium">Tus Gustos</p>
+          <p class="e-light">Aquí podrás seleccionar las categorías de eventos que más te interesen,para poder brindarte la mejor experiencia posible.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="img">
+          <ion-img src="../assets/profile/bill.svg"></ion-img>
+        </div>
+        <div class="desc">
+          <p class="medium">Tus Transacciones</p>
+          <p class="e-light">Aquí verás el listado de transacciones dentro de Passvent. Tu balance, reportes por evento y la opción para poder retirar dinero.</p>
+        </div>
+      </div>
+      <div class="row" routerLink="/profile-preferences">
+        <div class="img">
+          <ion-img src="../assets/profile/padlock.svg"></ion-img>
+        </div>
+        <div class="desc">
+          <p class="medium">Tu Privacidad</p>
+          <p class="e-light">Aquí podrás controlar tus preferencias de privacidad, de todo lo que tenga que ver con tu perfil en PassVent.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

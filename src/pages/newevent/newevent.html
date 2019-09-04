@@ -73,7 +73,7 @@
         <p>Ubicación</p>
         <ion-input (click)="this.event_data.location = ''" type="text" (blur)="this.event_data.location = '';" [(ngModel)]="event_data.location" (ngModelChange)="updateSearchResults()"></ion-input>
         <ion-list [hidden]="autocompleteItems.length == 0">
-         <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+         <ion-item class="items-lista" *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
            {{ item.description }}
          </ion-item>
          </ion-list>
@@ -87,20 +87,20 @@
 
       <div class="block">
         <i class="fas fa-user-friends"></i>
-        <p>Co-Afitiones</p>
-        <div class="counter">4 Co-Anfitriones</div>
+        <p>Anfitriones</p>
+        <div (click)="openAddpeople('admin')" class="counter">{{this.contarCual('anfitrión')}} Anfitriones</div>
       </div>
 
       <div class="block">
         <i class="fas fa-users"></i>
         <p> Agregar Invitados</p>
-        <div class="counter">100 Invitados</div>
+        <div (click)="openAddpeople('invite')" class="counter">{{this.contarCual('invitado')}} Invitados</div>
       </div>
 
       <div class="block">
         <i class="fas fa-id-card-alt"></i>
         <p> Agregar Staff</p>
-        <div class="counter">5 Staff</div>
+        <div (click)="openAddpeople('staff')" class="counter">{{this.contarCual('staff')}} Staff</div>
       </div>
 
       <div class="row">
@@ -125,7 +125,7 @@
       <div class="block">
         <i class="fas fa-camera"></i>
         <p>Agregar fotografo</p>
-        <div class="counter">1 Fotografo</div>
+        <div (click)="openAddpeople('fotografo')" class="counter">{{this.contarCual('fotógrafo')}} Fotografo</div>
       </div>
 
       <p class="title">Costo</p>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ActivityPage } from '../activity/activity';
 import { EventPage } from '../event/event';
+import { EventoPage } from '../evento/evento';
 
 /**
  * Generated class for the DetailsPage page.
@@ -28,12 +29,7 @@ public act: any = [];
   }
 
   seeDetails(){
-    if(this.act.isEvent){
-      this.navCtrl.push(EventPage, {'Event': this.act});
-    }
-    else{
-      this.navCtrl.push(ActivityPage, {'Activity': this.act});
-    }
+    this.navCtrl.push(EventoPage, {'Evento': this.act});
   }
 
 

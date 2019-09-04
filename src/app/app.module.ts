@@ -55,6 +55,13 @@ import { TutorialPage } from '../pages/tutorial/tutorial';
 import { ReservationsPage } from '../pages/reservations/reservations';
 import { AllPage } from '../pages/all/all';
 import { EventoPage } from '../pages/evento/evento';
+import { OtherProfilePage } from '../pages/other-profile/other-profile';
+import { AddFriendsPage } from '../pages/add-friends/add-friends';
+import { EditprofilePage } from '../pages/editprofile/editprofile';
+import { MapaPage } from '../pages/mapa/mapa';
+import { InvitadosPage } from '../pages/invitados/invitados';
+import { CodigoqrPage } from '../pages/codigoqr/codigoqr';
+import { PersonaPage } from '../pages/persona/persona';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -68,6 +75,8 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Facebook } from '@ionic-native/facebook';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { QRCodeModule } from 'angularx-qrcode';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -125,12 +134,20 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     TutorialPage,
     ReservationsPage,
     AllPage,
-    EventoPage
+    EventoPage,
+    OtherProfilePage,
+    AddFriendsPage,
+    EditprofilePage,
+    MapaPage,
+    InvitadosPage,
+    CodigoqrPage,
+    PersonaPage
   ],
   imports: [
     NgCalendarModule,
     BrowserModule,
     HttpModule,
+    QRCodeModule,
     IonicModule.forRoot(MyApp, {
       mode: 'ios',
       scrollPadding: true,
@@ -192,7 +209,14 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     TutorialPage,
     ReservationsPage,
     AllPage,
-    EventoPage
+    EventoPage,
+    OtherProfilePage,
+    AddFriendsPage,
+    EditprofilePage,
+    MapaPage,
+    InvitadosPage,
+    CodigoqrPage,
+    PersonaPage
   ],
   providers: [
     StatusBar,
@@ -205,6 +229,7 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     SocialSharing,
     Geolocation,
     Facebook,
+    BarcodeScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -22,8 +22,8 @@
           </div>
 
           <div *ngIf="r.request" class="action">
-            <ion-img src="../assets/card-actions/checked.svg"></ion-img>
-            <ion-img src="../assets/card-actions/error.svg"></ion-img>
+            <ion-img (click)="acceptFriend(r.friend, r.index)" src="../assets/card-actions/checked.svg"></ion-img>
+            <ion-img (click)="confirmErase(r.friend, r.index)" src="../assets/card-actions/error.svg"></ion-img>
           </div>
 
         </div>
@@ -31,7 +31,7 @@
   </div>
 
   <div *ngIf="f_selected == 2" >
-  
+
   </div>
 
 

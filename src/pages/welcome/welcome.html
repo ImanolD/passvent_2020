@@ -40,9 +40,10 @@
       <div *ngIf="doing == 'login'" class="bottom bti">
         <div class="light grey b1"> <a href="#" (click)="doing = 'facebook'">Continuar con facebook,</a> o puedes</div> <br><br>
         <ion-item><ion-input [(ngModel)]="mail" placeholder="Correo Electrónico" clearInput></ion-input></ion-item>
-        <ion-item><ion-input [(ngModel)]="pw" type="password" placeholder="Contraseña" clearInput></ion-input></ion-item>
+        <ion-item><ion-input (keyup.enter)="loginMail()" [(ngModel)]="pw" type="password" placeholder="Contraseña" clearInput></ion-input></ion-item>
         <!-- <button (click)="freindsAnimation($event)" class="button facebook" name="button"><i class="fab fa-facebook-f"></i>Continuar con Facebook</button> -->
         <br><div class="light grey b1"><a href="#" (click)="doing = 'register'">Aún no tengo una cuenta</a></div>
+        <button (click)="loginMail()" class="button orange" name="button">Continuar</button>
         <!-- <button (click)="freindsAnimation($event)" class="button facebook" name="button"><i class="fab fa-facebook-f"></i>Continuar con Facebook</button> -->
         <p class="light grey b1">Al hacer click en continuar estás <br> aceptando nuestros <br> <a href="#">Términos y Condiciones</a></p>
       </div>
@@ -51,7 +52,7 @@
         <!-- <div class="light grey b1"> <a href="#" (click)="doing = 'facebook'">Continuar con facebook,</a> o puedes</div> <br><br> -->
         <ion-item><ion-input [(ngModel)]="mail" placeholder="Correo Electrónico" clearInput></ion-input></ion-item>
         <ion-item><ion-input [(ngModel)]="pw" type="password" placeholder="Contraseña" clearInput></ion-input></ion-item>
-        <ion-item><ion-input [(ngModel)]="pw_confirm" type="password" placeholder="Confirmar Contraseña" clearInput></ion-input></ion-item>
+        <ion-item><ion-input (keyup.enter)="registerMail()" [(ngModel)]="pw_confirm" type="password" placeholder="Confirmar Contraseña" clearInput></ion-input></ion-item>
         <br><div class="light grey b1"><a href="#" (click)="doing = 'login'">Ya tengo una cuenta</a></div>
         <button (click)="registerMail()" class="button orange" name="button">Continuar</button>
         <p class="light grey b1">Al hacer click en continuar estás <br> aceptando nuestros <br> <a href="#">Términos y Condiciones</a></p>

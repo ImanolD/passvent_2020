@@ -4,8 +4,8 @@
       <input type="text" placeholder="Buscar" class="input-search">
     </div>
     <div class="filters-btn">
-      <div (click)="changeClass(1)" class="{{this.getClass(1)}}">Recomendados</div>
-      <div (click)="changeClass(2)" class="{{this.getClass(2)}}">Ciudad</div>
+      <div (click)="changeClass(1)" class="{{this.getClass(1)}}">Eventos</div>
+      <div (click)="changeClass(2)" class="{{this.getClass(2)}}">Ciudades</div>
       <div (click)="changeClass(3)" class="{{this.getClass(3)}}">Personas</div>
     </div>
   </ion-navbar>
@@ -14,8 +14,11 @@
 <ion-content>
 
 
-  <div #map id="map"></div>
+  <!-- <div #map id="map"></div> -->
 
 
+  <ion-fab (click)="openMapa()" right bottom>
+    <button ion-fab color="orange"><ion-icon name="md-pin"></ion-icon></button>
+  </ion-fab>
 
 </ion-content>
