@@ -6,6 +6,7 @@ import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from 'moment';
+import { NewchatPage } from '../newchat/newchat';
 
 /**
  * Generated class for the ChatsPage page.
@@ -27,6 +28,8 @@ export class ChatsPage {
   public room_chats: any = [];
   public noms_balance: any;
   public users$: any;
+  public friends: any = [];
+  public search: any = '';
 
 
 public segment: any = 'instructors';
@@ -49,8 +52,22 @@ public example_chats: any = [
   }
 
 
+  isName(info){
+    return info.toLowerCase().indexOf(this.search.toLowerCase())>-1;
+  }
+
+
+  darChats(){
+    return this.room_chats.filter(c=> this.search == '' || this.isName(c.partner_name));
+  }
+
+
+  startChat(){
+    this.navCtrl.push(NewchatPage, {'friends': this.friends});
+  }
+
   openChat(room){
-    this.navCtrl.push(ChatPage, {'chat-room': room});
+    this.navCtrl.push(ChatPage, {'chat-room': room.index, 'info': room.partner_info});
   }
 
   openFilters(){
@@ -73,21 +90,41 @@ public example_chats: any = [
   getName(miembros){
     let partner_id = '';
     let a = this.users$;
+
     for(let key in miembros){
       if(miembros[key].index != firebase.auth().currentUser.uid){
         partner_id = miembros[key].index;
       }
     }
 
+    console.log(partner_id);
+    console.log(a);
 
     for(let key in a){
-      if(a[key].index == partner_id){
-        if(a[key].business != undefined){
-          return a[key].business.business_name;
-        }
-        else{
-           return a[key].first_name;
-        }
+      if(key == partner_id){
+        return a[key];
+      }
+    }
+
+    return '';
+  }
+
+  getFID(miembros){
+    let partner_id = '';
+    let a = this.users$;
+
+    for(let key in miembros){
+      if(miembros[key].index != firebase.auth().currentUser.uid){
+        partner_id = miembros[key].index;
+      }
+    }
+
+    console.log(partner_id);
+    console.log(a);
+
+    for(let key in a){
+      if(key == partner_id){
+        return key;
       }
     }
 
@@ -104,6 +141,28 @@ public example_chats: any = [
     return false;
   }
 
+  obtenerNombre(miembros){
+    let partner_id = '';
+    let a = this.users$;
+
+    for(let key in miembros){
+      if(miembros[key].index != firebase.auth().currentUser.uid){
+        partner_id = miembros[key].index;
+      }
+    }
+
+    console.log(partner_id);
+    console.log(a);
+
+    for(let key in a){
+      if(key == partner_id){
+        return a[key].name;
+      }
+    }
+
+    return '';
+  }
+
   convertChats(){
     let a = this.response$;
     for(let key in a){
@@ -114,14 +173,17 @@ public example_chats: any = [
           'type': a[key].type,
           'members': a[key].members,
           'expireDay': a[key].expireDay,
-          'partner_name': (a[key].type == 'other' ? this.getName(a[key].members) : a[key].clanName),
+          'partner_info': this.getName(a[key].members),
           'activity_name': a[key].activity_name,
           'lastMsg': a[key].lastMsg.substring(0, 20) + '..',
-          'lastMsg_index': a[key].lastMsg_index
+          'lastMsg_index': a[key].lastMsg_index,
+          'partner_name': this.obtenerNombre(a[key].members)
         });
+        this.friends[this.friends.length] = this.getFID(a[key].members);
       }
     }
 
+    console.log(this.friends);
     let today  = moment();
     this.room_chats = this.room_chats.filter( chat => moment(chat.expireDay) != moment() && !moment(chat.expireDay).isBefore(today));
     console.log(this.room_chats);

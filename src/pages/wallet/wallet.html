@@ -5,28 +5,10 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar color="black1">
-    <ion-buttons *ngIf="this.user_type == 'nomads'" start style="margin-left: 3%!important;">
-     <!-- <div class="circles-noms">
-       <div class="div1"></div>
-       <div class="div2"></div>
-       <div class="div3"></div></div> -->
-     <!-- <p class="noms-hint">Noms</p>
-     <p class="noms-qty">{{this.noms_balance}}</p> -->
-    </ion-buttons>
-    <ion-buttons *ngIf="this.user_type == 'nomads'" (click)="openFilters()" end>
-     <!-- <div class="filters-noms">
-       <div class="div1"></div>
-       <div class="div2"></div>
-       <div class="div3"></div>
-     </div> -->
-     <!-- <button ion-button icon-only>
-       <ion-icon name="ios-options" color="white"></ion-icon>
-     </button> -->
-    </ion-buttons>
-    <p class="title">Wallet</p>
+  <ion-navbar color="white">
   </ion-navbar>
 </ion-header>
+
 
 
 <ion-content padding>
@@ -34,12 +16,10 @@
  <div class="card-container">
   <div class="card-top-container" padding>
    <div class="items-container">
-     <div class="balance-hint">Current Balance</div>
+     <div class="balance-hint">Balance Passvent</div>
     <div class="balance-container">
-     <div *ngIf="this.user_type == 'nomads'" class="number">{{this.noms_balance}}</div>
-     <div *ngIf="this.user_type != 'nomads'" class="number">${{this.noms_balance * 20}}</div>
-     <div *ngIf="this.user_type == 'nomads'" class="currency">NOMS</div>
-     <div *ngIf="this.user_type != 'nomads'" class="currency">MXN</div>
+     <div class="number">$ {{this.noms_balance}}</div>
+     <div class="currency">MXN</div>
     </div>
    </div>
   </div>
@@ -47,68 +27,6 @@
     <div *ngIf="this.user_type == 'nomads'" class="hint-avg">20 booking average</div>
     <div *ngIf="this.user_type == 'allies'" class="hint-avg">3 activities</div>
   </div> -->
- </div>
-
- <div *ngIf="this.user_type == 'nomads'">
-   <div class="buy-hint">Buy NOMS</div>
-   <div class="amounts-container">
-     <div class="amount-container">
-       <div class="input-group">
-         <p class="input-title">Set amount of Cash</p>
-         <input (click)="cash = ''" placeholder="$" type="text" class="input-field" [(ngModel)]="cash" (ngModelChange)="noms = cash/20">
-       </div>
-       <!-- <div class="amount-hint">Amount of cash</div>
-       <div class="amount-text" contenteditable="true">$0</div> -->
-     </div>
-     <div class="amount-container" style="margin-left: 3%;">
-       <div class="input-group">
-         <p class="input-title">Amount of Noms</p>
-         <input disabled type="text" class="input-field" [(ngModel)]="noms">
-       </div>
-       <!-- <div class="amount-hint">Amount of NOMS</div>
-       <div class="amount-text">{{95}}</div> -->
-     </div>
-   </div>
-   <div class="booking-avg"><b>{{this.getMenor()}}</b> to <b>{{this.getMayor()}}</b> bookings</div>
-
-   <button [disabled]="!canPay()" (click)="confirmPaypal()" type="button" class="pay-btn" padding>Get NOMS</button>
-
-   <div class="buy-hint">Packages</div>
-
-   <ion-slides slidesPerView="2.2">
-     <ion-slide *ngFor="let s of this.example_packages; let in = index">
-      <div (click)="selectP(in)" class="{{isSelected(in)}}">
-        <div class="top-slide">
-          <div class="qty-slide">{{s.noms}}</div>
-          <div class="circles-noms">
-            <!-- <div class="div1"></div> -->
-            <div class="div2"></div>
-            <div class="div3"></div>
-          </div>
-        </div>
-        <div class="btm-slide">
-          <!-- <div class="bookings-avg">{{s.bookings_avg}} Bookings avg.</div> -->
-          <div class="slide-price">$ {{s.price}} MXN</div>
-        </div>
-      </div>
-     </ion-slide>
-   </ion-slides>
- </div>
-
- <div *ngIf="this.user_type == 'allies'">
-   <div class="buy-hint gold">My Activities</div>
-
-    <div *ngFor="let a of this.my_activities" class="activities-container" padding>
-        <div class="texts-container">
-          <div class="top-text">{{a.title}}</div>
-          <div class="btm-text">Lessons: {{a.schedule.length}}</div>
-        </div>
-        <div class="texts-container">
-          <div class="top-text">{{a.total_earned}} NOMS</div>
-          <div class="btm-text">${{a.total_earned * 20}} MXN</div>
-        </div>
-    </div>
-
  </div>
 
 </ion-content>

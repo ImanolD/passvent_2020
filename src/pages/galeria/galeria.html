@@ -1,0 +1,28 @@
+<!--
+  Generated template for the GaleriaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="orange">
+    <div class="title white">Galeria</div>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div class="image-table">
+    <div *ngFor="let i of this.getPictures()">
+      <img src="{{i.url}}">
+    </div>
+  </div>
+
+
+
+  <ion-fab *ngIf="evento.gallery_all || evento.rol == 'fotógrafo'" right bottom>
+    <button (click)="presentOptions()" ion-fab color="orange"><ion-icon name="md-add"></ion-icon></button>
+  </ion-fab>
+
+</ion-content>

@@ -11,23 +11,23 @@
 <div class="modal1" padding>
   <div >
   <div class="top-container">
-    <div class="top-title">Help Center</div>
-    <div navPop class="top-cancel">Cancel</div>
+    <div class="top-title">Centro de Ayuda</div>
+    <div navPop class="top-cancel">Cancelar</div>
   </div>
 
   <div class="saldo-container">
-    <div class="saldo-msg">A nōmu support team member will be in touch with you soon</div>
-    <input (click)="selectCase()" type="tel" placeholder="Select" class="selector" [(ngModel)]="case">
+    <div class="saldo-msg">Un miembro del equipo de soporte de passvent estará en contacto pronto</div>
+    <input (click)="selectCase()" type="tel" placeholder="Seleccionar" class="selector" [(ngModel)]="case">
   </div>
 
-  <div class="section-title">Aditional Info</div>
+  <div class="section-title">Información Adicional</div>
   <div class="selector-containers">
     <textarea name="name" rows="6" cols="80" class="selector" [(ngModel)]="detalles"></textarea>
   </div>
 
   <button [disabled]="!canAdvance()" (click)="sendMsg()" type="button" class="pay-btn">
    <div class="pay-container">
-     <div class="pay-hint">Send</div>
+     <div class="pay-hint">Enviar</div>
    </div>
   </button>
 </div>

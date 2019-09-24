@@ -1,0 +1,18 @@
+page-galeria {
+  .white{
+    color: white!important;
+  }
+
+
+  .image-table{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    img{
+      width: 100%;
+      margin: 5%;
+      border-radius: 10px;
+    }
+  }
+}

@@ -1,0 +1,286 @@
+page-completar {
+  .page {
+    height: 100%;
+    width: 100vw;
+    background-color: white;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .cosas{
+    margin-top: -50vh;
+  }
+
+  .splash {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0px 40px;
+    position: relative;
+    .title{
+      font-weight: 700 !important;
+      font-size: 24px !important;
+    }
+    .logo {
+      height: 150px;
+    }
+    .facebook{
+      background-color: #3b5998;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+      position: relative;
+      i{
+        position: absolute;
+        bottom: 0!important;
+        // float: left;
+        // margin-left: 20px;
+      }
+    }
+    .bottom{
+      p{
+        font-size: .9em;
+        padding-top: .8em;
+      }
+
+    }
+  }
+
+  .freinds{
+    ion-img{
+      position: absolute;
+      display: block;
+    }
+    .one{
+      top: 200px;
+      left: -90px;
+      height: 210px;
+      width: 210px;
+    }
+    .two{
+      right: -80px;
+      top: 220px;
+      height: 320px;
+      width: 320px;
+    }
+    .three{
+      top: 420px;
+      left: 40px;
+      height: 100px;
+      width: 100px;
+    }
+    .four{
+      top: 70px;
+      left: 30%;
+      height: 160px;
+      width: 160px;
+    }
+    .five{
+      top: -50px;
+      right: -70px;
+      height: 207px;
+      width: 214px;
+    }
+    .six{
+      top: -70px;
+      left: -70px;
+      height: 190px;
+      width: 190px;
+    }
+  }
+
+  .likes-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 3%;
+    height: 70vh;
+    margin-bottom: 5%;
+    overflow: scroll;
+    .option-like{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 1em;
+      padding: 5%;
+      .circle-option{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 2px solid #FF5722;
+        padding: .5em;
+      }
+      .option-title{
+        font-size: 90%;
+        opacity: .6;
+      }
+    }
+  }
+
+  .selected{
+    background-color: rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
+  }
+
+  .likes{
+    height: 100%;
+    width: 100vw;
+    position: relative;
+    ion-grid{
+      text-align: center;
+      p{
+        margin-top: 0px;
+      }
+      .circle{
+        border: 2px solid #FF5722;
+        padding: 10px;
+        width: 66px;
+        border-radius: 50%;
+        display: block;
+        margin: 0 auto;
+        ion-img{
+          height: 44px;
+          width: 44px;
+        }
+      }
+    }
+  }
+
+  .fr{
+    .table{
+      height: 35em;
+      overflow-y: scroll;
+      margin-top: .8em;
+      .freind{
+        display: flex;
+        align-items: center;
+        padding: 0px 10px;
+        border-bottom: 1px solid #E6E6E6;
+        border-top: 1px solid #E6E6E6;
+        &.invite{
+          height: 6em;
+          button{
+            width: 9em !important;
+            height: 3em;
+            font-size: 18px;
+          }
+        }
+        .container-img{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 15%;
+        }
+        ion-img{
+          height: 60px;
+        }
+        p{
+          width: 45%;
+          font-size: 16px;
+          padding-left: 15px;
+        }
+        .container-btn{
+          width: 40%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        button{
+          border: 1px solid #7A7A7A;
+          background-color: white;
+          color: #7A7A7A;
+          border-radius: 6px;
+          font-size: 11px;
+          font-weight: 300;
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          padding: 5px 10px;
+          i{
+            margin-right: 5px;
+          }
+          &.blue{
+            border: 1px solid #536DFE;
+            color: #536DFE;
+            width: 130px;
+          }
+        }
+      }
+    }
+  }
+
+  .done{
+    height: 100vh;
+    width: 100vw;
+    color: white;
+    display: flex;
+    padding-top: 4em;
+    justify-content: flex-start;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    background-image: url("../../assets/placeholders/girl.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    background-position: -100px 0px;
+    .ya{
+      font-size: 24px;
+    }
+    .exp{
+      margin-top: -20px;
+      padding: 0px 10px;
+    }
+
+  }
+
+  .bottom{
+    position: absolute;
+    z-index: +100;
+    bottom: 0px;
+    left: 0px;
+    font-size: 14px;
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    &.static{
+      position:relative;
+    }
+    &.bt5{
+      bottom: 2em;
+    }
+  }
+
+  /* width */
+  .table::-webkit-scrollbar {
+    width: .3em;
+  }
+
+  /* Track */
+  .table::-webkit-scrollbar-track {
+    border-radius: 3px;
+  }
+
+  /* Handle */
+  .table::-webkit-scrollbar-thumb {
+    background: #FF5722;
+    border-radius: 5px;
+  }
+
+  /* Handle on hover */
+  .table::-webkit-scrollbar-thumb:hover {
+    background: #FF5722;
+  }
+
+}

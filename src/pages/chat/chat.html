@@ -5,13 +5,16 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
-    <p class="title">Chat</p>
+  <ion-navbar color="white">
+    <!-- <div class="info-usuario">
+      <div class="imagen-usuario" [style.background-image]="sanitizeThis(info.picture.data.url)"></div>
+      <div class="title medium">{{info.name}}</div>
+    </div> -->
   </ion-navbar>
 </ion-header>
 
 
-<ion-content padding class="chat-page">
+<ion-content class="chat-page">
 
   <div #list class="chat-area" [scrollTop]="list.scrollHeight">
     <div *ngFor="let m of Mensajes">
@@ -37,8 +40,11 @@
 <ion-navbar hideBackButton>
 
 <div class="contenedor-input">
-  <textarea [(ngModel)]="msgu" (keyup.enter)="addMsg()" name="name" rows="2" cols="80" placeholder="Type something..." class="input-msg"></textarea>
-  <div (click)="addMsg()" class="send-text">Send</div>
+  <textarea [(ngModel)]="msgu" (keyup.enter)="addMsg()" name="name" rows="2" cols="80" placeholder="Escribe algo..." class="input-msg"></textarea>
+  <div class="boton-enviar">
+    <ion-icon color="white" (click)="addMsg()" name="md-send"></ion-icon>
+  </div>
+  <!-- <div (click)="addMsg()" class="send-text">Send</div> -->
 </div>
 
 </ion-navbar>

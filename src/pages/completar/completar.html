@@ -1,0 +1,34 @@
+<!--
+  Generated template for the CompletarPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-content>
+
+  <div class="page">
+
+    <div class="page splash text-center">
+
+      <div class="cosas">
+        <img class="logo" src="assets/PV.png">
+        <p class="main-t title bold">Bienvenido a <span class="orange">PassVent</span></p>
+        <p style="margin-top:-20px;" class="grey subtitle">Únete a la red de más de 5,000 <br> personas</p>
+      </div>
+
+
+
+      <div class="bottom bti">
+        <!-- <div class="light grey b1"> <a href="#" (click)="doing = 'facebook'">Continuar con facebook,</a> o puedes</div> <br><br> -->
+        <ion-item><ion-input [(ngModel)]="mail" placeholder="Correo Electrónico" clearInput></ion-input></ion-item>
+        <ion-item><ion-input [(ngModel)]="pw" type="password" placeholder="Contraseña" clearInput></ion-input></ion-item>
+        <ion-item><ion-input [(ngModel)]="pw_confirm" type="password" placeholder="Confirmar Contraseña" clearInput></ion-input></ion-item>
+        <br><div class="light grey b1"><a href="#">Ya tengo una cuenta</a></div>
+        <button  class="button orange" name="button">Continuar</button>
+      </div>
+
+    </div>
+  </div>
+
+</ion-content>

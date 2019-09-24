@@ -129,6 +129,13 @@ public lista: any = [];
                'role': cual,
                'inevent': false
              });
+             let indice2 = this.generateUUID();
+             this.af.list('Users/'+user.index+'/requests').update(indice2, {
+               'index': indice2,
+               'friend': firebase.auth().currentUser.uid,
+               'event': (this.navParams.get('evento-index') ? this.navParams.get('evento-index') : ''),
+               'type': 'invitation'
+             });
              console.log(this.added);
             }
           },

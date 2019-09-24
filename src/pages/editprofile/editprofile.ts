@@ -7,6 +7,11 @@ import * as moment from 'moment';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DomSanitizer } from '@angular/platform-browser';
+import { WelcomePage } from '../welcome/welcome';
+import { LikesPage } from '../likes/likes';
+import { PrivacyPage } from '../privacy/privacy';
+import { CarteraPage } from '../cartera/cartera';
+import { WalletPage } from '../wallet/wallet';
 
 /**
  * Generated class for the EditprofilePage page.
@@ -40,6 +45,23 @@ public user: any = [];
     public sanitizer: DomSanitizer) {
       this.user = this.navParams.get('user');
       console.log(this.user);
+  }
+
+  openLikes(){
+    this.navCtrl.push(LikesPage);
+  }
+
+  openPrivacy(){
+    this.navCtrl.push(PrivacyPage);
+  }
+
+  openCartera(){
+    this.navCtrl.push(WalletPage);
+  }
+
+  logOut(){
+    this.afAuth.auth.signOut();
+    this.appCtrl.getRootNav().setRoot(WelcomePage);
   }
 
   modifyUser(){

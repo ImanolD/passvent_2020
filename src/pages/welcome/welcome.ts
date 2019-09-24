@@ -153,6 +153,9 @@ public mail: any = '';
 public pw: any = '';
 public pw_confirm: any = '';
 
+public first_name: any = '';
+public last_name: any = '';
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -162,7 +165,7 @@ public pw_confirm: any = '';
     public alertCtrl: AlertController,
     public fb: Facebook,
     public platform: Platform) {
-     this.af.list('/motivation').update("Heart", {"Text": 'All men are created equal, some work harder in the preseason'});
+
 
      this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
@@ -175,7 +178,8 @@ public pw_confirm: any = '';
     this.afAuth.authState.subscribe(user => {
       if(user){
         this.general_loader.dismiss();
-            // this.general_loader.dismiss();
+        this.navCtrl.setRoot(TabsPage);
+            //this.general_loader.dismiss();
             // let indice = firebase.auth().currentUser.uid;
             // let reference =  firebase.database().ref('Users').orderByChild('index').equalTo(indice);
             // reference.once('value', snapshot => {
@@ -326,7 +330,7 @@ public pw_confirm: any = '';
         };
 
 
-        this.signInWithEmail(credentials).then(() => this.freindsAnimation(event), error => this.handleError(error.message));}
+        this.signInWithEmail(credentials).then(() => this.doNext(), error => this.handleError(error.message));}
 
         else{
           let alert = this.alertCtrl.create({
@@ -345,6 +349,11 @@ public pw_confirm: any = '';
            });
            alert.present();
          }
+  }
+
+  doNext(){
+   if(this.general_loader) this.general_loader.dismiss();
+   this.goTabs();
   }
 
   signInWithEmail(credentials) {
@@ -399,11 +408,28 @@ public pw_confirm: any = '';
    saveData(){
      this.af.list('Users').update(firebase.auth().currentUser.uid, {
        'email': this.mail,
-       'index': firebase.auth().currentUser.uid
+       'index': firebase.auth().currentUser.uid,
+       'id': firebase.auth().currentUser.uid,
+       'first_name': this.first_name,
+       'last_name': this.last_name,
+       'name': this.first_name+' '+this.last_name,
+       'balance': 0
      });
+     this.af.list('Users/'+firebase.auth().currentUser.uid+'/picture').update('data', {
+       'url': 'http://monumentfamilydentistry.com/wp-content/uploads/2015/11/user-placeholder.png'
+     });
+
      this.freindsAnimation(event);
+     console.log('bounce');
    }
 
+   canSaveData(){
+     return this.mail != '' && this.pw != '' && this.pw_confirm != '';
+   }
+
+   canSaveDatos(){
+     return this.first_name != '' && this.last_name != '';
+   }
 
   //Login related code
 
@@ -427,6 +453,9 @@ public pw_confirm: any = '';
                     //this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']};
                     this.general_loader.dismiss();
                     this.af.list('Users').update(firebase.auth().currentUser.uid, profile);
+                    this.af.list('Users').update(firebase.auth().currentUser.uid, {
+                      'balance': 0
+                    });
                     this.freindsAnimation(event);
                 }).catch((error) => {
                   //this.general_loader.dismiss();
@@ -607,7 +636,8 @@ public pw_confirm: any = '';
 
   likesAnimation(event: any) {
     var tl = new TimelineMax();
-    tl.to(".invite-freinds", 2, { display: "none", y: -400, opacity: 0 });
+    tl.to(".add-freinds", 2, { display: "none", y: -400, opacity: 0 });
+    //tl.to(".invite-freinds", 2, { display: "none", y: -400, opacity: 0 });
     tl.from(".l1", 1, { opacity: 0, x: -20 });
     tl.from(".l0", .35, { opacity: 0, y: 20, scale: 0, ease: Back.easeOut.config(1.7) });
     tl.from(".l3", .35, { opacity: 0, y: 20, scale: 0, ease: Back.easeOut.config(1.7) }, '-=.15');

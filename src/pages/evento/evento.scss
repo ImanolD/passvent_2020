@@ -1,17 +1,198 @@
 page-evento {
+
+  .toolbar-content-ios{
+    padding: .5em!important;
+    background-color: white!important;
+    border-style: none!important;
+  }
+
+
+
+  .send-msg{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    //background-color: #EFEFEF;
+    padding-bottom: 3%;
+    textarea{
+      width: 70%;
+      border: 1px solid #EFEFEF;
+      //background-color: #EFEFEF;
+      //border: 1px solid transparent;
+      font-size: 100%;
+      padding: 2%;
+      text-indent: 1%;
+      border-radius: 5px;
+      color: black;
+    }
+    button{
+      background-color: #398AD7;
+      color: white;
+      font-weight: 700;
+      font-size: 90%;
+      border-radius: 5px;
+      width: 20%;
+      height: 40px;
+      padding: .5em;
+    }
+  }
+
+  .slider-amigos{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-left: 5%;
+    margin-bottom: 5%;
+    .persona{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding-right: 8%;
+    }
+    .light{
+      display: inline-block;
+      white-space: nowrap;
+    }
+    .picture{
+      height: 5em;
+      width: 5em;
+      border-radius: 2.5em;
+      border: .3em solid white;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      background-image: url("../assets/placeholders/chem.jpeg");
+      background-size: cover;
+      font-size: 1em;
+      &.add{
+        background-image: none;
+        background-color: $orange;
+        color: white;
+        font-size: 1em;
+      }
+      &.placeholder{
+        box-shadow: none;
+        background-color: white;
+        margin-right: 10em;
+      }
+    }
+  }
+
+  .botonesdown{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //flex-wrap: wrap;
+    button{
+     width: 30%!important;
+    }
+  }
+  .abajo{
+    width: 30vw!important;
+  }
+  .solo{
+    width: 100vw!important;
+  }
+
+
   .event {
+
+    #map {
+      margin-top: 3%;
+      width: 100%;
+      height: 30%;
+    }
+
     p{
       margin: 0px;
     }
     .title{
-      margin-left: 16px !important;
+      padding-left: 7%;
     }
     .subtitle{
       color: #7A7A7A;
-      margin-left: 16px !important;
+      padding-left: 7%;
       font-size: 12px;
 
     }
+
+    .indi{
+      width: auto;
+      padding-left: 2%;
+      padding-right: 2%;
+    }
+
+    .anuncios{
+      width: 100%;
+      height: 25vh;
+      overflow: scroll;
+      //border: 1px solid red;
+    }
+
+    .anuncio{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 3%;
+      margin-bottom: 2%;
+      border-bottom: 1px solid #EFEFEF;
+      .contenido-anuncio{
+        font-size: 90%;
+      }
+    }
+
+    .gold{
+      border: 2px solid #D4AF37;
+    }
+
+
+
+
+    .filters-btn{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 3%;
+      margin-top: 5%;
+      .btn-filters{
+        padding: .3em;
+        //border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        color: rgba(0, 0, 0, 0.2);
+        //border-radius: 5px;
+        font-size: 90%;
+        width: 50%;
+        text-align: center;
+        font-weight: 700;
+        //margin: 3%;
+      }
+      .selected{
+        border: 1px solid #FF5722;
+        background-color: #FF5722;
+        color: white!important;
+      }
+    }
+
+
+    .toolbar-background-ios{
+       border-style: none!important;
+      // -webkit-box-shadow: 0px 7px 8px 0px rgba(0,0,0,0.75);
+      // -moz-box-shadow: 0px 7px 8px 0px rgba(0,0,0,0.75);
+      // box-shadow: 0px 7px 8px 0px rgba(0,0,0,0.75);
+    }
+
+
+    ion-navbar{
+      height: 100px!important;
+      button{
+
+      }
+    }
+
+    .button{
+      //padding: 5em!important;
+    }
+
 
 
 
@@ -184,11 +365,13 @@ page-evento {
       }
       .back{
         position: absolute;
-        top: 55px;
+        top: 35px;
         left: 15px;
         z-index: +2;
         height: 15px;
         width: 15px;
+        color: white;
+        font-size: 2em;
       }
       .qr{
         position: absolute;
@@ -242,6 +425,7 @@ page-evento {
         width: 20%;
         border-radius: 10px;
         margin: 0px 15px;
+
         ion-img{
           height: 80px;
           width: 80px;
@@ -258,6 +442,15 @@ page-evento {
         }
         p{
           font-size: 12px;
+          i{
+            margin-right: 10px!important;
+          }
+        }
+        .direccion{
+          width: 60%;
+          white-space: nowrap;
+          overflow: hidden;
+          //border: 1px solid red;
         }
         .counter{
           background-color: #20BF55;
@@ -273,9 +466,8 @@ page-evento {
       }
     }
     .description{
-      font-size: 12px;
-      padding: 0px 10px;
-      padding-top: 15px;
+      font-size: 90%;
+      padding-left: 7%;
     }
     .asistants{
       width: 100%;

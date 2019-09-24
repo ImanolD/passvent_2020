@@ -13,11 +13,11 @@
 
 <ion-content padding>
 
-   <button (click)="newEvent()" class="button orange" name="button">Crear Evento</button>
+   <!-- <button (click)="newEvent()" class="button orange" name="button">Crear Evento</button> -->
 
    <div class="events">
      <div *ngFor="let e of this.activities">
-       <div class="card simple">
+       <div class="card simple" (click)="openEvento(e)">
         <div class="actions">
 
           <div class="asistants">
@@ -48,5 +48,10 @@
      </div>
 
    </div>
+
+
+  <ion-fab (click)="newEvent()" right bottom>
+    <button ion-fab color="orange"><ion-icon name="md-add"></ion-icon></button>
+  </ion-fab>
 
 </ion-content>

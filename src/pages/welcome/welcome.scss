@@ -7,6 +7,86 @@ page-welcome {
     position: relative;
   }
 
+  .cosas{
+    margin-top: -50vh;
+  }
+
+  .tabla{
+    height: 60vh;
+    overflow: scroll;
+  }
+
+  .search{
+    width: 100%;
+    padding: 0px 1.5em;
+    margin-top: .5em;
+    .input{
+      width: 100%;
+      input{
+        background-color: #EFEFEF;
+        border: 1px solid white;
+        font-family: 'Custom';
+        font-size: 100%;
+        padding: 3%;
+        width: 100%;
+        color: black;
+        background-image: url("../../assets/map/search.svg");
+        background-position: 4% 50%;
+        background-repeat: no-repeat;
+        background-size: 1em;
+        text-indent: 10%;
+        border-radius: 10px!important;
+      }
+      input:focus{
+        outline: none;
+      }
+    }
+  }
+
+  .persona-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 5%;
+    border-bottom: 1px solid rgba(240, 240, 240, 1);
+    img{
+      width: 15%;
+      border-radius: 10px;
+    }
+    .name{
+     width: 50%;
+     overflow: hidden;
+     font-size: 100%;
+    }
+    button{
+      border: 1px solid #7A7A7A;
+      background-color: white;
+      color: #7A7A7A;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 300;
+      display: flex;
+      justify-content: center;
+      width: 80%;
+      padding: 5px 10px;
+      margin-top: 3%;
+      i{
+        margin-right: 5px;
+      }
+      &.blue{
+        border: 1px solid #536DFE;
+        color: #536DFE;
+        width: 130px;
+      }
+      &.red{
+        border: 1px solid #E02020;
+        color: #E02020;
+        width: 140px;
+      }
+    }
+  }
+
   .splash {
     display: flex;
     align-items: center;

@@ -62,6 +62,13 @@ import { MapaPage } from '../pages/mapa/mapa';
 import { InvitadosPage } from '../pages/invitados/invitados';
 import { CodigoqrPage } from '../pages/codigoqr/codigoqr';
 import { PersonaPage } from '../pages/persona/persona';
+import { NewchatPage } from '../pages/newchat/newchat';
+import { CompletarPage } from '../pages/completar/completar';
+import { GaleriaPage } from '../pages/galeria/galeria';
+import { PrivacyPage } from '../pages/privacy/privacy';
+import { LikesPage } from '../pages/likes/likes';
+import { CarteraPage } from '../pages/cartera/cartera';
+import { BoletosPage } from '../pages/boletos/boletos';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -141,7 +148,14 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     MapaPage,
     InvitadosPage,
     CodigoqrPage,
-    PersonaPage
+    PersonaPage,
+    NewchatPage,
+    CompletarPage,
+    GaleriaPage,
+    LikesPage,
+    PrivacyPage,
+    CarteraPage,
+    BoletosPage
   ],
   imports: [
     NgCalendarModule,
@@ -216,7 +230,14 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     MapaPage,
     InvitadosPage,
     CodigoqrPage,
-    PersonaPage
+    PersonaPage,
+    NewchatPage,
+    CompletarPage,
+    GaleriaPage,
+    LikesPage,
+    PrivacyPage,
+    CarteraPage,
+    BoletosPage
   ],
   providers: [
     StatusBar,

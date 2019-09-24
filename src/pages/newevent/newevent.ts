@@ -80,11 +80,12 @@ export class NeweventPage {
     public modalCtrl: ModalController) {
      this.type = localStorage.getItem('Tipo');
      if(this.navParams.get('Clan')) this.isClan = true;
+       this.event_data.index = this.generateUUID();
   }
 
   openAddpeople(cual){
     this.tipo = cual;
-    this.navCtrl.push(AddFriendsPage, {'type': cual, 'lista': this.event_data.attendants});
+    this.navCtrl.push(AddFriendsPage, {'type': cual, 'lista': this.event_data.attendants, 'evento-index': this.event_data.index});
   }
 
   contarCual(rol){
@@ -193,15 +194,15 @@ export class NeweventPage {
     });
     this.general_loader.present();
 
-    let indice = this.generateUUID();
+    let indice = this.event_data.index;
     this.event_data.creator = firebase.auth().currentUser.uid;
-    this.event_data.index = indice;
 
     this.event_data.attendants.push({
       'index': this.event_data.creator,
       'isOwner': true,
       'status': 'Accepted',
-      'inevent': false
+      'inevent': false,
+      'role': 'admin'
     });
 
     this.af.list('Users/'+firebase.auth().currentUser.uid+'/schedule').push({

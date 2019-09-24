@@ -12,6 +12,9 @@ import { EventPage } from '../event/event';
 import * as moment from 'moment';
 import { DetailsPage } from '../details/details';
 import { MapaPage } from '../mapa/mapa';
+import { OtherProfilePage } from '../other-profile/other-profile';
+import { AllPage } from '../all/all';
+import { EventoPage } from '../evento/evento';
 
 @Component({
   selector: 'page-contact',
@@ -22,6 +25,7 @@ public general_loader: any;
 
 //For the user
 public users$: any;
+public users: any = [];
 public noms_balance: any = [];
 public nomad_schedule: any = [];
 
@@ -38,6 +42,50 @@ public filtered_a: any = [];
 
 public f_selected: any = 1;
 public eventos: any = [];
+public search: any = '';
+
+public ciudades: any = [
+  {
+    'name': 'San Luis Potosí',
+    'events': true,
+    'img': 'https://www.visitmexico.com/viajemospormexico/assets/uploads/destinos/san-luis-potosi_destinos-principales_san-luis-potosi_01.jpg'
+  },
+  {
+    'name': 'Querétaro',
+    'events': false,
+    'img': 'https://www.visitmexico.com/viajemospormexico/assets/uploads/destinos/queretaro_destinos-principales_queretaro_int.jpg'
+  },
+  {
+    'name': 'León',
+    'events': false,
+    'img': 'https://www.leon.gob.mx/leon/images/image5.jpg'
+  },
+  {
+    'name': 'Cancún',
+    'events': false,
+    'img': 'https://www.avianca.com/content/dam/avianca_new/destinos/cun/cun_banner_cancun_destino.jpg'
+  },
+  {
+    'name': 'Monterrey',
+    'events': false,
+    'img': 'https://www.visitmexico.com/viajemospormexico/assets/uploads/destinos/nuevo-leon_destinos-principales_monterrey_01.jpg'
+  },
+  {
+    'name': 'Guadalajara',
+    'events': false,
+    'img': 'https://img.chilango.com/2019/05/que-hacer-en-guadalajara-2.jpg'
+  },
+  {
+    'name': 'Puerto Vallarta',
+    'events': false,
+    'img': 'https://www.garzablancaresort.com.mx/blog/wp-content/uploads/2015/12/the-best-beaches-in-puerto-vallarta-e1506119214708.jpg'
+  },
+  {
+    'name': 'Ciudad de México',
+    'events': false,
+    'img': 'https://cdn-3.expansion.mx/dims4/default/01d4259/2147483647/strip/true/crop/659x462+0+0/resize/800x561!/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2Fdb%2Fdbf1446c85fabec0927577fc1a27d598%2Fcdmx-reforma20180516134246.jpg'
+  },
+]
 
   @ViewChild('map') mapElement: ElementRef;
    map: any;
@@ -49,8 +97,18 @@ public eventos: any = [];
     public alertCtrl: AlertController,
     public geolocation: Geolocation,
     public sanitizer: DomSanitizer,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController) {}
 
+  openProfile(usuario){
+    this.navCtrl.push(OtherProfilePage, {'user': usuario});
+  }
+
+  openAll(ciudad){
+    this.navCtrl.push(AllPage, {'city': ciudad, 'eventos': this.eventos});
+  }
+
+  filterAmigos(){
+    return this.users.filter(a => this.search == '' || a.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1 );
   }
 
   openMapa(){
@@ -78,6 +136,11 @@ public eventos: any = [];
    this.navCtrl.parent.select(4);
    setTimeout(() => {this.navCtrl.parent.getSelected().push(WalletPage)}, 500);
   }
+
+  openEvent(event){
+    this.navCtrl.push(EventoPage, {'Evento': event});
+  }
+
 
 
   getCoordinates(direccion){
@@ -227,8 +290,7 @@ public eventos: any = [];
     }
 
 
-    console.log(this.activities_all);
-    this.general_loader.dismiss();
+    if(this.general_loader) this.general_loader.dismiss();
     setTimeout(() => {this.class_slides = true}, 100);
   }
 
@@ -424,7 +486,11 @@ public eventos: any = [];
         'creator_index': a[key].creator,
         'description': a[key].description,
         'status': this.getStatus(a[key].attendants, a[key].private),
-        'attendants': a[key].attendants
+        'attendants': a[key].attendants,
+        'rol': this.getRol(a[key].attendants),
+        'messages': (a[key].messages ? a[key].messages : []),
+        'index': key,
+        'tickets': (a[key].tickets ? a[key].tickets : [])
       });
     }
 
@@ -443,8 +509,33 @@ public eventos: any = [];
     //if(!this.done_g) this.populateMap();
   }
 
+  getRol(lista){
+    let aux2 = [];
+    for(let key in lista){
+      aux2.push({
+        'isOwner': lista[key].isOwner,
+        'index': lista[key].index,
+        'role': lista[key].role
+      })
+    }
+    console.log(aux2);
+    let aux = aux2.filter(l=>l.index == firebase.auth().currentUser.uid);
+    if(aux.length != 0) return aux[0].role;
+    return 'nada';
+  }
+
   cuantosAmigos(conteo){
-    return conteo.filter(c=>c.isFriend).length;
+    let aux = [];
+    for(let key in conteo){
+      aux.push({
+        'isFriend': conteo[key].isFriend
+      })
+    }
+    return aux.filter(c=>c.isFriend).length;
+  }
+
+  filterEventos(){
+    return this.eventos.filter(e=> this.search == '' || e.title.toLowerCase().indexOf(this.search.toLowerCase())>-1 );
   }
 
   isAmigo(indice){
@@ -478,15 +569,43 @@ public eventos: any = [];
     }
   }
 
+  convertirUsuarios(){
+    let u = this.users$;
+    for(let key in u){
+      if(key != firebase.auth().currentUser.uid){
+        this.users.push({
+          'name': u[key].name,
+          'email': u[key].email,
+          'friends': u[key].friends,
+          'picture': u[key].picture,
+          'preferences': u[key].preferences,
+          'requests': u[key].requests,
+          'schedule': u[key].schedule,
+          'chats': u[key].Chats,
+          'events': u[key].Events,
+          'web': (u[key].web ? u[key].web : ''),
+          'description': (u[key].description ? u[key].description : ''),
+          'isamigo': this.isAmigo(key),
+          'index': key,
+          'selected': false
+        });
+      }
+    }
+    console.log(this.users);
+    if(this.general_loader) this.general_loader.dismiss();
+  }
+
 
   ionViewDidLoad(){
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
       content: 'Cargando...'
     });
-    //this.general_loader.present();
+    this.general_loader.present();
     this.af.object('Users/').snapshotChanges().subscribe(action => {
       this.users$ = action.payload.val();
+      this.users = []
+      this.convertirUsuarios();
     });
     this.getEventos();
     //this.loadMap();

@@ -43,6 +43,7 @@ import { AllPage } from '../pages/all/all';
 import { OtherProfilePage } from '../pages/other-profile/other-profile';
 import { EditprofilePage } from '../pages/editprofile/editprofile';
 import { InvitadosPage } from '../pages/invitados/invitados';
+import { CompletarPage } from '../pages/completar/completar';
 
 import { Keyboard } from '@ionic-native/keyboard';
 
@@ -61,11 +62,11 @@ export class MyApp {
 
       //config.set('backButtconIcon', 'fa-fal-angle-left');
 
-      afAuth.authState.subscribe(user => {
-        if(user){
-          this.rootPage = TabsPage;
-        }
-       });
+      // afAuth.authState.subscribe(user => {
+      //   if(user){
+      //     this.rootPage = TabsPage;
+      //   }
+      //  });
 
       //keyboard.disableScroll(true);
       statusBar.styleDefault();

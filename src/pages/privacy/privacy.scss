@@ -1,0 +1,41 @@
+page-privacy {
+
+  .title{
+  color: black;
+  font-size: 22px;
+  display: block;
+  margin-bottom: -20px !important;
+}
+
+label{
+  color: #7A7A7A;
+  margin-top: -1.2em;
+  position: relative;
+  right: -2em;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.8em 0;
+  width: 100%;
+  .desc{
+    width: 70%;
+    font-size: 14px;
+    &.long{
+      width: 100%;
+    }
+    .option{
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+}
+
+
+.preferences{
+  padding: 2.5em 1em 5.5em 1em;
+}
+
+}

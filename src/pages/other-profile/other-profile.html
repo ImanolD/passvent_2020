@@ -1,3 +1,10 @@
+
+<ion-header>
+  <ion-navbar color="white">
+  </ion-navbar>
+</ion-header>
+
+
 <ion-content>
   <div class="profile page">
 
@@ -10,7 +17,7 @@
       </div>
 
       <div style="margin-left:10px;" class="picture">
-        <div [style.background-image]="sanitizeThis(this.usuario.picture.data.url)" class="circle"></div>
+        <div [style.background-image]="sanitizeThis()" class="circle"></div>
       </div>
 
       <div style="float:right; margin-left:20px;" class="info f-center">
@@ -24,10 +31,16 @@
     <br>
     <p style="margin-left:20px;" class="name">{{this.usuario.name}}</p>
 
+     <div *ngIf="usuario.private">
+       <button (click)="confirmAdd(this.usuario, 1)" class="button blue medium"type="button" name="button">{{getTitleShow()}}</button>
+       <div class="private-notice">Este perfil es privado</div>
+     </div>
+
+    <div *ngIf="!usuario.private">
+
     <div class="about">
       <div class="follow-btns">
-        <button *ngIf="!this.usuario.isamigo" (click)="confirmAdd(this.usuario, 1)" class="button blue medium"type="button" name="button">Seguir</button> <button (click)="selectInputFoto()" class="button blue medium small" type="button" name="button"><i class="fas fa-user-friends"></i></button>
-
+        <button (click)="confirmAdd(this.usuario, 1)" class="button blue medium"type="button" name="button">{{getTitleShow()}}</button> <button (click)="selectInputFoto()" class="button blue medium small" type="button" name="button"><i class="fas fa-user-friends"></i></button>
       </div>
       <br>
       <a class="center" *ngIf="this.usuario.web != ''" href="{{this.usuario.web}}">{{this.usuario.web}}</a>
@@ -38,9 +51,9 @@
       <p *ngIf="this.usuario.description != ''" class="desc"><br>{{this.usuario.description}}</p>
     </div> <br>
 
-    <p class="title">Amigos <button routerLink="/freinds" type="button" name="button" class="more">Ver Todos</button></p>
+    <p class="title">Amigos <button type="button" name="button" class="more">Ver Todos</button></p>
 
-    <div class="slider-amigos">
+    <!-- <div class="slider-amigos">
 
       <div class="persona">
         <div class="picture add"></div>
@@ -55,7 +68,7 @@
       </div>
 
 
-    </div>
+    </div> -->
 
     <br><br>
 
@@ -164,6 +177,7 @@
       </div>
 
     </div>
+   </div>
 
   </div>
 

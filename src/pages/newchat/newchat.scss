@@ -1,0 +1,143 @@
+page-newchat {
+
+  .toolbar-background-ios{
+    border-style: none!important;
+  }
+
+  .center{
+    text-align: center;
+    //border: 1px solid red;
+  }
+
+  .freinds{
+    padding-top: 2.5em;
+    .search{
+      width: 100%;
+      padding: 0px 1.5em;
+      margin-bottom: 1.5em;
+      .input{
+        width: 100%;
+        input{
+          background-color: #EFEFEF;
+          border: 1px solid white;
+          font-size: 100%;
+          padding: 3%;
+          width: 100%;
+          color: black;
+          background-image: url("../../assets/map/search.svg");
+          background-position: 4% 50%;
+          background-repeat: no-repeat;
+          background-size: 1em;
+          text-indent: 10%;
+          border-radius: 10px!important;
+        }
+        input:focus{
+          outline: none;
+        }
+      }
+    }
+
+    .persona-container{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      padding: 5%;
+      border-bottom: 1px solid rgba(240, 240, 240, 1);
+      img{
+        width: 15%;
+        border-radius: 10px;
+      }
+      .name{
+       width: 50%;
+       overflow: hidden;
+      }
+      button{
+        border: 1px solid #7A7A7A;
+        background-color: white;
+        color: #7A7A7A;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 300;
+        display: flex;
+        justify-content: center;
+        width: 80%;
+        padding: 5px 10px;
+        margin-top: 3%;
+        i{
+          margin-right: 5px;
+        }
+        &.blue{
+          border: 1px solid #536DFE;
+          color: #536DFE;
+          width: 130px;
+        }
+        &.red{
+          border: 1px solid #E02020;
+          color: #E02020;
+          width: 140px;
+        }
+      }
+    }
+    .table{
+
+      height: 100%;
+      margin-top: 2em;
+      overflow-y: scroll;
+      .freind{
+        display: flex;
+        align-items: center;
+        padding: 0px 10px;
+        border-bottom: 1px solid #E6E6E6;
+        border-top: 1px solid #E6E6E6;
+        .container-img{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 15%;
+        }
+        ion-img{
+          height: 60px;
+        }
+        p{
+          width: 45%;
+          font-size: 16px;
+          padding-left: 15px;
+        }
+        .container-btn{
+          width: 40%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        button{
+          border: 1px solid #7A7A7A;
+          background-color: white;
+          color: #7A7A7A;
+          border-radius: 6px;
+          font-size: 11px;
+          font-weight: 300;
+          display: flex;
+          justify-content: center;
+          width: 80%;
+          padding: 5px 10px;
+          i{
+            margin-right: 5px;
+          }
+          &.blue{
+            border: 1px solid #536DFE;
+            color: #536DFE;
+            width: 130px;
+          }
+          &.red{
+            border: 1px solid #E02020;
+            color: #E02020;
+            width: 140px;
+
+          }
+        }
+      }
+    }
+
+  }
+}

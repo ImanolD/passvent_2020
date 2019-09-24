@@ -8,6 +8,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DomSanitizer } from '@angular/platform-browser';
 import { EventoPage } from '../evento/evento';
+import { ChatsPage } from '../chats/chats';
 
 /**
  * Generated class for the OtherProfilePage page.
@@ -60,10 +61,14 @@ export class OtherProfilePage {
       this.usuario.events_created = this.usuario.events.filter(e=>e.isOwner).length;
       this.usuario.events_gone = this.usuario.events.length;
 
-      this.fillFriends();
-
 
       console.log(this.usuario);
+    }
+
+    getTitleShow(){
+      if(this.usuario.status == 'not friend') return 'Seguir';
+      else if(this.usuario.status == 'waiting') return 'En espera';
+      else if(this.usuario.status == 'friends') return 'Siguiendo';
     }
 
     isIncluded(list){
@@ -75,26 +80,42 @@ export class OtherProfilePage {
 
     //Agregar amigos
     confirmAdd(user, indice){
-      this.alertCtrl.create({
-        title: '¿Deseas agrgar a '+user.name+' a tus amigos?',
-        message: 'Recibirá una solicitud para agregarte a sus amigos',
-        buttons: [
-          {
-            text: 'Cancelar',
-            handler: () =>{
-
-            }
-          },
-          {
-            text: 'Enviar Solicitud',
-            handler: () =>{
-              this.af.list('Users/'+firebase.auth().currentUser.uid+'/friends').update(user.index, {'index': user.index, 'status': 'requested'});
-              this.sendRequest(user);
-            }
-          },
-        ]
-      }).present();
+      if(user.private){
+        this.af.list('Users/'+firebase.auth().currentUser.uid+'/friends').update(user.index, {'index': user.index, 'status': 'requested'});
+        this.sendRequest(user);
+      }
+      else{
+        if(this.usuario.status != 'friends' && this.usuario.status != 'requested'){
+          this.af.list('Users/'+firebase.auth().currentUser.uid+'/friends').update(user.index, {'index': user.index, 'status': 'friends'});
+          this.addFriend(user);
+        }
+      }
     }
+
+    addFriend(user){
+      let index = this.generateUUID();
+
+      this.af.list('Users/'+user.index+'/friends').update(firebase.auth().currentUser.uid, {
+        'index': firebase.auth().currentUser.uid,
+        'status': 'friends'
+      });
+
+      this.usuario.status = 'friends';
+
+      //Notificacion para el usuario y push notification
+      this.af.list('Users/'+user.index+'/notifications').update(index, {
+        'title': '¡Nueva amigo de passvent!',
+        'subtitle': 'Tienes un nuevo amigo en passvent',
+        'index': index
+      }).then(()=>{
+            this.alertCtrl.create({
+              title: '¡Amigo agregado!',
+              message: 'Has agregado a '+user.name+' a tus amigos.',
+              buttons: ['Ok']
+            }).present();
+          });
+    }
+
     sendRequest(user){
       let index = this.generateUUID();
 
@@ -104,6 +125,11 @@ export class OtherProfilePage {
         'index': index,
         'friend': firebase.auth().currentUser.uid,
         'event': false
+      });
+
+      this.af.list('Users/'+user.index+'/friends').update(firebase.auth().currentUser.uid, {
+        'index': firebase.auth().currentUser.uid,
+        'status': 'waiting'
       });
 
       //Notificacion para el usuario y push notification
@@ -123,7 +149,7 @@ export class OtherProfilePage {
               message: 'Tu solicitud ha sido enviada',
               buttons: ['Ok']
             }).present();
-          })
+          });
     }
 
 
@@ -138,26 +164,39 @@ export class OtherProfilePage {
       }
       this.usuario.friends = aux;
 
+
       let f = this.usuario.friends;
       let a;
+      let status = 0;
+      console.log(f);
       for(let key in f){
         if(f[key].status == 'friends'){
           a = this.getPerson(f[key].index);
+          console.log(a);
           f[key].data = a;
         }
+        if(f[key].index == firebase.auth().currentUser.uid) status = f[key].status;
       }
-      console.log(this.usuario.friends)
+
+      if(status != 0) this.usuario.status = status;
+      else this.usuario.status = 'not friend';
+
+      console.log(this.usuario);
+      if(this.general_loader) this.general_loader.dismiss();
     }
 
     getPerson(indice){
+      console.log(indice);
       let p = this.alumno$;
+      console.log(p)
       for(let key in p){
         if(key == indice) return p[key];
       }
+      return '';
     }
 
-    sanitizeThis(image){
-      return this.sanitizer.bypassSecurityTrustStyle('url('+image+')');
+    sanitizeThis(){
+      return this.sanitizer.bypassSecurityTrustStyle('url('+this.usuario.picture.data.url+')');
     }
 
     filterEvents(tipo, evento){
@@ -205,7 +244,8 @@ export class OtherProfilePage {
           'creator_index': a[key].creator,
           'description': a[key].description,
           'status': this.getStatus(a[key].attendants, a[key].private),
-          'attendants': a[key].attendants
+          'attendants': a[key].attendants,
+          'tickets': (a[key].tickets ? a[key].tickets : [])
         });
       }
 
@@ -217,12 +257,17 @@ export class OtherProfilePage {
         }
       }
       //this.activities = this.activities.filter( a => a.creator == firebase.auth().currentUser.uid);
-      if(this.general_loader) this.general_loader.dismiss();
-      console.log(this.eventos);
+      //console.log(this.eventos);
     }
 
     cuantosAmigos(conteo){
-      return conteo.filter(c=>c.isFriend).length;
+      let aux = [];
+      for(let key in conteo){
+        aux.push({
+          'isFriend': conteo[key].isFriend
+        })
+      }
+      return aux.filter(c=>c.isFriend).length;
     }
 
     isAmigo(indice){
@@ -267,6 +312,7 @@ export class OtherProfilePage {
       this.general_loader.present();
       this.af.object('Users').snapshotChanges().subscribe(action => {
         this.alumno$ = action.payload.val();
+        this.fillFriends();
       });
       this.getActivities();
     }
@@ -288,25 +334,35 @@ export class OtherProfilePage {
         })
   }
 
+  confirmBlock(){
+    this.alertCtrl.create({
+      title: '¿Deseas bloquear a este usuario?',
+      message: 'Este usuario no podrá ver tu perfil ni tu actividad',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => {
+
+          }
+        },
+        {
+          text: 'Bloquear',
+          handler: () => {
+
+          }
+        }
+        ]
+    }).present();
+  }
+
    selectInputFoto() {
     const actionSheet = this.actionSheetCtrl.create({
       title: '¿Que deseas hacer?',
-      buttons: [{
-        text: 'Bloquear',
-        handler: () => {
-          console.log('Share clicked');
-        }
-      },
+      buttons: [
       {
         text: 'Mandar Mensaje',
         handler: () => {
-          console.log('Favorite clicked');
-        }
-      },
-      {
-        text: 'Reportar Usuario',
-        handler: () => {
-          console.log('Favorite clicked');
+          //this.navCtrl.push(ChatPage);
         }
       },
       {
@@ -316,9 +372,10 @@ export class OtherProfilePage {
         }
       },
       {
-        text: 'Url de Perfil',
+        text: 'Bloquear',
+        role: 'destructive',
         handler: () => {
-          console.log('Favorite clicked');
+          this.confirmBlock();
         }
       },
       {

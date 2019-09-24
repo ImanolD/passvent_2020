@@ -156,11 +156,14 @@ actionSheet.present();
         'creator': this.getCreator(a[key].creator, 'name'),
         'creator_img': this.getCreator(a[key].creator, 'img'),
         'creator_index': a[key].creator,
-        'description': a[key].description,
+        'description': (a[key].description ? a[key].description : ''),
         'status': this.getStatus(a[key].attendants, a[key].private),
-        'attendants': a[key].attendants
-      });
-    }
+        'attendants': a[key].attendants,
+        'messages': (a[key].messages ? a[key].messages : []),
+        'index': key,
+        'tickets': (a[key].tickets ? a[key].tickets : [])
+    });
+  }
 
     let e = this.eventos;
     for(let key in e){
@@ -175,7 +178,13 @@ actionSheet.present();
   }
 
   cuantosAmigos(conteo){
-    return conteo.filter(c=>c.isFriend).length;
+    let aux = [];
+    for(let key in conteo){
+      aux.push({
+        'isFriend': conteo[key].isFriend
+      })
+    }
+    return aux.filter(c=>c.isFriend).length;
   }
 
   isAmigo(indice){
@@ -197,9 +206,20 @@ actionSheet.present();
   }
 
   getStatus(lista, privado){
+    let aux2 = [];
     for(let key in lista){
-      return lista[key].index == firebase.auth().currentUser.uid ? lista[key].status : !privado ? 'Invited' : 'Not';
+      aux2.push({
+        'isOwner': lista[key].isOwner,
+        'index': lista[key].index,
+        'role': lista[key].role,
+        'status': lista[key].status
+      })
     }
+    for(let i=0; i<aux2.length; i++){
+      console.log(aux2[i]);
+      if(aux2[i].index == firebase.auth().currentUser.uid) return aux2[i].status;
+    }
+    return !privado ? 'Invited' : 'Not'
   }
 
   getCreator(indice, que){
@@ -301,14 +321,14 @@ actionSheet.present();
   filterEvents(tipo, evento){
     if(tipo == 'going'){
       let today = moment().subtract(1, 'days');
-      return this.isIncluded(evento.attendants) && !moment(evento.start_day).isBefore(today)
+      return evento.status == 'Accepted' && this.isIncluded(evento.attendants) && !moment(evento.start_day).isBefore(today)
     }
     else if(tipo == 'admin'){
-      return evento.creator_index == firebase.auth().currentUser.uid;
+      return evento.status == 'Accepted' && evento.creator_index == firebase.auth().currentUser.uid;
     }
     else{
       let today = moment().subtract(1, 'days');
-      return this.isIncluded(evento.attendants) && moment(evento.start_day).isBefore(today)
+      return evento.status == 'Accepted' && this.isIncluded(evento.attendants) && moment(evento.start_day).isBefore(today)
     }
   }
 

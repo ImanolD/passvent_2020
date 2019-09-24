@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar color="white" >
     <div class="input-container">
-      <input type="text" placeholder="Buscar" class="input-search">
+      <input [(ngModel)]="search" type="text" placeholder="Buscar" class="input-search">
     </div>
     <div class="filters-btn">
       <div (click)="changeClass(1)" class="{{this.getClass(1)}}">Eventos</div>
@@ -12,6 +12,42 @@
 </ion-header>
 
 <ion-content>
+
+
+  <div *ngIf="f_selected == 1">
+    <div *ngFor="let e of this.filterEventos()">
+      <div *ngIf="!e.private" class="persona-container" (click)="openEvent(e)">
+        <img src="{{e.img}}">
+        <div class="info-persona">
+          <div class="title medium">{{e.title}}</div>
+          <div class="light grey eventos">Dia: {{e.start_day}}</div>
+          <div class="light grey eventos">Hora: {{e.start_time}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="f_selected == 2">
+    <div *ngFor="let u of this.ciudades">
+      <div class="persona-container" (click)="openAll(u.name)">
+        <img src="{{u.img}}">
+        <div class="info-persona">
+          <div class="title medium name">{{u.name}}</div>
+          <div *ngIf="u.events" class="light grey eventos">¡{{this.eventos.length}} eventos en la ciudad!</div>
+          <div *ngIf="!u.events" class="light grey eventos">¡Eventos próximamente!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="f_selected == 3">
+    <div *ngFor="let u of this.filterAmigos()" (click)="openProfile(u)">
+      <div class="persona-container">
+        <img src="{{u.picture.data.url}}">
+        <div class="title medium name">{{u.name}}</div>
+      </div>
+    </div>
+  </div>
 
 
   <!-- <div #map id="map"></div> -->

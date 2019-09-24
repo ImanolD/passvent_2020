@@ -2,14 +2,74 @@ page-home {
 
   .home-page{
     //background: linear-gradient(#6C6C6C, #0C0C0C 70%)!important;
+    margin-top: 100px!important;
+    margin-bottom: 100px!important;
+  }
+
+  .scroll-content{
+    overflow: hidden!important;
+  }
+
+  .events{
+    height: 80vh;
+    overflow: scroll;
+    padding-bottom: 30px;
   }
 
   .toolbar-background-ios{
-     border-style: none!important;
+     //border-style: none!important;
     // -webkit-box-shadow: 0px 7px 8px 0px rgba(0,0,0,0.75);
     // -moz-box-shadow: 0px 7px 8px 0px rgba(0,0,0,0.75);
     // box-shadow: 0px 7px 8px 0px rgba(0,0,0,0.75);
+    //border-bottom: 1px solid black!important;
+    -webkit-box-shadow: 0 8px 6px -6px black!important;
+	  -moz-box-shadow: 0 8px 6px -6px black!important;
+	  box-shadow: 0 8px 6px -6px black!important;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)!important;
   }
+
+  .nav-header{
+  text-align: center;
+  padding: 35px 15px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  height: 100px;
+  margin-bottom: 30px;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: +100;
+  background-color: white;
+  p{
+    color: #FF5722;
+    font-weight: 600;
+    font-size: 1.9em;
+    margin: 0px;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: .3em;
+  }
+  .message{
+    float: right;
+    position: relative;
+    top: -1.9em;
+    .bubble{
+      height: 20px;
+      width: 20px;
+      background-color: white;
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      color: $orange;
+      font-size: 6px;
+    }
+  }
+}
 
   ion-navbar{
     //border: 3px solid red!important;
@@ -282,12 +342,6 @@ page-home {
          border-radius: 5px;
        }
      }
-   }
-
-   .events{
-     height: 60px;
-     width: 60px;
-     background: linear-gradient(#6EC6CA, #26B594);
    }
 
    // .experiences{

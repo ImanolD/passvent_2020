@@ -76,19 +76,19 @@ public name: any;
 
     alert.addInput({
       type: 'radio',
-      label: 'App performance issue',
+      label: 'Problema con la app',
       value: 'App performance issue'
     });
 
     alert.addInput({
       type: 'radio',
-      label: 'Payment issue',
+      label: 'Problema con el pago',
       value: 'Payment issue'
     });
 
     alert.addInput({
       type: 'radio',
-      label: 'Another problem',
+      label: 'Otro problema',
       value: 'Another problem',
       checked: true
     });

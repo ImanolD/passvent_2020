@@ -27,6 +27,7 @@ export class ChatPage {
   public Mensajes: any = [];
   public msgu: any;
   public chat_room: any;
+  public info: any = [];
   @ViewChild('list') list:any;
 
   constructor(public navCtrl: NavController,
@@ -35,7 +36,13 @@ export class ChatPage {
   public loadingCtrl: LoadingController,
   public alertCtrl: AlertController,
   public sanitizer: DomSanitizer) {
+    this.info = this.navParams.get('info');
+    console.log(this.info);
     //setTimeout(() =>  this.Mensajes.push({'Mensaje': 'Welcome! 🏠 <br><br> This is the UI for the Nomads App. <br> Send a message!', 'Sophie': 'Si', 'Foto': 'No'}), 500);
+  }
+
+  sanitizeThis(image){
+    return this.sanitizer.bypassSecurityTrustStyle('url('+image+')');
   }
 
   addMsg(){
@@ -59,11 +66,11 @@ export class ChatPage {
   getName(indice){
     let a = this.users$;
     if(indice == 'admin'){
-      return 'Nomads Team';
+      return 'Equipo Passvent';
     }
     for(let key in a){
-      if(a[key].index == indice){
-           return a[key].first_name;
+      if(key == indice){
+           return a[key].name;
       }
     }
     return '';

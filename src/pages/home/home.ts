@@ -52,7 +52,14 @@ export class HomePage {
   public alertCtrl: AlertController,
   public sanitizer: DomSanitizer,
   public stripe: Stripe,
-  public geolocation: Geolocation ) {}
+  public geolocation: Geolocation ) {
+
+    let l = 4;
+    let u = 19;
+    let m = 2;
+    let r = (500000*l)+(750000*u)+(1000000*m);
+    console.log(r);
+  }
 
 
   openFiltered(tipo){
@@ -449,11 +456,14 @@ export class HomePage {
         'creator': this.getCreator(a[key].creator, 'name'),
         'creator_img': this.getCreator(a[key].creator, 'img'),
         'creator_index': a[key].creator,
-        'description': a[key].description,
+        'description': (a[key].description ? a[key].description : ''),
         'status': this.getStatus(a[key].attendants, a[key].private),
         'attendants': this.fillFriends(a[key].attendants),
         'admins': this.getAdmins(a[key].attendants),
-        'rol': this.getRol(a[key].attendants)
+        'rol': this.getRol(a[key].attendants),
+        'messages': (a[key].messages ? a[key].messages : []),
+        'index': key,
+        'tickets': (a[key].tickets ? a[key].tickets : [])
       });
     }
 
@@ -464,6 +474,9 @@ export class HomePage {
         else e[key].attendants[lla].isFriend = false;
       }
     }
+
+    let today  = moment();
+    this.eventos = this.eventos.filter( event => !moment(event.start_day).isBefore(today));
     //this.activities = this.activities.filter( a => a.creator == firebase.auth().currentUser.uid);
     this.general_loader.dismiss();
     console.log(this.eventos);
@@ -494,13 +507,29 @@ export class HomePage {
   }
 
   getRol(lista){
-    let aux = lista.filter(l=>l.index == firebase.auth().currentUser.uid);
+    let aux2 = [];
+    for(let key in lista){
+      aux2.push({
+        'isOwner': lista[key].isOwner,
+        'index': lista[key].index,
+        'role': lista[key].role
+      })
+    }
+    console.log(aux2);
+    let aux = aux2.filter(l=>l.index == firebase.auth().currentUser.uid);
     if(aux.length != 0) return aux[0].role;
     return 'nada';
   }
 
   getAdmins(lista){
-    return lista.filter(l=>l.isOwner).length;
+    let aux = [];
+    for(let key in lista){
+      aux.push({
+        'isOwner': lista[key].isOwner
+      })
+    }
+    console.log(aux);
+    return aux.filter(l=>l.isOwner).length;
   }
 
   cuantosAmigos(conteo){
@@ -522,9 +551,18 @@ export class HomePage {
   }
 
   getStatus(lista, privado){
-    for(let i=0; i<lista.length; i++){
-      console.log(lista[i]);
-      if(lista[i].index == firebase.auth().currentUser.uid) return lista[i].status;
+    let aux2 = [];
+    for(let key in lista){
+      aux2.push({
+        'isOwner': lista[key].isOwner,
+        'index': lista[key].index,
+        'role': lista[key].role,
+        'status': lista[key].status
+      })
+    }
+    for(let i=0; i<aux2.length; i++){
+      console.log(aux2[i]);
+      if(aux2[i].index == firebase.auth().currentUser.uid) return aux2[i].status;
     }
     return !privado ? 'Invited' : 'Not'
   }
@@ -533,10 +571,12 @@ export class HomePage {
     let u = this.users$;
     for(let key in u){
       if(key == indice){
+        console.log(u[key])
         if(que == 'name') return u[key].name;
         else if(que == 'img') return u[key].picture.data.url;
       }
     }
+    return '';
   }
 
   existsF(arre, cual){

@@ -5,22 +5,36 @@
   Ionic pages and navigation.
 -->
 
+<ion-header>
+  <ion-navbar color="white" >
+
+  </ion-navbar>
+</ion-header>
+
 <ion-content padding>
+
   <div class="input-container">
-    <input type="text" placeholder="Buscar" class="input-search">
+    <input type="text" placeholder="Buscar" class="input-search" [(ngModel)]="search">
   </div>
 
-  <div *ngFor="let r of this.room_chats">
-    <ion-item (click)="openChat(r.index)">
-      <ion-avatar slot="start">
-        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+  <div *ngFor="let r of this.darChats()">
+
+
+    <ion-item (click)="openChat(r)">
+      <ion-avatar item-start>
+        <img src="{{r.partner_info.picture.data.url}}">
       </ion-avatar>
       <ion-label>
-        Alejandro Ruiz <br>
-        <span class="message">Hey que pedo estoy bien pacheco.kjahslkjadhflkajsdhflkajsdhflakjsdhflakjsdhflakjsdhflakjsdhflakjdhflkjahdflakjsdflakjdfl.</span>
+        {{r.partner_info.name}} <br>
+        <span class="message">{{r.lastMsg}}</span>
       </ion-label>
     </ion-item>
   </div>
+
+
+  <ion-fab (click)="startChat()" right bottom>
+    <button ion-fab color="orange"><ion-icon name="md-add"></ion-icon></button>
+  </ion-fab>
 
 
 

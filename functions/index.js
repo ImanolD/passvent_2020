@@ -16,8 +16,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 const paypal = require('paypal-rest-sdk');
 
-const stripe = require('stripe')(functions.config().stripe.testkey)
-
 // paypal.configure({
 //   'mode': 'sandbox', //sandbox or live
 //   'client_id': 'AX_ac3tIQ-Mm_3y3WT400FOtKTehvYcSlpe3bvgXUyzwmvtbfaKB3-qMhl7LY0YJ7uXKHmdqiiiD9phn',
@@ -26,9 +24,15 @@ const stripe = require('stripe')(functions.config().stripe.testkey)
 
 paypal.configure({
   'mode': 'live', //sandbox or live
-  'client_id': 'AcNyOAAwZWq6zHNZs79IAggaJ__fakKbBkjPdmpdqJJrcVN1SgPUkcXasyQ9IY9RYtoNCpYtu8WGLsj5',
-  'client_secret': 'EJ_r71J9yTKIFnoeZlOKAnVq3W-oC8odV0j8DwseiSadgP0ThGFDn3egfcz7i-4wJOp67OHISBJmxEq-'
+  'client_id': 'AcpvXpywtj7at8hW792AsQaBKSfZ_RGlOLOjegzbOjo6PJKlICteDt1sTf8obXD-bBfy8CvqIVuwVXjQ',
+  'client_secret': 'EMPC0yqnjwKZCX2QPr6CPlL8O5xcnkdEzka_AuwIMCeOHFQWf3pydEa0lYq54ZscmSO2NT-KQJ-c5DDA'
 });
+
+// paypal.configure({
+//   'mode': 'live', //sandbox or live
+//   'client_id': 'AcNyOAAwZWq6zHNZs79IAggaJ__fakKbBkjPdmpdqJJrcVN1SgPUkcXasyQ9IY9RYtoNCpYtu8WGLsj5',
+//   'client_secret': 'EJ_r71J9yTKIFnoeZlOKAnVq3W-oC8odV0j8DwseiSadgP0ThGFDn3egfcz7i-4wJOp67OHISBJmxEq-'
+// });
 
 //Con el routing de Express defino la función
 app.post('/createPayment', function(req, res){
@@ -136,49 +140,3 @@ app.get('/executePayment/', function(req, res){
 
 //Función cloud que ejecuta el proceso
 exports.process = functions.https.onRequest(app);
-
-
-exports.stripeCharge = functions.database
-                                .ref('/Payments/{userId}/{paymentId}')
-                                .onWrite((change,context) => {
-
-
-
-  const payment = change.after.val();
-  const userId = context.params.userId;
-  const paymentId = context.params.paymentId;
-
-
-  // checks if payment exists or if it has already been charged
-  if (!payment || payment.charge) return;
-
-  return admin.database()
-              .ref(`/Users/${userId}`)
-              .once('value')
-              .then(snapshot => {
-                  return snapshot.val();
-               })
-               .then(customer => {
-
-                 const amount = payment.amount;
-                 const idempotency_key = paymentId;  // prevent duplicate charges
-                 const source = payment.token.id;
-                 const currency = 'usd';
-                 const charge = {amount, currency, source};
-
-
-                 return stripe.charges.create(charge, { idempotency_key });
-
-               })
-
-               .then(charge => {
-
-                   admin.database()
-                        .ref(`/Payments/${userId}/${paymentId}/charge`)
-                        .set(charge);
-
-                        return true;
-                  })
-
-
-});

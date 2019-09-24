@@ -223,7 +223,7 @@ ion-content{
 .tabbar {
   background-color: white!important;
   border-top: none!important;
-  padding: 2.5%!important;
+  padding: 5%!important;
 	a.tab-button[aria-selected=true]:nth-of-type(1) {
 		color: rgba(255, 255, 255, 1);
 		font-family: 'Montserrat', sans-serif;
@@ -644,7 +644,7 @@ a{
 .filters{
   padding: 10px 0px;
   .button-outline{
-    width: 30%;
+    //width: 30%;
   }
   &.two{
     .button-outline{
@@ -758,7 +758,7 @@ a{
       }
     }
     .title{
-      padding-left: 15px;
+      padding-left: 5px;
     }
     .bottom{
       display: flex;
@@ -781,8 +781,20 @@ a{
           font-size: 12px;
           display: flex;
           align-items: center;
-          padding-left: 10px;
+          padding-left: 5px;
           color: white;
+        }
+        .overlay-content{
+          //border: 1px solid white;
+          height: 100%;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          flex-direction: column;
+          p{
+            white-space: nowrap;
+          }
         }
       }
       .host{

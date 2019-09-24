@@ -1,0 +1,77 @@
+<!--
+  Generated template for the PrivacyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+  <ion-navbar color="white">
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="preferences">
+    <p class="title">Tipo de perfíl</p>
+    <div class="row">
+
+      <div class="desc">
+        <p class="option">Privado</p>
+        <p class="description grey">Solo los usuarios que aceptes que te siga podrán ver tu perfíl.</p>
+      </div>
+
+      <ion-toggle color="primary"></ion-toggle>
+    </div>
+
+    <p class="title">Eventos</p>
+    <div class="row">
+
+      <div class="desc">
+        <p class="option">Eventos arganizados</p>
+        <p class="description grey">Usuarios de PassVent no podrán ver los eventos que haz organizado.</p>
+      </div>
+
+      <ion-toggle color="primary"></ion-toggle>
+    </div>
+
+    <div class="row">
+
+      <div class="desc">
+        <p class="option">Eventos asistidos</p>
+        <p class="description grey">Usuarios de PassVent no podrán ver eventos los eventos a los que haz asistido.</p>
+      </div>
+
+      <ion-toggle color="primary"></ion-toggle>
+    </div>
+
+    <div class="row">
+
+      <div class="desc">
+        <p class="option">Eventos que asistirás</p>
+        <p class="description grey">Usuarios de PassVent no podrán los eventos a los que asistirás.</p>
+      </div>
+
+      <ion-toggle color="primary"></ion-toggle>
+    </div>
+
+    <div class="row">
+
+      <div class="desc long">
+        <p class="option">Usuarios Bloquados</p>
+        <p class="description grey">Los usuarios que hayas bloqueado no podrán ver tu perfil.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <button class="button red medium center" type="button" name="button">Ver Usuarios Bloqueados</button>
+    </div>
+    <div class="row">
+        <button routerLink="/profile-info" style="display:block; margin:0 auto;" class="button orange" type="button" name="button">Continuar</button>
+    </div>
+
+  </div>
+
+
+
+
+</ion-content>

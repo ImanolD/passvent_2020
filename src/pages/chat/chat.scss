@@ -3,6 +3,22 @@ page-chat {
   overflow-y: hidden !important;
  }
 
+ .toolbar-background-ios{
+   border-style: none!important;
+ }
+
+ ion-label{
+   font-weight: 700;
+   color: black;
+   border: 1px solid red!important;
+ }
+
+ .info-usuario{
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+ }
+
   .chat-page{
     //border: 1px solid black;
 
@@ -12,6 +28,7 @@ page-chat {
     height: calc(100vh - 210px);
     overflow: scroll;
     padding-bottom: 25%;
+    padding: 3%;
   .inputmsg{
     display: block;
       margin: auto;
@@ -26,7 +43,7 @@ page-chat {
       background-repeat:no-repeat;
       background-position:5%;  padding-left:15px;
       animation-duration: 1s;
-      font-family: 'Custom';
+      //font-family: 'Custom';
   }
   .inputmsg:hover{
     background-color: rgba(228, 228, 228, 1);
@@ -45,8 +62,8 @@ page-chat {
     margin-top: 5%;
     //border: 1px solid red;
     .sender-name{
-      font-family: 'Custom';
-      color: white;
+      //font-family: 'Custom';
+      color: rgba(0, 0, 0, 0.5);
       font-size: 80%;
       padding-bottom: 2%;
     }
@@ -61,7 +78,7 @@ page-chat {
     color: white;
     background: #FF5722;
     //border-radius: 8px 0 0 8px 8px;
-    font-family: 'Custom';
+    //font-family: 'Custom';
     color: #FFFFFF;
     letter-spacing: 0;
     font-weight: 700;
@@ -102,11 +119,12 @@ page-chat {
     margin-left: 0%;
     border-radius: 0 9px 9px 9px;
     background-color: #FFFFFF;
-    box-shadow: 0 2px 9px 0 rgba(0,0,0,0.52);
+    border: 1px solid  rgba(0, 0, 0, 0.2);
+    //box-shadow: 0 2px 9px 0 rgba(0,0,0,0.52);
     //display: inline;
 
     /* ¡Hola! Mi nombre es: */
-    font-family: 'Custom';
+    //font-family: 'Custom';
     font-size: 85%;
     color: #000000;
     letter-spacing: 0;
@@ -145,7 +163,7 @@ page-chat {
     //border: 2px solid black;
     .content{
       /* ¿Qué es ZipUp?: */
-      font-family: 'Custom';
+      //font-family: 'Custom';
       font-size: 100%;
       font-weight: 700;
       color: #FFFFFF;
@@ -166,7 +184,7 @@ page-chat {
     //border: 2px solid black;
     .content{
       /* ¿Qué es ZipUp?: */
-      font-family: 'Custom';
+      //font-family: 'Custom';
       font-size: 100%;
       font-weight: 700;
       color: #FFFFFF;
@@ -197,7 +215,7 @@ ion-grid{
        width: 95%;
        margin-left: 2.5%;
        p{
-         font-family: 'Custom';
+         //font-family: 'Custom';
          font-size: 90%;
          font-weight: 700;
          color: #FFFFFF;
@@ -214,7 +232,7 @@ ion-grid{
        width: 95%;
        margin-left: 2.5%;
        p{
-         font-family: 'Custom';
+         //font-family: 'Custom';
          font-size: 90%;
          font-weight: 700;
          color: #FFFFFF;
@@ -245,14 +263,26 @@ ion-grid{
  //border: 1px solid red;
  padding: 2%;
   .input-msg{
-    border: 1px solid #7A7A7A;
-    border-radius: 30px;
-    height: 2.5em;
-    display: block;
-    margin: 0 auto;
-    width: 85%;
-    text-indent: 1em;
-    margin-right: 15px;
+    width: 80%;
+    border: 1px solid #EFEFEF;
+    //background-color: #EFEFEF;
+    //border: 1px solid transparent;
+    font-size: 100%;
+    padding: 2%;
+    text-indent: 1%;
+    border-radius: 5px;
+    color: black;
+  }
+  .boton-enviar{
+    width: 40px;
+    height: 40px;
+    margin-left: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #398AD7;
+    font-size: 1.5em;
   }
   .send-text{
     font-weight: 700;

@@ -4,6 +4,12 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+
+<ion-header>
+  <ion-navbar color="white">
+  </ion-navbar>
+</ion-header>
+
 <ion-content>
   <div class="person-info page">
     <div class="info">
@@ -57,7 +63,7 @@
     </div>
 
     <div class="options">
-      <div class="row">
+      <div class="row" (click)="openLikes()">
         <div class="img">
           <ion-img src="../assets/profile/like.svg"></ion-img>
         </div>
@@ -66,7 +72,7 @@
           <p class="e-light">Aquí podrás seleccionar las categorías de eventos que más te interesen,para poder brindarte la mejor experiencia posible.</p>
         </div>
       </div>
-      <div class="row">
+      <div class="row" (click)="openCartera()">
         <div class="img">
           <ion-img src="../assets/profile/bill.svg"></ion-img>
         </div>
@@ -75,7 +81,7 @@
           <p class="e-light">Aquí verás el listado de transacciones dentro de Passvent. Tu balance, reportes por evento y la opción para poder retirar dinero.</p>
         </div>
       </div>
-      <div class="row" routerLink="/profile-preferences">
+      <div class="row" (click)="openPrivacy()">
         <div class="img">
           <ion-img src="../assets/profile/padlock.svg"></ion-img>
         </div>
@@ -85,6 +91,9 @@
         </div>
       </div>
     </div>
+
+
+    <div (click)="logOut()" class="light grey logout">Cerrar Sesión</div>
   </div>
 
 </ion-content>
