@@ -223,7 +223,9 @@ ion-content{
 .tabbar {
   background-color: white!important;
   border-top: none!important;
-  padding: 5%!important;
+  padding: .8% 5% 9% 5% !important;
+  border-top: .5px solid #b3b3b3 !important;
+  background-color: #f2f2f2 !important; 
 	a.tab-button[aria-selected=true]:nth-of-type(1) {
 		color: rgba(255, 255, 255, 1);
 		font-family: 'Montserrat', sans-serif;
@@ -397,6 +399,11 @@ a{
   padding-left: 10px;
   margin-top: 20px !important;
   margin-bottom: 10px !important;
+  .add-icon{
+    font-size: 1.5em !important;
+    position: relative;
+    bottom: -3px;
+  }
 }
 
 .subtitle{
@@ -444,8 +451,12 @@ a{
 
 .nav-header{
   text-align: center;
-  padding: 35px 15px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  padding: 30px 15px;
+  // box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  border-top: none;
+  // padding: .8% 5% 9% 5% !important;
+  border-bottom: .5px solid #b3b3b3 !important;
+  background-color: #f2f2f2 !important; 
   height: 100px;
   margin-bottom: 30px;
   position: fixed;
@@ -669,6 +680,8 @@ a{
     background-color: $orange;
   }
 }
+
+.add-button
 
 //
 
@@ -1003,4 +1016,39 @@ a{
     }
   }
 
+}
+
+.preview-freinds{
+  display: flex;
+  justify-content: space-around;
+  padding: 0px 20px;
+  .circle{
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    margin: 0px 3px;
+    background-color: red;
+    border: 2px solid white;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    &.last{
+      background-color: $orange;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 10px;
+      .fas{
+        position: relative !important;
+        font-size: 15px !important;
+        color: white !important;
+        top: 0px;
+        right: 0px; 
+
+      }
+    }
+  }
+}
+
+.search-header{
+  border-bottom: .9px solid #b3b3b3 !important;
+  background-color: #f2f2f2 !important; 
 }

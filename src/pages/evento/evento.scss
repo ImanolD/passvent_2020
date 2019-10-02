@@ -2,8 +2,8 @@ page-evento {
 
   .toolbar-content-ios{
     padding: .5em!important;
-    background-color: white!important;
-    border-style: none!important;
+    // background-color: white!important;
+
   }
 
 
@@ -354,6 +354,18 @@ page-evento {
       background-size: cover;
       position: relative;
       padding: 10px;
+      .counter{
+        background-color: rgba(255, 255, 255, .3);
+        position: absolute;
+        right: 20px;
+        bottom: 10px;
+        color: white;
+        padding: 5px;
+        width: 25%;
+        text-align: center;
+        border-radius: 5px;
+        font-size: 16px;
+      }
       .gradient{
         background: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,0.5) 100%);
         position: absolute;

@@ -1,10 +1,3 @@
-<!--
-  Generated template for the EventoPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-
 <ion-content>
 
   <div class="event">
@@ -23,6 +16,7 @@
           <p class="light white">{{this.cuantosAmigos(this.evento_data.attendants)}} Amigos asistirán a</p>
         </div>
         <p>{{this.evento_data.title}}</p>
+        <div class="counter">0/100</div>
       </div>
     </div>
 
@@ -60,7 +54,11 @@
      <div *ngIf="this.evento_data.description == '' || this.evento_data.description == undefined" class="light grey description">Al parecer este evento aún no tiene una descripción.</div>
 
 
-     <div class="title">Amigos que asistirán<button *ngIf="!this.evento_data.private" (click)="invitarAmigo()" type="button" name="button" class="more blue">Invitar Amigo</button><button *ngIf="this.cuantosAmigos(this.evento_data.attendants) != 0" (click)="openInvitados(1)" type="button" name="button" class="more orange">Ver Todos</button><button *ngIf="this.isOwner()" (click)="openInvitados(2)" type="button" name="button" class="more grey"><i class="fas fa-edit"></i> Editar</button></div>
+     <div class="title">Amigos que asistirán
+      <!-- <button *ngIf="!this.evento_data.private" (click)="invitarAmigo()" type="button" name="button" class="more blue">Invitar Amigo</button> -->
+      <button *ngIf="this.cuantosAmigos(this.evento_data.attendants) != 0" (click)="openInvitados(1)" type="button" name="button" class="more orange">Ver Todos</button>
+      <button *ngIf="this.isOwner()" (click)="openInvitados(2)" type="button" name="button" class="more grey"><i class="fas fa-edit"></i> Editar</button>
+    </div>
      <div  *ngIf="this.cuantosAmigos(this.evento_data.attendants) != 0" class="slider-amigos">
 
        <div *ngFor="let a of this.amigos">
@@ -72,9 +70,13 @@
      </div>
      <div *ngIf="this.cuantosAmigos(this.evento_data.attendants) == 0" class="light grey description">Al parecer tus amigos aún no están en este evento. ¡Solicita que sean invitados!</div>
 
-     <div class="title">Galeria del evento<button (click)="openGaleria()" type="button" name="button" class="more orange indi">Ver Galeria</button></div>
+     <div class="title">Galeria del evento</div>
+     
      <!-- <div *ngIf="this.evento_data.description != ''" class="light grey description">{{this.evento_data.description}}</div> -->
-     <div *ngIf="!this.evento_data.gallery" class="light grey description">Al parecer este evento aún no tiene una galeria de fotos.</div>
+     <div *ngIf="!this.evento_data.gallery" class="light grey description">
+       Al parecer este evento aún no tiene una galeria de fotos.
+     </div>
+     <button (click)="openGaleria()" type="button" name="button" class="button medium orange center">Ver Galeria</button>
 
      <div class="title">Ubicación del Evento<button (click)="goNavigate()" type="button" name="button" class="more orange indi">Obtener Indicaciones</button></div>
      <div class="location-row">
@@ -172,8 +174,8 @@
 </ion-footer>
 
 
-<ion-footer *ngIf="f_selected != 2">
-  <ion-navbar hideBackButton class="white">
+<ion-footer style="border-top:.6px solid #b3b3b3" *ngIf="f_selected != 2">
+  <ion-navbar hideBackButton>
     <div *ngIf="this.evento_data.rol != 'invitado'">
       <button (click)="openEdit()" *ngIf="this.evento_data.rol == 'admin' || this.evento_data.rol == 'anfitrión'" class="button blue center" type="button" name="button"><i class="fas fa-edit"></i>Editar Evento</button>
       <button (click)="openScanned()" *ngIf="this.evento_data.rol == 'staff'" class="button blue center" type="button" name="button"><i class="fas fa-edit"></i>Escanear Asistentes</button>
@@ -195,6 +197,5 @@
         <button (click)="confirmAction('no')" style="height:40px;" class="button-outline red abajo"> No </button>
       </div>
     </div>
-
   </ion-navbar>
 </ion-footer>

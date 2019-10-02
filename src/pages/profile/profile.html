@@ -1,14 +1,3 @@
-<!--
-  Generated template for the ProfilePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-  <ion-navbar color="transparent">
-  </ion-navbar>
-</ion-header>
-
 <ion-content>
 
   <div class="profile page">
@@ -49,14 +38,23 @@
       <p *ngIf="this.user_data.description != ''" class="desc"><br>{{this.user_data.description}}</p>
     </div> <br>
 
-    <p class="title">Amigos <button routerLink="/freinds" type="button" name="button" class="more orange">Ver Todos</button></p>
+    <p class="title">Amigos </p>
 
 
-    <div class="slider-amigos">
+    <div class="preview-freinds">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div routerLink="/freinds" (click)="addFriends()" class="circle last"><i class="fas fa-ellipsis-h"></i></div>
+    </div>
 
-      <div (click)="addFriends()" class="persona">
-        <div class="picture add"></div>
-        <div class="light grey">Agregar Amigo</div>
+    <!-- <div class="slider-amigos">
+
+      <div  class="persona">
+        <div class="picture add"><i class="fas fa-user-plus"></i></div>
       </div>
 
       <div *ngFor="let f of this.user_data.friends">
@@ -66,13 +64,13 @@
         </div>
       </div>
 
-
-    </div>
+    </div> -->
 
 
     <br><br>
 
-    <p class="title">Eventos que asistirás <button type="button" name="button" class="more orange">Ver Todos</button></p>
+    <p class="title">Eventos que asistirás   <ion-icon class="orange add-icon" ios="ios-add-circle" md="md-add-circle"></ion-icon>    </p>
+    <!-- <button type="button" name="button" class="more orange">Ver Todos</button> -->
     <div class="events">
       <div *ngFor="let e of this.eventos">
         <div *ngIf="this.filterEvents('going', e)" class="card simple" (click)="openEvento(e)">
@@ -108,7 +106,7 @@
 
     </div>
 
-    <p class="title">Eventos Organizados <button type="button" name="button" class="more orange">Ver Todos</button></p>
+    <p class="title">Eventos Organizados <ion-icon class="orange add-icon" ios="ios-add-circle" md="md-add-circle"></ion-icon></p>
     <div class="events">
       <div *ngFor="let e of this.eventos">
         <div *ngIf="this.filterEvents('admin', e)" class="card simple" (click)="openEvento(e)">
@@ -143,7 +141,7 @@
 
     </div>
 
-    <p class="title">Eventos que asististe <button type="button" name="button" class="more orange">Ver Todos</button></p>
+    <p class="title">Eventos que asististe <ion-icon class="orange add-icon" ios="ios-add-circle" md="md-add-circle"></ion-icon></p>
     <div class="events">
       <div *ngFor="let e of this.eventos">
         <div *ngIf="this.filterEvents('hi', e)" class="card simple" (click)="openEvento(e)">

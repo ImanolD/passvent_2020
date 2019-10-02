@@ -49,6 +49,12 @@ page-profile {
         background-color: $orange;
         color: white;
         font-size: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i {
+          font-size: 1.5em;
+        }
       }
       &.placeholder{
         box-shadow: none;
@@ -294,7 +300,7 @@ page-profile {
     color: #7A7A7A;
     font-size: 25px;
     position: absolute;
-    top: 30px;
+    top: 50px;
     right: 20px;
   }
 
@@ -302,13 +308,13 @@ page-profile {
     color: #7A7A7A;
     font-size: 25px;
     position: absolute;
-    top: 30px;
+    top: 50px;
     left: 25px;
   }
 
   .person {
     display: flex;
-    padding-top: 4.5em;
+    padding-top: 3.5em;
     width: 100%;
 
     .picture {
