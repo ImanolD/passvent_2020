@@ -535,7 +535,8 @@ public ciudades: any = [
   }
 
   filterEventos(){
-    return this.eventos.filter(e=> this.search == '' || e.title.toLowerCase().indexOf(this.search.toLowerCase())>-1 );
+    let today  = moment();
+    return this.eventos.filter(e=> !moment(e.start_day).isBefore(today) && this.search == '' || e.title.toLowerCase().indexOf(this.search.toLowerCase())>-1 );
   }
 
   isAmigo(indice){

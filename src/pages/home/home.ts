@@ -661,7 +661,7 @@ export class HomePage {
       spinner: 'bubbles',
       content: 'Cargando...'
     });
-    this.general_loader.present();
+    //this.general_loader.present();
     this.af.object('Users').snapshotChanges().subscribe(action => {
       this.users$ = action.payload.val();
     });

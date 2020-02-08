@@ -22,7 +22,7 @@
 
     <div class="host">
       <div class="pic">
-        <ion-img src="{{this.getData('img')}}"></ion-img>
+        <img src="{{this.getData('img')}}">
       </div>
       <div class="info">
         <p class="name medium">{{this.getData('name')}}</p>
@@ -71,12 +71,12 @@
      <div *ngIf="this.cuantosAmigos(this.evento_data.attendants) == 0" class="light grey description">Al parecer tus amigos aún no están en este evento. ¡Solicita que sean invitados!</div>
 
      <div class="title">Galeria del evento</div>
-     
+
      <!-- <div *ngIf="this.evento_data.description != ''" class="light grey description">{{this.evento_data.description}}</div> -->
      <div *ngIf="!this.evento_data.gallery" class="light grey description">
        Al parecer este evento aún no tiene una galeria de fotos.
      </div>
-     <button (click)="openGaleria()" type="button" name="button" class="button medium orange center">Ver Galeria</button>
+     <button *ngIf="this.evento_data.gallery"  (click)="openGaleria()" type="button" name="button" class="button medium orange center">Ver Galeria</button>
 
      <div class="title">Ubicación del Evento<button (click)="goNavigate()" type="button" name="button" class="more orange indi">Obtener Indicaciones</button></div>
      <div class="location-row">
@@ -174,7 +174,7 @@
 </ion-footer>
 
 
-<ion-footer style="border-top:.6px solid #b3b3b3" *ngIf="f_selected != 2">
+<ion-footer style="border-top:.6px solid #b3b3b3" *ngIf="this.evento_data.rol != 'admin' && f_selected != 2">
   <ion-navbar hideBackButton>
     <div *ngIf="this.evento_data.rol != 'invitado'">
       <button (click)="openEdit()" *ngIf="this.evento_data.rol == 'admin' || this.evento_data.rol == 'anfitrión'" class="button blue center" type="button" name="button"><i class="fas fa-edit"></i>Editar Evento</button>
